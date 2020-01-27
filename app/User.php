@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Food;
+use App\Order;
+use App\Review;
 
 class User extends Authenticatable
 {
@@ -37,4 +40,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected function food()
+    {
+        return $this->hasMany(Food::class, 'user_id', 'id');
+    }
+
+    protected function order()
+    {
+        return $this->hasMany(Order::class, 'user_id', 'id');
+    }
+
+    protected function review()
+    {
+        return $this->hasMany(Review::class, 'user_id', 'id');
+    }
 }
