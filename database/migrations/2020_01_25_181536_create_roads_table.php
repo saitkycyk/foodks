@@ -16,6 +16,7 @@ class CreateRoadsTable extends Migration
         Schema::create('roads', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('city_id');
+            $table->bigIncrements('road_nr');
             $table->string('name');
             $table->string('location');
             $table->timestamps();

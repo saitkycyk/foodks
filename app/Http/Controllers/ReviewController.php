@@ -6,5 +6,33 @@ use Illuminate\Http\Request;
 
 class ReviewController extends Controller
 {
-    //
+	public function show()
+	{
+
+	}
+
+	public function create()
+	{
+
+	}
+
+	public function store()
+	{
+
+	}
+
+	public function update()
+	{
+
+	}
+
+	public function delete()
+	{
+
+	}
+
+	public function edit()
+	{
+		
+	}
 }
