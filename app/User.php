@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Food;
-use App\Order;
+use App\Order_Group;
+use App\Review;
 use App\Review;
 
 class User extends Authenticatable
@@ -46,9 +47,9 @@ class User extends Authenticatable
         return $this->hasMany(Food::class, 'user_id', 'id');
     }
 
-    protected function order()
+    protected function order_groups()
     {
-        return $this->hasMany(Order::class, 'user_id', 'id');
+        return $this->hasMany(Order_Group::class, 'user_id', 'id');
     }
 
     protected function review()
