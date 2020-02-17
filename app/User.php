@@ -9,7 +9,6 @@ use Illuminate\Notifications\Notifiable;
 use App\Food;
 use App\Order_Group;
 use App\Review;
-use App\Review;
 
 class User extends Authenticatable
 {

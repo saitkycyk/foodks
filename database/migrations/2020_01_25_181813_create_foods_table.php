@@ -19,12 +19,10 @@ class CreateFoodsTable extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->double('price', 8, 2);
-            $table->boolean('door_payment')->default(false);
-            $table->boolean('card_payment')->default(false);
             $table->boolean('sale')->default(false);
             $table->text('picture')->nullable();
             $table->json('ingredients')->nullable();
-            $table->json('drinks')->nullable();
+            $table->boolean('drink')->default(false);
             $table->timestamps();
             $table->softDeletes();
 
