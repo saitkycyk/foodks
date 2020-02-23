@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\City;
+use App\Road;
 
 class HomeController extends Controller
 {
@@ -24,5 +26,12 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function addressCreate()
+    {
+        $cities = City::all();
+        $roads = Road::all();
+        return view('address-create', compact(['cities', 'roads']));
     }
 }

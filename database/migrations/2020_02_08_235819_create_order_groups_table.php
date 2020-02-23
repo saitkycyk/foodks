@@ -17,6 +17,7 @@ class CreateOrderGroupsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->string('payment_type');
+            $table->string('status')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

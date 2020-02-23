@@ -12,11 +12,48 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
-
-Route::view('/test', 'index');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+
+// //Food
+// Route::get()->name('');
+// Route::post()->name('');
+// Route::patch()->name('');
+// Route::delete()->name('');
+
+// //Order
+// Route::get()->name('');
+// Route::post()->name('');
+// Route::patch()->name('');
+// Route::delete()->name('');
+
+// //Review
+// Route::get()->name('');
+// Route::post()->name('');
+// Route::patch()->name('');
+// Route::delete()->name('');
+
+// //City
+// Route::get()->name('');
+// Route::get()->name('');
+// Route::post()->name('');
+// Route::patch()->name('');
+// Route::delete()->name('');
+
+// //Road
+// Route::get()->name('');
+// Route::post()->name('');
+// Route::patch()->name('');
+// Route::delete()->name('');
+
+// //User
+// Route::get()->name('');
+// Route::post()->name('');
+// Route::patch()->name('');
+// Route::delete()->name('');

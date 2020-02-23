@@ -12,11 +12,6 @@ class CityController extends Controller
 		return City::all();
 	}
 
-	public function create()
-	{
-		return view('city-create');
-	}
-
 	public function store(Request $request)
 	{
 		$data = $this->validateCity($request);

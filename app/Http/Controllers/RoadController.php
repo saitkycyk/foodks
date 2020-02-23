@@ -13,11 +13,6 @@ class RoadController extends Controller
 		return Road::all();
 	}
 
-	public function create()
-	{
-		return view('road-create');
-	}
-
 	public function store(Request $request)
 	{
 		$data = $this->validateRoad($request);

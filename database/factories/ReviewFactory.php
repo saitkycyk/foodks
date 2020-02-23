@@ -2,7 +2,9 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
+use App\Review;
 use App\User;
+use App\Food;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
@@ -17,18 +19,12 @@ use Illuminate\Support\Str;
 |
 */
 
-$factory->define(User::class, function (Faker $faker) {
+$factory->define(Review::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
-        'lastname' => $faker->lastName,
-        'restaurant' => $faker->boolean() ? true : false,
-        'phone' => $faker->phoneNumber,
-        'address' => $faker->address,
-        'lastname' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'email_verified_at' => now(),
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        'remember_token' => Str::random(50),
+        'food_id' => Food::inRandomOrder()->first()->id,
+        'user_id' => User::inRandomOrder()->first()->id,
+        'rate' => rand(0,5),
+        'review' => $faker->sentence(),
         'created_at' => now()
     ];
 });
