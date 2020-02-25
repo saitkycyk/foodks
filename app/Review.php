@@ -16,12 +16,12 @@ class Review extends Model
 	];
 
 	
-	protected function user()
+	public function user()
 	{
 		return $this->belongsTo(User::class, 'user_id', 'id');
 	}
 
-	protected function food()
+	public function food()
 	{
 		return $this->belongsTo(Food::class, 'food_id', 'id');
 	}

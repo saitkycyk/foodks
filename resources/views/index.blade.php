@@ -130,7 +130,7 @@
                 <p>
                     Ridiculus sociosqu cursus neque cursus curae ante scelerisque vehicula.
                 </p>
-                <form method="post" action="list_page.html">
+                <form method="post" action="/search">
                     <div id="custom-search-input">
                         <div class="input-group">
                             <input type="text" class=" search-query" placeholder="Your Address or postal code">
@@ -145,9 +145,9 @@
         <img src="img/video_fix.png" alt="" class="header-video--media" data-video-src="video/intro" data-teaser-source="video/intro" data-provider="Vimeo" data-video-width="1920" data-video-height="960">
         <div id="count" class="hidden-xs">
             <ul>
-                <li><span class="number">2650</span> Restaurant</li>
-                <li><span class="number">5350</span> People Served</li>
-                <li><span class="number">12350</span> Registered Users</li>
+                <li><span class="number">{{$restaurants}}</span> Restorante</li>
+                <li><span class="number">{{$orders}}</span> Porosi të dërguar</li>
+                <li><span class="number">{{$users}}</span> Përdorues e regjistruar</li>
             </ul>
         </div>
     </section><!-- End Header video -->
@@ -219,144 +219,46 @@
         
         <div class="row">
             <div class="col-md-6">
+                @php $i=0; @endphp
+                @foreach($popularFoods as $popularFood)
+                @php $i++; @endphp
                 <a href="detail_page.html" class="strip_list">
                     <div class="ribbon_1">Popular</div>
                     <div class="desc">
                         <div class="thumb_strip">
-                            <img src="img/thumb_restaurant.jpg" alt="">
+                            <img src="{{$popularFood->picture}}" alt="">
                         </div>
                         <div class="rating">
-                            <i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i>
+                            @php $r=0; @endphp
+                            @while(round($popularFood->rating) != $r)
+                            <i class="icon_star voted"></i>
+                            @php $r++; @endphp
+                            @endwhile
                         </div>
-                        <h3>Taco Mexican</h3>
+                        <h3>{{$popularFood->name}}</h3>
                         <div class="type">
-                            Mexican / American
+
                         </div>
                         <div class="location">
-                            135 Newtownards Road, Belfast, BT4. <span class="opening">Opens at 17:00</span>
+                            {{$popularFood->restaurant->address}} <span class="opening">{{$popularFood->restaurant->works}}</span>
                         </div>
                         <ul>
-                            <li>Take away<i class="icon_check_alt2 ok"></i></li>
-                            <li>Delivery<i class="icon_check_alt2 ok"></i></li>
+                            <li>Në Derë<i class="{{$popularFood->restaurant->door_payment ? 'icon_check_alt2 ok' : 'icon_close_alt2 no'}}"></i></li>
+                            <li>Kartelë<i class="{{$popularFood->restaurant->card_payment ? 'icon_check_alt2 ok' : 'icon_close_alt2 no'}}"></i></li>
                         </ul>
                     </div><!-- End desc-->
                 </a><!-- End strip_list-->
-                <a href="detail_page.html" class="strip_list">
-                 <div class="ribbon_1">Popular</div>
-                 <div class="desc">
-                    <div class="thumb_strip">
-                        <img src="img/thumb_restaurant_2.jpg" alt="">
-                    </div>
-                    <div class="rating">
-                        <i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i>
-                    </div>
-                    <h3>Naples Pizza</h3>
-                    <div class="type">
-                        Italian / Pizza
-                    </div>
-                    <div class="location">
-                        135 Newtownards Road, Belfast, BT4. <span class="opening">Opens at 17:00</span>
-                    </div>
-                    <ul>
-                        <li>Take away<i class="icon_check_alt2 ok"></i></li>
-                        <li>Delivery<i class="icon_check_alt2 ok"></i></li>
-                    </ul>
-                </div><!-- End desc-->
-            </a><!-- End strip_list-->
-            <a href="detail_page.html" class="strip_list">
-                <div class="ribbon_1">Popular</div>
-                <div class="desc">
-                    <div class="thumb_strip">
-                        <img src="img/thumb_restaurant_3.jpg" alt="">
-                    </div>
-                    <div class="rating">
-                        <i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i>
-                    </div>
-                    <h3>Japan Food</h3>
-                    <div class="type">
-                        Sushi / Japanese
-                    </div>
-                    <div class="location">
-                        135 Newtownards Road, Belfast, BT4. <span class="opening">Opens at 17:00</span>
-                    </div>
-                    <ul>
-                        <li>Take away<i class="icon_check_alt2 ok"></i></li>
-                        <li>Delivery<i class="icon_check_alt2 ok"></i></li>
-                    </ul>
-                </div><!-- End desc-->
-            </a><!-- End strip_list-->
-        </div><!-- End col-md-6-->
-        <div class="col-md-6">
-            <a href="detail_page.html" class="strip_list">
-                <div class="ribbon_1">Popular</div>
-                <div class="desc">
-                    <div class="thumb_strip">
-                        <img src="img/thumb_restaurant_4.jpg" alt="">
-                    </div>
-                    <div class="rating">
-                        <i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i>
-                    </div>
-                    <h3>Sushi Gold</h3>
-                    <div class="type">
-                        Sushi / Japanese
-                    </div>
-                    <div class="location">
-                        135 Newtownards Road, Belfast, BT4. <span class="opening">Opens at 17:00</span>
-                    </div>
-                    <ul>
-                        <li>Take away<i class="icon_check_alt2 ok"></i></li>
-                        <li>Delivery<i class="icon_close_alt2 no"></i></li>
-                    </ul>
-                </div><!-- End desc-->
-            </a><!-- End strip_list-->
-            <a href="detail_page.html" class="strip_list">
-                <div class="ribbon_1">Popular</div>
-                <div class="desc">
-                    <div class="thumb_strip">
-                        <img src="img/thumb_restaurant_5.jpg" alt="">
-                    </div>
-                    <div class="rating">
-                        <i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i>
-                    </div>
-                    <h3>Dragon Tower</h3>
-                    <div class="type">
-                        Chinese / Thai
-                    </div>
-                    <div class="location">
-                        135 Newtownards Road, Belfast, BT4. <span class="opening">Opens at 17:00</span>
-                    </div>
-                    <ul>
-                        <li>Take away<i class="icon_check_alt2 ok"></i></li>
-                        <li>Delivery<i class="icon_check_alt2 ok"></i></li>
-                    </ul>
-                </div><!-- End desc-->
-            </a><!-- End strip_list-->
-            <a href="detail_page.html" class="strip_list">
-                <div class="ribbon_1">Popular</div>
-                <div class="desc">
-                    <div class="thumb_strip">
-                        <img src="img/thumb_restaurant_6.jpg" alt="">
-                    </div>
-                    <div class="rating">
-                        <i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i>
-                    </div>
-                    <h3>China Food</h3>
-                    <div class="type">
-                        Chinese / Vietnam
-                    </div>
-                    <div class="location">
-                        135 Newtownards Road, Belfast, BT4. <span class="opening">Opens at 17:00</span>
-                    </div>
-                    <ul>
-                        <li>Take away<i class="icon_check_alt2 ok"></i></li>
-                        <li>Delivery<i class="icon_check_alt2 ok"></i></li>
-                    </ul>
-                </div><!-- End desc-->
-            </a><!-- End strip_list-->
-        </div>
-    </div><!-- End row -->   
+                @if($i==3)
+            </div><!-- End col-md-6-->
+            <div class="col-md-6">
+                @endif
+                @endforeach
+            </div><!-- End col-md-6-->
+            <div class="col-md-6">
+            </div>
+        </div><!-- End row -->   
 
-</div><!-- End container -->
+    </div><!-- End container -->
 </div><!-- End white_bg -->
 
 <div class="high_light">

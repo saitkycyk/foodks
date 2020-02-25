@@ -1,5 +1,12 @@
 <?php
-
+use Illuminate\Http\Request;
+use App\City;
+use App\Road;
+use App\Food;
+use App\Order;
+use App\Order_Group;
+use App\Review;
+use App\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -10,10 +17,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', 'HomeController@homepage')->name('index');
+//Route::view('/test', 'list_page');
 
 Auth::routes();
 
@@ -21,38 +26,38 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 
-// //Food
+//Food
 // Route::get()->name('');
 // Route::post()->name('');
 // Route::patch()->name('');
 // Route::delete()->name('');
 
-// //Order
+//Order
 // Route::get()->name('');
 // Route::post()->name('');
 // Route::patch()->name('');
 // Route::delete()->name('');
 
-// //Review
+//Review
 // Route::get()->name('');
 // Route::post()->name('');
 // Route::patch()->name('');
 // Route::delete()->name('');
 
-// //City
+//City
 // Route::get()->name('');
 // Route::get()->name('');
 // Route::post()->name('');
 // Route::patch()->name('');
 // Route::delete()->name('');
 
-// //Road
+//Road
 // Route::get()->name('');
 // Route::post()->name('');
 // Route::patch()->name('');
 // Route::delete()->name('');
 
-// //User
+//User
 // Route::get()->name('');
 // Route::post()->name('');
 // Route::patch()->name('');

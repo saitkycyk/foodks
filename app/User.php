@@ -41,17 +41,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected function food()
+    public function food()
     {
         return $this->hasMany(Food::class, 'user_id', 'id');
     }
 
-    protected function order_groups()
+    public function order_groups()
     {
         return $this->hasMany(Order_Group::class, 'user_id', 'id');
     }
 
-    protected function review()
+    public function review()
     {
         return $this->hasMany(Review::class, 'user_id', 'id');
     }

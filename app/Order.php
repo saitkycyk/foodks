@@ -15,12 +15,12 @@ class Order extends Model
 		'id'
 	];
 
-	protected function food()
+	public function food()
 	{
 		return $this->belongsTo(Food::class, 'food_id', 'id');
 	}
 
-	protected function order_group()
+	public function order_group()
 	{
 		return $this->belongsTo(Order_Group::class, 'order_group_id', 'id');
 	}

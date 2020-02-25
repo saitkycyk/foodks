@@ -15,12 +15,12 @@ class Order_Group extends Model
 
 	protected $guarded = 'id';
 
-	protected function orders()
+	public function orders()
 	{
 		return $this->hasMany(Order::class, 'order_group_id', 'id');
 	}
 
-	protected function user()
+	public function user()
 	{
 		return $this->belongsTo(User::class, 'user_id', 'id');
 	}

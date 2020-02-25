@@ -14,8 +14,7 @@ class Road extends Model
 		'id'
 	];
 
-
-	protected function city()
+	public function city()
 	{
 		return $this->belongsTo(City::class, 'city_id', 'id');
 	}

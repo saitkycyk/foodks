@@ -24,6 +24,7 @@ $factory->define(User::class, function (Faker $faker) {
         'restaurant' => $faker->boolean() ? true : false,
         'phone' => $faker->phoneNumber,
         'address' => $faker->address,
+        'works' => "10:00 - 20:00",
         'lastname' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
