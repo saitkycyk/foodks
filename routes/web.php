@@ -7,6 +7,8 @@ use App\Order;
 use App\Order_Group;
 use App\Review;
 use App\User;
+
+Auth::loginUsingId(1);
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,6 +19,12 @@ use App\User;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/test', function () {
+	
+	dd(auth()->check());
+
+});
 Route::get('/', 'HomeController@homepage')->name('index');
 //Route::view('/test', 'list_page');
 
