@@ -30,10 +30,6 @@ class CreateOrdersTable extends Migration
             $table->foreign('user_id')
             ->references('id')
             ->on('users');
-
-            $table->foreign('order_group_id')
-            ->references('id')
-            ->on('order_groups');
         });
     }
 

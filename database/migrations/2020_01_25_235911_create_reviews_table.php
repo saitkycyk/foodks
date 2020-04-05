@@ -15,8 +15,9 @@ class CreateReviewsTable extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('food_id');
+            $table->unsignedBigInteger('food_id')->nullable();
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('restaurant_id')->nullable();
             $table->integer('rate')->nullable();
             $table->text('review')->nullable();
             $table->timestamps();

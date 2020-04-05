@@ -26,6 +26,9 @@ $factory->define(User::class, function (Faker $faker) {
         'address' => $faker->address,
         'works' => "10:00 - 20:00",
         'lastname' => $faker->name,
+        'preferences' => json_encode([
+            'min_order' => '5'
+        ]),
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password

@@ -8,7 +8,6 @@ use App\Order_Group;
 use App\Review;
 use App\User;
 
-Auth::loginUsingId(1);
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,17 +19,13 @@ Auth::loginUsingId(1);
 |
 */
 
-Route::get('/test', function () {
-	
-	dd(auth()->check());
-
-});
 Route::get('/', 'HomeController@homepage')->name('index');
 //Route::view('/test', 'list_page');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/restaurants', 'RestaurantController@restaurantPage')->name('restaurants');
 
 
 

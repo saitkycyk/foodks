@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use App\Food;
 use App\Order_Group;
 use App\Review;
+use App\City;
 
 class User extends Authenticatable
 {
@@ -54,5 +55,15 @@ class User extends Authenticatable
     public function review()
     {
         return $this->hasMany(Review::class, 'user_id', 'id');
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class, 'city_id', 'id');
+    }
+
+    public function restaurans()
+    {
+        return $this->where('restaurant', true);
     }
 }

@@ -22,10 +22,12 @@ class CreateUsersTable extends Migration
             $table->boolean('card_payment')->default(false);
             $table->json('preferences')->nullable();
             $table->string('email')->unique();
+            $table->string('picture')->nullable();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
             $table->string('works')->nullable();
             $table->string('password');
+            $table->unsignedBigInteger('city_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

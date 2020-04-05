@@ -17,6 +17,12 @@ class RestaurantController extends Controller
 		return Order_Group::all();
 	}
 
+	public function restaurantPage()
+	{
+		$restaurants = User::where('restaurant', true)->paginate(10);
+		return view('restaurants', compact('restaurants'));
+	}
+
 	public function denyOrder(Order_Group $order_group)
 	{
 		$this->authorize('isOrdersFoodOwner', $order_group);
