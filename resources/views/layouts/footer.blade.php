@@ -4,7 +4,7 @@
             <div class="col-md-4 col-sm-3">
                 <h3>Pagesat e sigurta me</h3>
                 <p>
-                    <img src="img/cards.png" alt="" class="img-responsive">
+                    <img src="/img/cards.png" alt="" class="img-responsive">
                 </p>
             </div>
             <div class="col-md-3 col-sm-3">

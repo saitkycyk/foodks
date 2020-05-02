@@ -18,13 +18,18 @@ use Illuminate\Support\Str;
 |
 */
 
+
 $factory->define(Food::class, function (Faker $faker) {
-    return [
-        'user_id' => User::inRandomOrder()->first()->id,
-        'name' => $faker->name,
-        'description' => $faker->sentence(),
-        'price' => rand(1,99),
-        'drink' => $faker->boolean() ? true : false,
-        'created_at' => now()
-    ];
+	$array = array('fastfood', 'mëngjes', 'gjellë', 'supë', 'pije të ftohta', 'pije të nxehta', 'mish', 'ëmbëlsirë', 'kryesorë', 'tjerë');
+	$rand = array_rand($array);
+
+	return [
+		'user_id' => User::inRandomOrder()->first()->id,
+		'name' => $faker->name,
+		'description' => $faker->sentence(),
+		'category' => $array[$rand],
+		'price' => rand(1,99),
+		'drink' => $faker->boolean() ? true : false,
+		'created_at' => now()
+	];
 });

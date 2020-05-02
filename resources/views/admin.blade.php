@@ -12,11 +12,11 @@
 	<title>QuickFood - Quality delivery or take away food</title>
 
 	<!-- Favicons-->
-	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-	<link rel="apple-touch-icon" type="image/x-icon" href="img/apple-touch-icon-57x57-precomposed.png">
-	<link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png">
-	<link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="img/apple-touch-icon-114x114-precomposed.png">
-	<link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="img/apple-touch-icon-144x144-precomposed.png">
+	<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+	<link rel="apple-touch-icon" type="image/x-icon" href="/img/apple-touch-icon-57x57-precomposed.png">
+	<link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="/img/apple-touch-icon-72x72-precomposed.png">
+	<link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="/img/apple-touch-icon-114x114-precomposed.png">
+	<link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="/img/apple-touch-icon-144x144-precomposed.png">
 
 	<!-- GOOGLE WEB FONT -->
 	<link href='https://fonts.googleapis.com/css?family=Lato:400,700,900,400italic,700italic,300,300italic' rel='stylesheet' type='text/css'>
@@ -60,15 +60,15 @@
 			<div class="row">
 				<div class="col--md-4 col-sm-4 col-xs-4">
 					<a href="index.html" id="logo">
-						<img src="img/logo.png" width="190" height="23" alt="" data-retina="true" class="hidden-xs">
-						<img src="img/logo_mobile.png" width="59" height="23" alt="" data-retina="true" class="hidden-lg hidden-md hidden-sm">
+						<img src="/img/logo.png" width="190" height="23" alt="" data-retina="true" class="hidden-xs">
+						<img src="/img/logo_mobile.png" width="59" height="23" alt="" data-retina="true" class="hidden-lg hidden-md hidden-sm">
 					</a>
 				</div>
 				<nav class="col--md-8 col-sm-8 col-xs-8">
 					<a class="cmn-toggle-switch cmn-toggle-switch__htx open_close" href="javascript:void(0);"><span>Menu mobile</span></a>
 					<div class="main-menu">
 						<div id="header_menu">
-							<img src="img/logo.png" width="190" height="23" alt="" data-retina="true">
+							<img src="/img/logo.png" width="190" height="23" alt="" data-retina="true">
 						</div>
 						<a href="#" class="open_close" id="close_in"><i class="icon_close"></i></a>
 						<ul>
@@ -129,7 +129,7 @@
 	<!-- End Header =============================================== -->
 
 	<!-- SubHeader =============================================== -->
-	<section class="parallax-window" id="short" data-parallax="scroll" data-image-src="img/sub_header_cart.jpg" data-natural-width="1400" data-natural-height="350">
+	<section class="parallax-window" id="short" data-parallax="scroll" data-image-src="/img/sub_header_cart.jpg" data-natural-width="1400" data-natural-height="350">
 		<div id="subheader">
 			<div id="sub_content">
 				<h1>Admin section</h1>
@@ -818,7 +818,7 @@
 			<div class="row">
 				<div class="col-md-4 col-sm-3">
 					<h3>Secure payments with</h3>
-					<p><img src="img/cards.png" alt="" class="img-responsive">
+					<p><img src="/img/cards.png" alt="" class="img-responsive">
 					</p>
 
 				</div>
@@ -963,22 +963,22 @@
 	<!-- End Search Menu -->
 
 	<!-- COMMON SCRIPTS -->
-	<script src="js/jquery-2.2.4.min.js"></script>
-	<script src="js/common_scripts_min.js"></script>
-	<script src="js/functions.js"></script>
-	<script src="assets/validate.js"></script>
+	<script src="/js/jquery-2.2.4.min.js"></script>
+	<script src="/js/common_scripts_min.js"></script>
+	<script src="/js/functions.js"></script>
+	<script src="/assets/validate.js"></script>
 
 	<!-- Specific scripts -->
-	<script src="js/tabs.js"></script>
+	<script src="/js/tabs.js"></script>
 	<script>
 		new CBPFWTabs(document.getElementById('tabs'));
 	</script>
 
-	<script src="js/bootstrap3-wysihtml5.min.js"></script>
+	<script src="/js/bootstrap3-wysihtml5.min.js"></script>
 	<script type="text/javascript">
 		$('.wysihtml5').wysihtml5({});
 	</script>
-	<script src="js/dropzone.min.js"></script>
+	<script src="/js/dropzone.min.js"></script>
 	<script>
 		if ($('.dropzone').length > 0) {
 			Dropzone.autoDiscover = false;

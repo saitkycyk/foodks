@@ -161,7 +161,7 @@
 			@if($key % 2 == 0)</div><div class="row"> @endif
 
 				<div class="col-md-6 col-sm-6 wow zoomIn" data-wow-delay="0.2s">
-					<a class="strip_list grid" href="detail_page.html">
+					<a class="strip_list grid" href="restaurant/{{$restaurant->id}}">
 						{{-- <div class="ribbon_1">Popular</div> --}}
 						<div class="desc">
 							<div class="thumb_strip">

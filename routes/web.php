@@ -18,14 +18,26 @@ use App\User;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::loginUsingId(1);
+Route::get('/test', function () {
+	
+	$res = User::where('restaurant', true)->first();
+	return json_decode($res->preferences)->description;
 
+});
 Route::get('/', 'HomeController@homepage')->name('index');
 //Route::view('/test', 'list_page');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/restaurants', 'RestaurantController@restaurantPage')->name('restaurants');
+Route::get('/restaurants', 'RestaurantController@restaurantsPage')->name('restaurants');
+Route::get('/restaurant/{id}', 'RestaurantController@restaurantMenu')->name('restaurant-menu');
+Route::get('/restaurant/{id}/profile', 'RestaurantController@restaurantProfile')->name('restaurant-profile');
+Route::get('/about', 'HomeController@about')->name('about');
+Route::get('/register/restaurant', 'RestaurantController@create')->name('createRestaurant');
+Route::post('/register/restaurant', 'RestaurantController@store')->name('storeRestaurant');
+Route::get('/admin', 'RestaurantController@adminPage')->name('adminPage');
 
 
 

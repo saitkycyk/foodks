@@ -42,7 +42,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function food()
+    public function foods()
     {
         return $this->hasMany(Food::class, 'user_id', 'id');
     }
@@ -62,8 +62,14 @@ class User extends Authenticatable
         return $this->belongsTo(City::class, 'city_id', 'id');
     }
 
-    public function restaurans()
+    public function restaurantReviews()
+    {
+        return $this->hasMany(Review::class, 'restaurant_id', 'id');
+    }
+
+    public function restaurants()
     {
         return $this->where('restaurant', true);
     }
+
 }

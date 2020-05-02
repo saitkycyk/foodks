@@ -222,7 +222,7 @@
 </div>
 <div class="row">
     <div class="col-md-4 col-md-offset-4">
-     <a class="box_work" href="submit_restaurant.html">
+     <a class="box_work" href="/register/restaurant">
         <img src="img/submit_restaurant.jpg" width="848" height="480" alt="" class="img-responsive">
         <h3>Regjistro Restorantin<span>Shërbej më shumë konsumatorë</span></h3>
         <p>Lorem ipsum dolor sit amet, ut virtute fabellas vix, no pri falli eloquentiam adversarium. Ea legere labore eam. Et eum sumo ocurreret, eos ei saepe oratio omittantur, legere eligendi partiendo pro te.</p>
