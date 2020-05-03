@@ -18,11 +18,11 @@ use App\User;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::loginUsingId(1);
+// Auth::loginUsingId(1);
 Route::get('/test', function () {
-	
-	$res = User::where('restaurant', true)->first();
-	return json_decode($res->preferences)->description;
+
+	// $res = User::where('restaurant', true)->first();
+	// return json_decode($res->preferences)->description;
 
 });
 Route::get('/', 'HomeController@homepage')->name('index');

@@ -163,13 +163,13 @@
                <div class="col-md-6 col-sm-6">
                 <div class="form-group">
                  <label>Emri</label>
-                 <input type="text" class="form-control" id="name_contact" name="restaurant_user_name" placeholder="Agon" value="">
+                 <input type="text" class="form-control" id="name_contact" name="userName" placeholder="Agon" @auth value="{{auth()->user()->name}}" @endauth required>
              </div>
          </div>
          <div class="col-md-6 col-sm-6">
             <div class="form-group">
              <label>Mbiemri</label>
-             <input type="text" class="form-control" id="lastname_contact" name="restaurant_user_lastname" placeholder="Gashi">
+             <input type="text" class="form-control" id="lastname_contact" name="lastName" placeholder="Gashi" @auth value="{{auth()->user()->lastname}}" @endauth required>
          </div>
      </div>
  </div>
@@ -177,13 +177,13 @@
    <div class="col-md-6 col-sm-6">
     <div class="form-group">
      <label>Email:</label>
-     <input type="email" id="email_contact" name="email" class="form-control " placeholder="shembull@email.com">
+     <input type="email" id="email_contact" name="email" class="form-control " placeholder="your_bussiness_email@email.com" required>
  </div>
 </div>
 <div class="col-md-6 col-sm-6">
     <div class="form-group">
      <label>Nr. Telefonit:</label>
-     <input type="text" id="phone_contact" name="phone" class="form-control" placeholder="044 123 456">
+     <input type="text" id="phone_contact" name="phone" class="form-control" placeholder="044 123 456" @auth value="{{auth()->user()->phone}}" @endauth required>
  </div>
 </div>
 </div>
@@ -191,13 +191,13 @@
    <div class="col-md-6">
     <div class="form-group">
      <label>Emri Restaurantit</label>
-     <input type="text" id="restaurant" name="name" class="form-control" placeholder="Pizza King">
+     <input type="text" id="restaurant" name="name" class="form-control" placeholder="Pizza King" required>
  </div>
 </div>
 <div class="col-md-6">
     <div class="form-group">
      <label>Website(optinal)</label>
-     <input type="text" id="restaurant_web" name="restaurant_web" class="form-control" placeholder="http://">
+     <input type="text" id="restaurant_web" name="restaurantWeb" class="form-control" placeholder="http://">
  </div>
 </div>
 </div><!-- End row  -->
@@ -205,7 +205,7 @@
    <div class="col-md-6">
     <div class="form-group">
      <label>Qyteti</label>
-     <select class="form-control" name="city" id="city">
+     <select class="form-control" name="city_id" id="city">
         @foreach(\App\City::all() as $city)
         <option value="{{$city->id}}">{{$city->name}}</option>
         @endforeach
@@ -215,7 +215,7 @@
 <div class="col-md-6">
     <div class="form-group">
      <label>Rruga/Addresa</label>
-     <select class="form-control" name="road" id="road" disabled="true"></select>
+     <select class="form-control" name="road_id" id="road" disabled="true"></select>
  </div>
 </div>
 </div><!-- End row  -->
@@ -224,13 +224,13 @@
     <div class="col-md-6">
         <div class="form-group">
          <label>Numri lokalit</label>
-         <input type="text" id="restaurant_nr" name="restaurant_nr" class="form-control" placeholder="113">
+         <input type="text" id="restaurant_nr" name="restaurantNr" class="form-control" placeholder="113">
      </div>
  </div>
  <div class="col-md-6">
     <div class="form-group">
      <label>Kodi Postar</label>
-     <input type="text" id="restaurant_postal_code" name="restaurant_postal_code" class="form-control" placeholder="20000">
+     <input type="text" id="restaurant_postal_code" name="restaurantZip" class="form-control" placeholder="20000">
  </div>
 </div>
 </div><!-- End row  -->
@@ -239,17 +239,26 @@
    <div class="col-md-6">
     <div class="form-group">
      <label>Krijo fjalëkalimin</label>
-     <input type="text" class="form-control" placeholder="Fjalëkalimi"  id="password1">
+     <input type="password" class="form-control" name="password" placeholder="Fjalëkalimi"  id="password1" required>
  </div>
 </div>
 <div class="col-md-6">
     <div class="form-group">
      <label>Konfirmo fjalëkalimin</label>
-     <input type="text" class="form-control" placeholder="Konfirmo fjalëkalimin"  id="password2">
+     <input type="password" class="form-control" name="password_confirmation" placeholder="Konfirmo fjalëkalimin"  id="password2" required>
  </div>
 </div>
 </div><!-- End row  -->
 <div id="pass-info" class="clearfix"></div>
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 <div class="row">
  <div class="col-md-6">
      <label><input name="mobile" type="checkbox" value="" class="icheck" checked>Prano <a href="#0">termat dhe kushtet</a>.</label>

@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         factory(User::class, 50)->create();
-        factory(City::class, 37)->create();
+        $this->call(CitySeeder::class);
         factory(Road::class, 300)->create();
         factory(Food::class, 200)->create();
         factory(Order_Group::class, 30)->create();

@@ -16,7 +16,7 @@ use Illuminate\Support\Str;
 | model instances for testing / seeding your application's database.
 |
 */
-
+//Not being used
 $factory->define(City::class, function (Faker $faker) {
     return [
         'name' => $faker->city,

@@ -2,18 +2,52 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Session;
+use App\Order;
 use App\Order_Group;
 use App\User;
-use App\Order;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class RestaurantController extends Controller
 {
 	public function create()
 	{
 		return view('submit_restaurant');
+	}
+
+
+	public function store(Request $request)
+	{
+		$data = $request->validate([
+			'email' => 'required|unique:App\User,email',
+			'password' => 'required|confirmed',
+			'phone' => 'required',
+			'city_id' => 'required',
+			'road_id' => 'required',
+			'name' => 'required'
+		]);
+
+		$data += [
+			'restaurant' => 1,
+			'preferences' => json_encode([
+				'userName' => $request->userName,
+				'lastName' => $request->lastName,
+				'restaurantWeb' => $request->restaurantWeb,
+				'restaurantNr' => $request->restaurantNr,
+				'restaurantZip' => $request->restaurantZip
+			])
+		];
+
+		$data['password'] = bcrypt($data['password']);
+
+		$user = User::create($data);
+
+		Auth::logout();
+		Auth::login($user);
+
+		return redirect()->route('adminPage');
 	}
 
 
