@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Seeder;
 use App\City;
-use Faker\Generator as Faker;
 
 class CitySeeder extends Seeder
 {
@@ -12,16 +11,15 @@ class CitySeeder extends Seeder
 
     public function run()
     {
-        foreach ($this->$cityNames as $cityName) {
+        foreach ($this->cityNames as $cityName) {
             $this->cityCreator($cityName);
         }
     }
 
-    public function cityCreator($cityName, Faker $faker)
+    public function cityCreator($cityName)
     {        
         City::create([
             'name' => $cityName,
-            'location' => $faker->address,
             'created_at' => now()
         ]);
     }

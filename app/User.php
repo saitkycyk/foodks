@@ -10,6 +10,7 @@ use App\Food;
 use App\Order_Group;
 use App\Review;
 use App\City;
+use App\Road;
 
 class User extends Authenticatable
 {
@@ -38,6 +39,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'preferences' => 'json',
     ];
 
     public function foods()
@@ -58,6 +60,11 @@ class User extends Authenticatable
     public function city()
     {
         return $this->belongsTo(City::class, 'city_id', 'id');
+    }
+
+    public function road()
+    {
+        return $this->belongsTo(Road::class, 'road_id', 'id');
     }
 
     public function restaurantReviews()

@@ -55,77 +55,7 @@
 	<!-- End Preload -->
 
 	<!-- Header ================================================== -->
-	<header>
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col--md-4 col-sm-4 col-xs-4">
-					<a href="index.html" id="logo">
-						<img src="/img/logo.png" width="190" height="23" alt="" data-retina="true" class="hidden-xs">
-						<img src="/img/logo_mobile.png" width="59" height="23" alt="" data-retina="true" class="hidden-lg hidden-md hidden-sm">
-					</a>
-				</div>
-				<nav class="col--md-8 col-sm-8 col-xs-8">
-					<a class="cmn-toggle-switch cmn-toggle-switch__htx open_close" href="javascript:void(0);"><span>Menu mobile</span></a>
-					<div class="main-menu">
-						<div id="header_menu">
-							<img src="/img/logo.png" width="190" height="23" alt="" data-retina="true">
-						</div>
-						<a href="#" class="open_close" id="close_in"><i class="icon_close"></i></a>
-						<ul>
-                    <li class="submenu">
-                    <a href="javascript:void(0);" class="show-submenu">Home<i class="icon-down-open-mini"></i></a>
-                    <ul>
-                        <li><a href="index.html">Home Video background</a></li>
-                        <li><a href="index_2.html">Home Static image</a></li>
-                        <li><a href="index_3.html">Home Text rotator</a></li>
-                        <li><a href="index_8.html">Home Layer slider</a></li>
-                        <li><a href="index_4.html">Home Cookie bar</a></li>
-                        <li><a href="index_5.html">Home Popup</a></li>
-                        <li><a href="index_6.html">Home Mobile synthetic</a></li>
-                        <li><a href="index_7.html">Top Menu version 2</a></li>
-                    </ul>
-                    </li>
-                    <li class="submenu">
-                    <a href="javascript:void(0);" class="show-submenu">Restaurants<i class="icon-down-open-mini"></i></a>
-                    <ul>
-                        <li><a href="list_page.html">Row listing</a></li>
-                        <li><a href="grid_list.html">Grid listing</a></li>
-                        <li><a href="map_listing.html">Map listing</a></li>
-                        <li><a href="detail_page.html">Restaurant Menu</a></li>
-                        <li><a href="submit_restaurant.html">Submit Restaurant</a></li>
-                        <li><a href="cart.html">Order step 1</a></li>
-                        <li><a href="cart_2.html">Order step 2</a></li>
-                        <li><a href="cart_3.html">Order step 3</a></li>
-                        <li><a href="cart_datepicker.html">Order Date/Time picker</a></li>
-                    </ul>
-                    </li>
-                    <li><a href="about.html">About us</a></li>
-                    <li><a href="faq.html">Faq</a></li>
-                    <li class="submenu">
-                    <a href="javascript:void(0);" class="show-submenu">Pages<i class="icon-down-open-mini"></i></a>
-                    <ul>
-                        <li><a href="RTL_version/index.html">RTL version</a></li>
-                        <li><a href="admin.html">Admin section</a></li>
-                        <li><a href="submit_driver.html">Submit Driver</a></li>
-                        <li><a href="#0" data-toggle="modal" data-target="#login_2">User Login</a></li>
-                        <li><a href="#0" data-toggle="modal" data-target="#register">User Register</a></li>
-                        <li><a href="detail_page_2.html">Restaurant detail page</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="contacts.html">Contacts</a></li>
-                        <li><a href="coming_soon/index.html">Coming soon page</a></li>
-                        <li><a href="shortcodes.html">Shortcodes</a></li>
-                        <li><a href="icon_pack_1.html">Icon pack 1</a></li>
-                        <li><a href="icon_pack_2.html">Icon pack 2</a></li>
-                    </ul>
-                    </li>
-                    <li><a href="#0" data-toggle="modal" data-target="#login_2">Login</a></li>
-                    <li><a href="#0">Purchase this template</a></li>
-                </ul>
-					</div><!-- End main-menu -->
-				</nav>
-			</div><!-- End row -->
-		</div><!-- End container -->
-	</header>
+@include('layouts.header')
 	<!-- End Header =============================================== -->
 
 	<!-- SubHeader =============================================== -->
@@ -143,11 +73,9 @@
 	<div id="position">
 		<div class="container">
 			<ul>
-				<li><a href="#0">Home</a>
+				<li><a href="/">Kryefaqja</a>
 				</li>
-				<li><a href="#0">Category</a>
-				</li>
-				<li>Page active</li>
+				<li>Menaxhimi</li>
 			</ul>
 			<a href="#0" class="search-overlay-menu-btn"><i class="icon-search-6"></i> Search</a>
 		</div>
@@ -158,141 +86,128 @@
 		<div id="tabs" class="tabs">
 			<nav>
 				<ul>
-					<li><a href="#section-1" class="icon-profile"><span>Main info</span></a>
+					<li><a href="#section-1" class="icon-profile"><span>Informacionet Gjenerale</span></a>
 					</li>
 					<li><a href="#section-2" class="icon-menut-items"><span>Menu</span></a>
 					</li>
-					<li><a href="#section-3" class="icon-settings"><span>Settings</span></a>
+					<li><a href="#section-3" class="icon-settings"><span>Siguria dhe politika</span></a>
 					</li>
 				</ul>
 			</nav>
 			<div class="content">
 
 				<section id="section-1">
+					@if ($errors->any())
+					<div class="alert alert-danger">
+					<ul>
+					    @foreach ($errors->all() as $error)
+					        <li>{{ $error }}</li>
+					    @endforeach
+					</ul>
+					</div>
+					@endif
 					<div class="indent_title_in">
 						<i class="icon_house_alt"></i>
-						<h3>General restaurant description</h3>
-						<p>Partem diceret praesent mel et, vis facilis alienum antiopam ea, vim in sumo diam sonet. Illud ignota cum te, decore elaboraret nec ea. Quo ei graeci repudiare definitionem. Vim et malorum ornatus assentior, exerci elaboraret eum ut, diam meliore no mel.</p>
+						<h3>Përshkrimi i restorantit</h3>
+						<p>{{$restaurant->preferences['description'] ?? 'Nuk ka përshkrim!'}}</p>
 					</div>
 
 					<div class="wrapper_indent">
+					<form action="admin/info" method="POST">
+					@csrf
 						<div class="form-group">
-							<label>Restaurant name</label>
-							<input class="form-control" name="restaurant_name" id="restaurant_name" type="text">
+							<label>Emri i restorantit</label>
+							<input class="form-control" name="name" id="restaurant_name" value="{{$restaurant->name}}" type="text">
 						</div>
 						<div class="form-group">
-							<label>Restaurant description</label>
-							<textarea class="wysihtml5 form-control" placeholder="Enter text ..." style="height: 200px;"></textarea>
+							<label>Përshkrimi i restorantit</label>
+							<textarea class="form-control" placeholder="Enter text ..." style="height: 200px;" name="restaurant_description">{{$restaurant->preferences["description"]}}</textarea>
 						</div>
 						<div class="row">
 							<div class="col-sm-6">
 								<div class="form-group">
-									<label>Telephone</label>
-									<input type="text" id="Telephone" name="Telephone" class="form-control">
+									<label>Nr. Telefonit</label>
+									<input type="text" id="Telephone" name="phone" value="{{$restaurant->phone}}" class="form-control">
 								</div>
 							</div>
 							<div class="col-sm-6">
 								<div class="form-group">
 									<label>Email</label>
-									<input type="email" id="Email" name="Email" class="form-control">
+									<input type="email" id="Email" name="email" value="{{$restaurant->email}}" class="form-control">
 								</div>
 							</div>
 						</div>
+
+							<button type="submit" class="btn_1">Ruaj ndryshimet</button>
+						</form>
 					</div><!-- End wrapper_indent -->
 
 					<hr class="styled_2">
-
 					<div class="indent_title_in">
 						<i class="icon_pin_alt"></i>
-						<h3>Address</h3>
-						<p>
-							Mussum ipsum cacilds, vidis litro abertis.
-						</p>
+						<h3>Adresa</h3>
+						<p>{{($restaurant->city->name ?? '').', '.($restaurant->road->road_nr ?? '').' '.($restaurant->road->name ?? '').', '.$restaurant->address}}</p>
 					</div>
 					<div class="wrapper_indent">
+					<form action="admin/address" method="POST">
+					@csrf
 						<div class="row">
 							<div class="col-sm-6">
 								<div class="form-group">
-									<label>Country</label>
-									<select class="form-control" name="country" id="country">
-										<option value="" selected>Select your country</option>
-										<option value="Europe">Europe</option>
-										<option value="United states">United states</option>
-										<option value="Asia">Asia</option>
-									</select>
+									<label>Qyteti</label>
+							     <select class="form-control" name="city_id" id="city">
+							        @foreach(\App\City::all() as $city)
+							        <option value="{{$city->id}}" @if($city->id == $restaurant->city->id)  selected="true" @endif>{{$city->name}}</option>
+							        @endforeach
+							    </select>
 								</div>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-sm-6">
 								<div class="form-group">
-									<label>Street line 1</label>
-									<input type="text" id="street_1" name="street_1" class="form-control">
+							     <label>Rruga/Addresa</label>
+							     <select class="form-control" name="road_id" id="road">
+							        <option value="{{$restaurant->road->id ?? ''}}" selected="true">{{($restaurant->road->road_nr ?? '').' '.($restaurant->road->name ?? '')}}</option>
+							     </select>
 								</div>
 							</div>
 							<div class="col-sm-6">
 								<div class="form-group">
-									<label>Street line 2</label>
-									<input type="text" id="street_2" name="street_2" class="form-control">
+									<label>Adresa specifike</label>
+									<input type="text" id="street_2" name="address" value="{{$restaurant->address ?? ''}}" class="form-control">
 								</div>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group">
-									<label>City</label>
-									<input type="text" id="city_booking" name="city_booking" class="form-control">
-								</div>
-							</div>
-							<div class="col-md-3">
-								<div class="form-group">
-									<label>State</label>
-									<input type="text" id="state_booking" name="state_booking" class="form-control">
-								</div>
-							</div>
-							<div class="col-md-3">
-								<div class="form-group">
-									<label>Postal code</label>
-									<input type="text" id="postal_code" name="postal_code" class="form-control">
-								</div>
-							</div>
-						</div><!--End row -->
+
+						<button type="submit" class="btn_1">Ruaj ndryshimet</button>
+						</form>
 					</div><!-- End wrapper_indent -->
 
 					<hr class="styled_2">
 					<div class="indent_title_in">
 						<i class="icon_images"></i>
-						<h3>Logo and restaurant photos</h3>
+						<h3>Logoja e restorantit</h3>
 						<p>
-							Mussum ipsum cacilds, vidis litro abertis.
+							Shkarkoni një fotografi që representon restorantin tuaj!
 						</p>
 					</div>
 
 					<div class="wrapper_indent add_bottom_45">
+					<form action="admin/logo" method="POST" enctype="multipart/form-data">
+					@csrf
 						<div class="form-group">
-							<label>Upload your restaurant logo</label>
-							<div id="logo_picture" class="dropzone">
+							<label>Shkarko logon e restorantit</label>
+							<div id="logo_picture">
 								<input name="file" type="file">
-								<div class="dz-default dz-message"><span>Click or Drop Images Here</span>
-								</div>
 							</div>
 						</div>
 
-						<div class="form-group">
-							<label>Upload your restaurant photos</label>
-							<div id="photos" class="dropzone">
-								<input name="file" type="file" multiple>
-								<div class="dz-default dz-message"><span>Click or Drop Images Here</span>
-								</div>
-							</div>
-						</div>
+						<button type="submit" class="btn_1">Ruaj ndryshimet</button>
+						</form>
 					</div><!-- End wrapper_indent -->
                     
 					<hr class="styled_2">
-					<div class="wrapper_indent">
-						<button class="btn_1">Save now</button>
-					</div><!-- End wrapper_indent -->
-                    
 				</section><!-- End section 1 -->
 
 				<section id="section-2">
@@ -813,143 +728,11 @@
 	<!-- End Content =============================================== -->
 
 	<!-- Footer ================================================== -->
-	<footer>
-		<div class="container">
-			<div class="row">
-				<div class="col-md-4 col-sm-3">
-					<h3>Secure payments with</h3>
-					<p><img src="/img/cards.png" alt="" class="img-responsive">
-					</p>
-
-				</div>
-				<div class="col-md-3 col-sm-3">
-					<h3>About</h3>
-					<ul>
-						<li><a href="about.html">About us</a>
-						</li>
-						<li><a href="faq.html">Faq</a>
-						</li>
-						<li><a href="contacts.html">Contacts</a>
-						</li>
-						<li><a href="#0" data-toggle="modal" data-target="#login_2">Login</a>
-						</li>
-						<li><a href="#0" data-toggle="modal" data-target="#register">Register</a>
-						</li>
-						<li><a href="#0">Terms and conditions</a>
-						</li>
-					</ul>
-				</div>
-				<div class="col-md-3 col-sm-3" id="newsletter">
-					<h3>Newsletter</h3>
-					<p>Join our newsletter to keep be informed about offers and news.</p>
-					<div id="message-newsletter_2"></div>
-					<form method="post" action="assets/newsletter.php" name="newsletter_2" id="newsletter_2">
-						<div class="form-group">
-							<input name="email_newsletter_2" id="email_newsletter_2" type="email" value="" placeholder="Your mail" class="form-control">
-						</div>
-						<input type="submit" value="Subscribe" class="btn_1" id="submit-newsletter_2">
-					</form>
-				</div>
-				<div class="col-md-2 col-sm-3">
-					<h3>Settings</h3>
-					<div class="styled-select">
-						<select class="form-control" name="lang" id="lang">
-							<option value="English" selected>English</option>
-							<option value="French">French</option>
-							<option value="Spanish">Spanish</option>
-							<option value="Russian">Russian</option>
-						</select>
-					</div>
-					<div class="styled-select">
-						<select class="form-control" name="currency" id="currency">
-							<option value="USD" selected>USD</option>
-							<option value="EUR">EUR</option>
-							<option value="GBP">GBP</option>
-							<option value="RUB">RUB</option>
-						</select>
-					</div>
-				</div>
-			</div>
-			<!-- End row -->
-			<div class="row">
-				<div class="col-md-12">
-					<div id="social_footer">
-						<ul>
-							<li><a href="#0"><i class="icon-facebook"></i></a>
-							</li>
-							<li><a href="#0"><i class="icon-twitter"></i></a>
-							</li>
-							<li><a href="#0"><i class="icon-google"></i></a>
-							</li>
-							<li><a href="#0"><i class="icon-instagram"></i></a>
-							</li>
-							<li><a href="#0"><i class="icon-pinterest"></i></a>
-							</li>
-							<li><a href="#0"><i class="icon-vimeo"></i></a>
-							</li>
-							<li><a href="#0"><i class="icon-youtube-play"></i></a>
-							</li>
-						</ul>
-						<p>© Quick Food 2015</p>
-					</div>
-				</div>
-			</div>
-			<!-- End row -->
-		</div>
-		<!-- End container -->
-	</footer>
+@include('layouts.footer')
 	<!-- End Footer =============================================== -->
 
 	<div class="layer"></div>
 	<!-- Mobile menu overlay mask -->
-
-	<!-- Login modal -->
-	<div class="modal fade" id="login_2" tabindex="-1" role="dialog" aria-labelledby="myLogin" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content modal-popup">
-				<a href="#" class="close-link"><i class="icon_close_alt2"></i></a>
-				<form action="#" class="popup-form" id="myLogin">
-					<div class="login_icon"><i class="icon_lock_alt"></i>
-					</div>
-					<input type="text" class="form-control form-white" placeholder="Username">
-					<input type="text" class="form-control form-white" placeholder="Password">
-					<div class="text-left">
-						<a href="#">Forgot Password?</a>
-					</div>
-					<button type="submit" class="btn btn-submit">Submit</button>
-				</form>
-			</div>
-		</div>
-	</div>
-	<!-- End modal -->
-
-	<!-- Register modal -->
-	<div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="myRegister" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content modal-popup">
-				<a href="#" class="close-link"><i class="icon_close_alt2"></i></a>
-				<form action="#" class="popup-form" id="myRegister">
-					<div class="login_icon"><i class="icon_lock_alt"></i>
-					</div>
-					<input type="text" class="form-control form-white" placeholder="Name">
-					<input type="text" class="form-control form-white" placeholder="Last Name">
-					<input type="email" class="form-control form-white" placeholder="Email">
-					<input type="text" class="form-control form-white" placeholder="Password" id="password1">
-					<input type="text" class="form-control form-white" placeholder="Confirm password" id="password2">
-					<div id="pass-info" class="clearfix"></div>
-					<div class="checkbox-holder text-left">
-						<div class="checkbox">
-							<input type="checkbox" value="accept_2" id="check_2" name="check_2" />
-							<label for="check_2"><span>I Agree to the <strong>Terms &amp; Conditions</strong></span>
-							</label>
-						</div>
-					</div>
-					<button type="submit" class="btn btn-submit">Register</button>
-				</form>
-			</div>
-		</div>
-	</div>
-	<!-- End Register modal -->
 
 	<!-- Search Menu -->
 	<div class="search-overlay-menu">
@@ -999,6 +782,26 @@
 				addRemoveLinks: true
 			});
 		}
+
+	    var roads = @json(\App\Road::all());
+	    
+	    $('#city').on('change', function() {
+	        var selectValue = $(this).val();
+	        $('#road').empty();
+
+	        var filtered = roads.filter(function (road) {
+	            return road.city_id == selectValue
+	        });
+
+	        filtered.forEach(addRoadOption)
+	        document.getElementById("road").disabled=false;
+	        // $( "#road" ).load(window.location.href + " #road" );
+	    });
+
+	    function addRoadOption(item, index){
+	        $('#road').append("<option value='" + item['id'] + "'>" + item['road_nr'] + ' ' + item['name'] + "</option>");
+	    }
+
 	</script>
 
 </body>

@@ -2,6 +2,8 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
+use App\City;
+use App\Road;
 use App\User;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
@@ -24,11 +26,12 @@ $factory->define(User::class, function (Faker $faker) {
         'restaurant' => $faker->boolean() ? true : false,
         'phone' => $faker->phoneNumber,
         'address' => $faker->address,
+        'city_id' => City::inRandomOrder()->first()->id,
+        'road_id' => Road::inRandomOrder()->first()->id,
         'works' => "10:00 - 20:00",
-        'lastname' => $faker->name,
         'preferences' => json_encode([
             'min_order' => '5',
-            'description' => $fake->description
+            'description' => $faker->text
         ]),
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),

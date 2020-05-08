@@ -8,10 +8,68 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class RestaurantController extends Controller
 {
+
+	public function adminPage()
+	{
+		$this->authorize('isRestaurant', User::class);
+
+		$restaurant = auth()->user();
+		
+		return view('admin', compact('restaurant'));
+	}
+
+
+	public function changeInfo(Request $request)
+	{
+		$data = $request->validate([
+			'email' => 'required|unique:App\User,email,'.auth()->user()->id.'.id',
+			'phone' => 'required',
+			'name' => 'required',
+		]);
+
+		$preferences = auth()->user()->preferences;
+		$preferences['description'] = $request->restaurant_description;
+		$data['preferences'] = $preferences;
+
+		auth()->user()->update($data);
+
+		return back();
+	}
+
+
+	public function changeLogo(Request $request)
+	{
+		$request->validate([
+			'file' => 'required|mimes:jpeg,bmp,png,svg'
+		]);
+
+		$path = $request->file('file')->storePubliclyAs('logos', 'RestaurantLogo'.auth()->user()->id.'.jpg');
+
+		auth()->user()->update(['picture' => 'app/'.$path]);
+
+		return back();
+	}
+
+
+	public function changeAddress(Request $request)
+	{
+		$data = $request->validate([
+			'city_id' => 'required',
+			'road_id' => 'required',
+			'address' => 'sometimes',
+		]);
+
+		auth()->user()->update($data);
+
+		return back();
+	}
+
+
 	public function create()
 	{
 		return view('submit_restaurant');
@@ -50,12 +108,6 @@ class RestaurantController extends Controller
 		return redirect()->route('adminPage');
 	}
 
-
-	public function adminPage()
-	{
-		$this->authorize('isRestaurant', User::class);
-		return view('admin');
-	}
 
 	//split into active and finished sectors at front
 	public function showOrders()

@@ -1,12 +1,13 @@
 <?php
-use Illuminate\Http\Request;
 use App\City;
-use App\Road;
 use App\Food;
 use App\Order;
 use App\Order_Group;
 use App\Review;
+use App\Road;
 use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +19,15 @@ use App\User;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Auth::loginUsingId(1);
+Auth::loginUsingId(2);
 Route::get('/test', function () {
 
+
+	// City::create([
+	// 	'name' => 'test',
+	// 	'location' => 'idk',
+	// 	'created_at' => now()
+	// ]);
 	// $res = User::where('restaurant', true)->first();
 	// return json_decode($res->preferences)->description;
 
@@ -39,6 +46,9 @@ Route::get('/register/restaurant', 'RestaurantController@create')->name('createR
 Route::post('/register/restaurant', 'RestaurantController@store')->name('storeRestaurant');
 Route::get('/admin', 'RestaurantController@adminPage')->name('adminPage');
 
+Route::post('/admin/logo', 'RestaurantController@changeLogo')->name('changeRestaurantLogo');
+Route::post('/admin/address', 'RestaurantController@changeAddress')->name('changeRestaurantAddress');
+Route::post('/admin/info', 'RestaurantController@changeInfo')->name('changeRestaurantInfo');
 
 
 //Food
