@@ -48,9 +48,9 @@ class RestaurantController extends Controller
 			'file' => 'required|mimes:jpeg,bmp,png,svg'
 		]);
 
-		$path = $request->file('file')->storePubliclyAs('logos', 'RestaurantLogo'.auth()->user()->id.'.jpg');
+		$path = $request->file('file')->storeAs('public/logos', 'RestaurantLogo'.auth()->user()->id.'.jpg');
 
-		auth()->user()->update(['picture' => 'app/'.$path]);
+		auth()->user()->update(['picture' => $path]);
 
 		return back();
 	}

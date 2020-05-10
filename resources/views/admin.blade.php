@@ -121,7 +121,7 @@
 						</div>
 						<div class="form-group">
 							<label>Përshkrimi i restorantit</label>
-							<textarea class="form-control" placeholder="Enter text ..." style="height: 200px;" name="restaurant_description">{{$restaurant->preferences["description"]}}</textarea>
+							<textarea class="form-control" placeholder="Enter text ..." style="height: 200px;" name="restaurant_description">{{$restaurant->preferences["description"] ?? ''}}</textarea>
 						</div>
 						<div class="row">
 							<div class="col-sm-6">
