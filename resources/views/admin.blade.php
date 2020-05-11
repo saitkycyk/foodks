@@ -97,7 +97,7 @@
 			<div class="content">
 
 				<section id="section-1">
-					@if ($errors->any())
+            		@if (!$errors->has('email') && !$errors->has('password') && $errors->any())
 					<div class="alert alert-danger">
 					<ul>
 					    @foreach ($errors->all() as $error)
@@ -128,12 +128,6 @@
 								<div class="form-group">
 									<label>Nr. Telefonit</label>
 									<input type="text" id="Telephone" name="phone" value="{{$restaurant->phone}}" class="form-control">
-								</div>
-							</div>
-							<div class="col-sm-6">
-								<div class="form-group">
-									<label>Email</label>
-									<input type="email" id="Email" name="email" value="{{$restaurant->email}}" class="form-control">
 								</div>
 							</div>
 						</div>
@@ -210,21 +204,28 @@
 					<hr class="styled_2">
 				</section><!-- End section 1 -->
 
+
+
+
+
+
+
+
 				<section id="section-2">
 					<div class="indent_title_in">
 						<i class="icon_document_alt"></i>
-						<h3>Edit menu list</h3>
-						<p>Partem diceret praesent mel et, vis facilis alienum antiopam ea, vim in sumo diam sonet. Illud ignota cum te, decore elaboraret nec ea. Quo ei graeci repudiare definitionem. Vim et malorum ornatus assentior, exerci elaboraret eum ut, diam meliore no mel.</p>
+						<h3>Lista e Menu-s</h3>
+						<p>Më poshtë mund të krijoni kategorinë ose të ndryshoni atë, muund të krijoni një lloj të ushqimit që takonë një kategorisë apo të ndryshoni atë. Mund të shtoni edhe fotografi atij ushqimi!</p>
 					</div>
                     
 					<div class="wrapper_indent">
 						<div class="form-group">
-							<label>Menu Category</label>
+							<label>Kategoria e Menu-s</label>
 							<input type="text" name="menu_category" class="form-control" placeholder="EX. Starters">
 						</div>
 
 						<div class="menu-item-section clearfix">
-							<h4>Menu item #1</h4>
+							<h4>Ushqimi</h4>
 							<div><a href="#0"><i class="icon_plus_alt"></i></a><a href="#0"><i class="icon_minus_alt"></i></a>
 							</div>
 						</div>
@@ -234,7 +235,7 @@
 								<div class="col-sm-3">
 									<div class="menu-item-pic dropzone">
 										<input name="file" type="file">
-										<div class="dz-default dz-message"><span>Click or Drop<br>Images Here</span>
+										<div class="dz-default dz-message"><span>Kliko ose lësho<br>fotografinë këtu</span>
 										</div>
 									</div>
 								</div>
@@ -242,53 +243,33 @@
 									<div class="row">
 										<div class="col-md-8">
 											<div class="form-group">
-												<label>Title</label>
-												<input type="text"  name="menu_item_title" class="form-control">
+												<label>Emri</label>
+												<input type="text"  name="name" class="form-control">
 											</div>
 										</div>
 										<div class="col-md-4">
 											<div class="form-group">
-												<label>Price</label>
-												<input type="text" name="menu_item_title_price" class="form-control">
+												<label>Cmimi</label>
+												<input type="text" name="price" placeholder="2.00" class="form-control">
 											</div>
 										</div>
 									</div>
 									<div class="form-group">
-										<label>Short description</label>
-										<input type="text" name="menu_item_description" class="form-control">
+										<label>Përshkrimi</label>
+										<input type="text" name="description" class="form-control">
 									</div>
 
 									<div class="form-group">
-										<label>Item options</label>
+										<label>Lloji ushqimit</label>
 										<div class="table-responsive">
 											<table class="table table-striped edit-options">
 												<tbody>
 													<tr>
-														<td style="width:20%">
-															<input type="text" class="form-control" placeholder="+ $3.50">
-														</td>
-														<td style="width:50%">
-															<input type="text" class="form-control" placeholder="Ex. Medium">
-														</td>
 														<td style="width:30%">
 															<label>
-																<input type="radio" name="option_item_settings_1" checked class="icheck" value="checkbox">Checkbox</label>
+																<input type="radio" name="drink" checked class="icheck" value="0">Ushqim</label>
 															<label class="margin_left">
-																<input type="radio" name="option_item_settings_1" class="icheck" value="radio">Radio</label>
-														</td>
-													</tr>
-													<tr>
-														<td style="width:20%">
-															<input type="text" class="form-control" placeholder="+ $5.50">
-														</td>
-														<td style="width:50%">
-															<input type="text" class="form-control" placeholder="Ex. Large">
-														</td>
-														<td style="width:30%">
-															<label>
-																<input type="radio" name="option_item_settings_2" class="icheck" value="checkbox">Checkbox</label>
-															<label class="margin_left">
-																<input type="radio" name="option_item_settings_2" class="icheck" value="radio" checked>Radio</label>
+																<input type="radio" name="drink" class="icheck" value="1">Pije</label>
 														</td>
 													</tr>
 												</tbody>
@@ -297,154 +278,26 @@
 									</div><!-- End form-group -->
 
 									<div class="form-group">
-										<label>Item ingredients</label>
+										<label>Përbërësit opsional</label>
                                         <div class="table-responsive">
 										<table class="table table-striped notifications">
-											<tbody>
-												<tr>
-													<td style="width:20%">
-														<input type="text" class="form-control" placeholder="+ $2.50">
-													</td>
-													<td style="width:50%">
-														<input type="text" class="form-control" placeholder="Ex. Extra tomato">
-													</td>
-													<td style="width:30%">
-														<label>
-															<input type="radio" name="option_item_settings_3" checked class="icheck" value="checkbox">Checkbox</label>
-														<label class="margin_left">
-															<input type="radio" name="option_item_settings_3" class="icheck" value="radio">Radio</label>
-													</td>
-												</tr>
-												<tr>
-													<td style="width:20%">
-														<input type="text" class="form-control" placeholder="+ $5.50">
-													</td>
-													<td style="width:50%">
-														<input type="text" class="form-control" placeholder="Ex. Extra Pepper">
-													</td>
-													<td style="width:30%">
-														<label>
-															<input type="radio" name="option_item_settings_4" class="icheck" value="checkbox">Checkbox</label>
-														<label class="margin_left">
-															<input type="radio" name="option_item_settings_4" class="icheck" value="radio" checked>Radio</label>
-													</td>
-												</tr>
-											</tbody>
-										</table>
-                                        </div>
-									</div><!-- End form-group -->
-								</div>
-							</div><!-- End row -->
-						</div><!-- End strip_menu_items -->
-
-
-
-						<div class="menu-item-section clearfix">
-							<h4>Menu item #2</h4>
-							<div><a href="#0"><i class="icon_plus_alt"></i></a><a href="#0"><i class="icon_minus_alt"></i></a>
-							</div>
-						</div>
-
-						<div class="strip_menu_items">
-							<div class="row">
-								<div class="col-sm-3">
-									<div class="menu-item-pic dropzone">
-										<input name="file" type="file">
-										<div class="dz-default dz-message"><span>Click or Drop<br>Images Here</span>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-9">
-									<div class="row">
-										<div class="col-md-8">
-											<div class="form-group">
-												<label>Title</label>
-												<input type="text" name="menu_item_title" class="form-control">
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="form-group">
-												<label>Price</label>
-												<input type="text" name="menu_item_title_price" class="form-control">
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<label>Short description</label>
-										<input type="text" name="menu_item_description" class="form-control">
-									</div>
-
-									<div class="form-group">
-										<label>Item options</label>
-                                        <div class="table-responsive">
-										<table class="table table-striped notifications">
-											<tbody>
-												<tr>
-													<td style="width:20%">
-														<input type="text" class="form-control" placeholder="+ $3.50">
-													</td>
-													<td style="width:50%">
-														<input type="text" class="form-control" placeholder="Ex. Medium">
-													</td>
-													<td style="width:30%">
-														<label>
-															<input type="radio" name="option_item_settings_5" checked class="icheck" value="checkbox">Checkbox</label>
-														<label class="margin_left">
-															<input type="radio" name="option_item_settings_5" class="icheck" value="radio">Radio</label>
-													</td>
-												</tr>
-												<tr>
-													<td style="width:20%">
-														<input type="text" class="form-control" placeholder="+ $5.50">
-													</td>
-													<td style="width:50%">
-														<input type="text" class="form-control" placeholder="Ex. Large">
-													</td>
-													<td style="width:30%">
-														<label>
-															<input type="radio" name="option_item_settings_7" class="icheck" value="checkbox">Checkbox</label>
-														<label class="margin_left">
-															<input type="radio" name="option_item_settings_7" class="icheck" value="radio" checked>Radio</label>
-													</td>
-												</tr>
-											</tbody>
-										</table>
-                                        </div>
-									</div><!-- End form-group -->
-
-									<div class="form-group">
-										<label>Item ingredients</label>
-                                        <div class="table-responsive">
-										<table class="table table-striped notifications">
-											<tbody>
-												<tr>
-													<td style="width:20%">
-														<input type="text" class="form-control" placeholder="+ $2.50">
-													</td>
-													<td style="width:50%">
-														<input type="text" class="form-control" placeholder="Ex. Extra tomato">
-													</td>
-													<td style="width:30%">
-														<label>
-															<input type="radio" name="option_item_settings_8" checked class="icheck" value="checkbox">Checkbox</label>
-														<label class="margin_left">
-															<input type="radio" name="option_item_settings_8" class="icheck" value="radio">Radio</label>
-													</td>
-												</tr>
-												<tr>
-													<td style="width:20%">
-														<input type="text" class="form-control" placeholder="+ $5.50">
-													</td>
-													<td style="width:50%">
-														<input type="text" class="form-control" placeholder="Ex. Extra Pepper">
-													</td>
-													<td style="width:30%">
-														<label>
-															<input type="radio" name="option_item_settings_9" class="icheck" value="checkbox">Checkbox</label>
-														<label class="margin_left">
-															<input type="radio" name="option_item_settings_9" class="icheck" value="radio" checked>Radio</label>
-													</td>
-												</tr>
+											<tbody id="tbody">
+												<div id="div">
+													<tr id="ingredients0">
+														<td style="width:20%">
+															<input type="text" class="form-control" placeholder="+ €2.50">
+														</td>
+														<td style="width:50%">
+															<input type="text" class="form-control" placeholder="Ketchap">
+														</td>
+														<td style="width:30%">
+															<label>
+																<input type="radio" name="ingredients1" checked class="icheck" value="checkbox">Po</label>
+															<label class="margin_left">
+																<input type="radio" name="ingredients1" class="icheck" value="radio">Jo</label>
+														</td>
+													</tr>
+												</div>
 											</tbody>
 										</table>
                                         </div>
@@ -457,133 +310,13 @@
 					<hr class="styled_2">
                     
 					<div class="wrapper_indent">
-						<div class="form-group">
-							<label>Menu Category</label>
-							<input type="text" name="menu_category" class="form-control" placeholder="EX. Main courses">
-						</div>
-
-						<div class="menu-item-section clearfix">
-							<h4>Menu item #1</h4>
-							<div><a href="#0"><i class="icon_plus_alt"></i></a><a href="#0"><i class="icon_minus_alt"></i></a>
-							</div>
-						</div>
-
-						<div class="strip_menu_items">
-							<div class="row">
-								<div class="col-sm-3">
-									<div class="menu-item-pic dropzone">
-										<input name="file" type="file">
-										<div class="dz-default dz-message"><span>Click or Drop<br>Images Here</span>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-9">
-									<div class="row">
-										<div class="col-md-8">
-											<div class="form-group">
-												<label>Title</label>
-												<input type="text" name="menu_item_title" class="form-control">
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="form-group">
-												<label>Price</label>
-												<input type="text" name="menu_item_title_price" class="form-control">
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<label>Short description</label>
-										<input type="text" name="menu_item_description" class="form-control">
-									</div>
-
-									<div class="form-group">
-										<label>Item options</label>
-                                        <div class="table-responsive">
-										<table class="table table-striped notifications">
-											<tbody>
-												<tr>
-													<td style="width:20%">
-														<input type="text" class="form-control" placeholder="+ $3.50">
-													</td>
-													<td style="width:50%">
-														<input type="text" class="form-control" placeholder="Ex. Medium">
-													</td>
-													<td style="width:30%">
-														<label>
-															<input type="radio" name="option_item_settings_10" checked class="icheck" value="checkbox">Checkbox</label>
-														<label class="margin_left">
-															<input type="radio" name="option_item_settings_10" class="icheck" value="radio">Radio</label>
-													</td>
-												</tr>
-												<tr>
-													<td style="width:20%">
-														<input type="text" class="form-control" placeholder="+ $5.50">
-													</td>
-													<td style="width:50%">
-														<input type="text" class="form-control" placeholder="Ex. Large">
-													</td>
-													<td style="width:30%">
-														<label>
-															<input type="radio" name="option_item_settings_11" class="icheck" value="checkbox">Checkbox</label>
-														<label class="margin_left">
-															<input type="radio" name="option_item_settings_11" class="icheck" value="radio" checked>Radio</label>
-													</td>
-												</tr>
-											</tbody>
-										</table>
-                                        </div>
-									</div><!-- End form-group -->
-
-									<div class="form-group">
-										<label>Item ingredients</label>
-                                        <div class="table-responsive">
-										<table class="table table-striped notifications">
-											<tbody>
-												<tr>
-													<td style="width:20%">
-														<input type="text" class="form-control" placeholder="+ $2.50">
-													</td>
-													<td style="width:50%">
-														<input type="text" class="form-control" placeholder="Ex. Extra tomato">
-													</td>
-													<td style="width:30%">
-														<label>
-															<input type="radio" name="option_item_settings_12" checked class="icheck" value="checkbox">Checkbox</label>
-														<label class="margin_left">
-															<input type="radio" name="option_item_settings_12" class="icheck" value="radio">Radio</label>
-													</td>
-												</tr>
-												<tr>
-													<td style="width:20%">
-														<input type="text" class="form-control" placeholder="+ $5.50">
-													</td>
-													<td style="width:50%">
-														<input type="text" class="form-control" placeholder="Ex. Extra Pepper">
-													</td>
-													<td style="width:30%">
-														<label>
-															<input type="radio" name="option_item_settings_13" class="icheck" value="checkbox">Checkbox</label>
-														<label class="margin_left">
-															<input type="radio" name="option_item_settings_13" class="icheck" value="radio" checked>Radio</label>
-													</td>
-												</tr>
-											</tbody>
-										</table>
-                                        </div>
-									</div><!-- End form-group -->
-								</div>
-							</div><!-- End row -->
-						</div><!-- End strip_menu_items -->
-					</div><!-- End wrapper_indent -->
-                    
-					<hr class="styled_2">
-                    
-					<div class="wrapper_indent">
-						<div class="add_more_cat"><a href="#0" class="btn_1">Save now</a> <a href="#0" class="btn_1">Add menu category</a> </div>
+						<button type="button" id="but" class="btn_1 green">Ruaj</button>
 					</div><!-- End wrapper_indent -->
                     
 				</section><!-- End section 2 -->
+
+
+
 
 				<section id="section-3">
 
@@ -592,50 +325,70 @@
 						<div class="col-md-6 col-sm-6 add_bottom_15">
 							<div class="indent_title_in">
 								<i class="icon_lock_alt"></i>
-								<h3>Change your password</h3>
+								<h3>Ndryshoni fjalëkalimin tuaj</h3>
 								<p>
-									Mussum ipsum cacilds, vidis litro abertis.
+									Plotësoni të dhënat më poshtë për të ndryshuar fjalëkalimin.
 								</p>
+							@if (Session::has('password'))
+								<div class="alert alert-warning">
+								<ul>
+									<li>{{Session::get('password')}}</li>
+								</ul>
+								</div>
+							@endif
 							</div>
 							<div class="wrapper_indent">
-								<div class="form-group">
-									<label>Old password</label>
-									<input class="form-control" name="old_password" id="old_password" type="password">
-								</div>
-								<div class="form-group">
-									<label>New password</label>
-									<input class="form-control" name="new_password" id="new_password" type="password">
-								</div>
-								<div class="form-group">
-									<label>Confirm new password</label>
-									<input class="form-control" name="confirm_new_password" id="confirm_new_password" type="password">
-								</div>
-								<button type="submit" class="btn_1 green">Update Password</button>
+								<form action="/admin/changepassword" method="POST">
+									@csrf
+									<div class="form-group">
+										<label>Fjalëkalimi vjetër</label>
+										<input class="form-control" name="old_password" id="old_password" type="password">
+									</div>
+									<div class="form-group">
+										<label>Fjalëkalimi i ri</label>
+										<input class="form-control" name="password" id="new_password" type="password">
+									</div>
+									<div class="form-group">
+										<label>Konfirmo fjalëkalimin e re</label>
+										<input class="form-control" name="password_confirmation" id="confirm_new_password" type="password">
+									</div>
+									<button type="submit" class="btn_1 green">Ndrysho Fjalëkalimin</button>
+								</form>
 							</div><!-- End wrapper_indent -->
 						</div>
                         
 						<div class="col-md-6 col-sm-6 add_bottom_15">
 							<div class="indent_title_in">
 								<i class="icon_mail_alt"></i>
-								<h3>Change your email</h3>
+								<h3>Ndryshoni emailin tuaj</h3>
 								<p>
-									Mussum ipsum cacilds, vidis litro abertis.
+									Plotësoni të dhënat më poshtë për të ndryshuar emailin.
 								</p>
+							@if (Session::has('email'))
+								<div class="alert alert-warning">
+								<ul>
+									<li>{{Session::get('email')}}</li>
+								</ul>
+								</div>
+							@endif
 							</div>
 							<div class="wrapper_indent">
-								<div class="form-group">
-									<label>Old email</label>
-									<input class="form-control" name="old_email" id="old_email" type="email">
-								</div>
-								<div class="form-group">
-									<label>New email</label>
-									<input class="form-control" name="new_email" id="new_email" type="email">
-								</div>
-								<div class="form-group">
-									<label>Confirm new email</label>
-									<input class="form-control" name="confirm_new_email" id="confirm_new_email" type="email">
-								</div>
-								<button type="submit" class="btn_1 green">Update Email</button>
+								<form action="/admin/changeemail" method="POST">
+									@csrf
+									<div class="form-group">
+										<label>Emaili vjetër</label>
+										<input class="form-control" name="old_email" id="old_email" type="email">
+									</div>
+									<div class="form-group">
+										<label>Emaili i ri</label>
+										<input class="form-control" name="email" id="new_email" type="email">
+									</div>
+									<div class="form-group">
+										<label>Konfirmo emailin e re</label>
+										<input class="form-control" name="email_confirmation" id="confirm_new_email" type="email">
+									</div>
+									<button type="submit" class="btn_1 green">Ndrysho Emailin</button>
+								</form>
 							</div><!-- End wrapper_indent -->
 						</div>
                         
@@ -643,82 +396,6 @@
 
 					<hr class="styled_2">
                     
-					<div class="indent_title_in">
-						<i class="icon_shield"></i>
-						<h3>Notification settings</h3>
-						<p>
-							Mussum ipsum cacilds, vidis litro abertis.
-						</p>
-					</div>
-					<div class="row">
-                    
-						<div class="col-md-6 col-sm-6">
-							<div class="wrapper_indent">
-								<table class="table table-striped notifications">
-									<tbody>
-										<tr>
-											<td style="width:5%">
-												<i class="icon_pencil-edit_alt"></i>
-											</td>
-											<td style="width:65%">
-												New orders
-											</td>
-											<td style="width:35%">
-												<label>
-													<input type="checkbox" name="option_1_settings" checked class="icheck" value="yes">Yes</label>
-												<label class="margin_left">
-													<input type="checkbox" name="option_1_settings" class="icheck" value="no">No</label>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<i class="icon_pencil-edit_alt"></i>
-											</td>
-											<td>
-												Modified orders
-											</td>
-											<td>
-												<label>
-													<input type="checkbox" name="option_2_settings" checked class="icheck" value="yes">Yes</label>
-												<label class="margin_left">
-													<input type="checkbox" name="option_2_settings" class="icheck" value="no">No</label>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<i class="icon_pencil-edit_alt"></i>
-											</td>
-											<td>
-												New user registration
-											</td>
-											<td>
-												<label>
-													<input type="checkbox" name="option_3_settings" checked class="icheck" value="yes">Yes</label>
-												<label class="margin_left">
-													<input type="checkbox" name="option_3_settings" class="icheck" value="no">No</label>
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<i class="icon_pencil-edit_alt"></i>
-											</td>
-											<td>
-												New comments
-											</td>
-											<td>
-												<label>
-													<input type="checkbox" name="option_4_settings" checked class="icheck" value="yes">Yes</label>
-												<label class="margin_left">
-													<input type="checkbox" name="option_4_settings" class="icheck" value="no">No</label>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-								<button type="submit" class="btn_1 green">Update notifications settings</button>
-							</div>
-                            
-						</div><!-- End row -->
-					</div><!-- End wrapper_indent -->
                     
 				</section><!-- End section 3 -->
 
@@ -763,6 +440,15 @@
 	</script>
 	<script src="/js/dropzone.min.js"></script>
 	<script>
+		var i = 0;
+		$(document).ready(function(){
+		   $("#but").click(function(){
+		   	i++;
+		    $("#ingredients0").clone().prop('id', 'ingredients' + i).appendTo("#tbody");
+		   });
+		});
+
+
 		if ($('.dropzone').length > 0) {
 			Dropzone.autoDiscover = false;
 			$("#photos").dropzone({

@@ -7,12 +7,58 @@ use App\Order_Group;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class RestaurantController extends Controller
 {
+
+	public function changePassword(Request $request)
+	{
+		if(Hash::check($request->old_password, auth()->user()->password)){
+			try{
+				$newPassword = $request->validate([
+					'password' => 'required|confirmed'
+				]);
+			} catch (\Exception $e) {
+				session()->flash('password', 'Konfirmimi i fjalëkalimit është dështuar, provoni përsëri!');
+				return back();
+			}
+
+			auth()->user()->update(['password' => bcrypt($newPassword['password'])]);
+
+			session()->flash('password', 'Fjalëkalimi u ndryshua me sukses!');
+			return back();
+		}
+
+		session()->flash('password', 'Fjalëkalimi nuk përputhet me fjalëkalimin e vjetër!');
+		return back();
+	}
+
+	public function changeEmail(Request $request)
+	{
+		if($request->old_email == auth()->user()->email){
+			try{
+				$newEmail = $request->validate([
+					'email' => 'required|confirmed|unique:App\User,email,'.auth()->user()->id.'.id'
+				]);
+			} catch (\Exception $e) {
+				session()->flash('email', 'Emaili nuk përputhet me emailin e vjetër ose ky email është e zënë!');
+				return back();
+			}
+			dd('hooop hemserim nereye');
+			auth()->user()->update($newEmail);
+
+			session()->flash('email', 'Emaili u ndryshua me sukses!');
+			return back();
+		}
+
+		session()->flash('email', 'Emaili nuk përputhet me emailin e vjetër ose ky email është e zënë!');
+		return back();
+	}
+
 
 	public function adminPage()
 	{
@@ -27,7 +73,6 @@ class RestaurantController extends Controller
 	public function changeInfo(Request $request)
 	{
 		$data = $request->validate([
-			'email' => 'required|unique:App\User,email,'.auth()->user()->id.'.id',
 			'phone' => 'required',
 			'name' => 'required',
 		]);
