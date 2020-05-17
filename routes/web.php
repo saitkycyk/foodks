@@ -43,48 +43,13 @@ Route::get('/restaurant/{id}/profile', 'RestaurantController@restaurantProfile')
 Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/register/restaurant', 'RestaurantController@create')->name('createRestaurant');
 Route::post('/register/restaurant', 'RestaurantController@store')->name('storeRestaurant');
-Route::get('/admin', 'RestaurantController@adminPage')->name('adminPage');
 
+
+Route::get('/admin', 'RestaurantController@adminPage')->name('adminPage');
 Route::post('/admin/logo', 'RestaurantController@changeLogo')->name('changeRestaurantLogo');
 Route::post('/admin/address', 'RestaurantController@changeAddress')->name('changeRestaurantAddress');
 Route::post('/admin/info', 'RestaurantController@changeInfo')->name('changeRestaurantInfo');
 Route::post('/admin/changepassword', 'RestaurantController@changePassword')->name('changeRestaurantPassword');
 Route::post('/admin/changeemail', 'RestaurantController@changeEmail')->name('changeRestaurantEmail');
+Route::post('/admin/food/create', 'RestaurantController@createFood')->name('createFood');
 
-
-//Food
-// Route::get()->name('');
-// Route::post()->name('');
-// Route::patch()->name('');
-// Route::delete()->name('');
-
-//Order
-// Route::get()->name('');
-// Route::post()->name('');
-// Route::patch()->name('');
-// Route::delete()->name('');
-
-//Review
-// Route::get()->name('');
-// Route::post()->name('');
-// Route::patch()->name('');
-// Route::delete()->name('');
-
-//City
-// Route::get()->name('');
-// Route::get()->name('');
-// Route::post()->name('');
-// Route::patch()->name('');
-// Route::delete()->name('');
-
-//Road
-// Route::get()->name('');
-// Route::post()->name('');
-// Route::patch()->name('');
-// Route::delete()->name('');
-
-//User
-// Route::get()->name('');
-// Route::post()->name('');
-// Route::patch()->name('');
-// Route::delete()->name('');

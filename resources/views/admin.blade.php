@@ -205,13 +205,9 @@
 				</section><!-- End section 1 -->
 
 
-
-
-
-
-
-
 				<section id="section-2">
+					<form action="admin/food/create" method="POST" enctype="multipart/form-data">
+					@csrf
 					<div class="indent_title_in">
 						<i class="icon_document_alt"></i>
 						<h3>Lista e Menu-s</h3>
@@ -219,100 +215,104 @@
 					</div>
                     
 					<div class="wrapper_indent">
-						<div class="form-group">
-							<label>Kategoria e Menu-s</label>
-							<input type="text" name="menu_category" class="form-control" placeholder="EX. Starters">
-						</div>
-
-						<div class="menu-item-section clearfix">
-							<h4>Ushqimi</h4>
-							<div><a href="#0"><i class="icon_plus_alt"></i></a><a href="#0"><i class="icon_minus_alt"></i></a>
+							<div class="form-group">
+								<label>Kategoria e Menu-s</label>
+								<input class="form-control" type="text" name="category" list="categories"/>
+								<datalist id="categories">
+									@foreach($restaurant->foods as $food)
+								    	<option value="{{$food->category}}">{{$food->category}}</option>
+								    @endforeach
+								</datalist>
 							</div>
-						</div>
 
-						<div class="strip_menu_items">
-							<div class="row">
-								<div class="col-sm-3">
-									<div class="menu-item-pic dropzone">
-										<input name="file" type="file">
-										<div class="dz-default dz-message"><span>Kliko ose lësho<br>fotografinë këtu</span>
-										</div>
-									</div>
+							<div class="menu-item-section clearfix">
+								<h4>Ushqimi</h4>
+								<div>
 								</div>
-								<div class="col-sm-9">
-									<div class="row">
-										<div class="col-md-8">
-											<div class="form-group">
-												<label>Emri</label>
-												<input type="text"  name="name" class="form-control">
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="form-group">
-												<label>Cmimi</label>
-												<input type="text" name="price" placeholder="2.00" class="form-control">
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<label>Përshkrimi</label>
-										<input type="text" name="description" class="form-control">
-									</div>
+							</div>
 
-									<div class="form-group">
-										<label>Lloji ushqimit</label>
-										<div class="table-responsive">
-											<table class="table table-striped edit-options">
-												<tbody>
-													<tr>
-														<td style="width:30%">
-															<label>
-																<input type="radio" name="drink" checked class="icheck" value="0">Ushqim</label>
-															<label class="margin_left">
-																<input type="radio" name="drink" class="icheck" value="1">Pije</label>
-														</td>
-													</tr>
+							<div class="strip_menu_items">
+								<div class="row">
+									<div class="col-sm-3">
+										<div class="form-group">
+											<label>Shkarko logon e restorantit</label>
+											<div id="logo_picture">
+												<input name="file" type="file">
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-9">
+										<div class="row">
+											<div class="col-md-8">
+												<div class="form-group">
+													<label>Emri</label>
+													<input type="text"  name="name" class="form-control">
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="form-group">
+													<label>Cmimi</label>
+													<input type="text" name="price" placeholder="2.00" class="form-control">
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label>Përshkrimi</label>
+											<input type="text" name="description" class="form-control">
+										</div>
+
+										<div class="form-group">
+											<label>Lloji ushqimit</label>
+											<div class="table-responsive">
+												<table class="table table-striped edit-options">
+													<tbody>
+														<tr>
+															<td style="width:30%">
+																<label>
+																	<input type="radio" name="drink" checked class="icheck" value="0">Ushqim</label>
+																<label class="margin_left">
+																	<input type="radio" name="drink" class="icheck" value="1">Pije</label>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div><!-- End form-group -->
+
+										<div class="form-group">
+											<label>Përbërësit opsional</label><a href="#0" id="but" style="float: right"><i class="icon_plus_alt"></i></a>
+	                                        <div class="table-responsive">
+											<table class="table table-striped notifications">
+												<tbody id="tbody">
+													<div id="div">
+														<tr id="ingredients0">
+															<td style="width:20%">
+																<input type="text" id="ingPrice" name="ingredients[0][ingPrice]" class="form-control" placeholder="+ €2.50">
+															</td>
+															<td style="width:50%">
+																<input type="text" id="ingName" name="ingredients[0][ingName]" class="form-control" placeholder="Ketchap">
+															</td>
+															<td style="width:30%">
+																<label>
+																	<input type="radio" id="ingDefault" name="ingredients[0][ingDefault]" checked value="1">&nbsp;Po</label>
+																<label class="margin_left">
+																	<input type="radio" id="ingDefault" name="ingredients[0][ingDefault]" value="0">&nbsp;Jo</label>
+															</td>
+														</tr>
+													</div>
 												</tbody>
 											</table>
-										</div>
-									</div><!-- End form-group -->
-
-									<div class="form-group">
-										<label>Përbërësit opsional</label>
-                                        <div class="table-responsive">
-										<table class="table table-striped notifications">
-											<tbody id="tbody">
-												<div id="div">
-													<tr id="ingredients0">
-														<td style="width:20%">
-															<input type="text" class="form-control" placeholder="+ €2.50">
-														</td>
-														<td style="width:50%">
-															<input type="text" class="form-control" placeholder="Ketchap">
-														</td>
-														<td style="width:30%">
-															<label>
-																<input type="radio" name="ingredients1" checked class="icheck" value="checkbox">Po</label>
-															<label class="margin_left">
-																<input type="radio" name="ingredients1" class="icheck" value="radio">Jo</label>
-														</td>
-													</tr>
-												</div>
-											</tbody>
-										</table>
-                                        </div>
-									</div><!-- End form-group -->
-								</div>
-							</div><!-- End row -->
-						</div><!-- End strip_menu_items -->
+	                                        </div>
+										</div><!-- End form-group -->
+									</div>
+								</div><!-- End row -->
+							</div><!-- End strip_menu_items -->
 					</div><!-- End wrapper_indent -->
-
+					<div class="wrapper_indent" id="this shit works">
+						<button type="submit" class="btn_1 green">Submit</button>
+					</div><!-- End wrapper_indent -->
+					</form>
 					<hr class="styled_2">
-                    
-					<div class="wrapper_indent">
-						<button type="button" id="but" class="btn_1 green">Ruaj</button>
-					</div><!-- End wrapper_indent -->
-                    
 				</section><!-- End section 2 -->
 
 
@@ -440,11 +440,14 @@
 	</script>
 	<script src="/js/dropzone.min.js"></script>
 	<script>
+
+
 		var i = 0;
 		$(document).ready(function(){
 		   $("#but").click(function(){
 		   	i++;
-		    $("#ingredients0").clone().prop('id', 'ingredients' + i).appendTo("#tbody");
+
+		   	$("#tbody").append('<tr id="ingredients'+i+'"><td style="width:20%"><input type="text" id="ingPrice" name="ingredients['+i+'][ingPrice]" class="form-control" placeholder="+ €2.50"></td><td style="width:50%"><input type="text" id="ingName" name="ingredients['+i+'][ingName]" class="form-control" placeholder="Ketchap"></td><td style="width:30%"><label><input type="radio" id="ingDefault" name="ingredients['+i+'][ingDefault]" checked value="1">&nbsp;Po</label><label class="margin_left"><input type="radio" id="ingDefault" name="ingredients['+i+'][ingDefault]" value="0">&nbsp;Jo</label></td></tr>');
 		   });
 		});
 

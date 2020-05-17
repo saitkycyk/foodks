@@ -16,6 +16,15 @@ class Food extends Model
 		'id'
 	];
 
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'ingredients' => 'json',
+    ];
+    
 	public function restaurant()
 	{
 		return $this->belongsTo(User::class, 'user_id', 'id');
