@@ -280,7 +280,7 @@
 										</div><!-- End form-group -->
 
 										<div class="form-group">
-											<label>Përbërësit opsional</label><a href="#0" id="but" style="float: right"><i class="icon_plus_alt"></i></a>
+											<label>Përbërësit opsional</label><a href="#0" id="newIng" style="float: right"><i class="icon_plus_alt"></i></a>
 	                                        <div class="table-responsive">
 											<table class="table table-striped notifications">
 												<tbody id="tbody">
@@ -309,7 +309,7 @@
 							</div><!-- End strip_menu_items -->
 					</div><!-- End wrapper_indent -->
 					<div class="wrapper_indent" id="this shit works">
-						<button type="submit" class="btn_1 green">Submit</button>
+						<button type="submit" class="btn_1 green">Krijo</button>
 					</div><!-- End wrapper_indent -->
 					</form>
 					<hr class="styled_2">
@@ -387,13 +387,21 @@
 										</div><!-- End form-group -->
 
 										<div class="form-group">
-											<label>Përbërësit opsional</label><a href="#0" id="but" style="float: right"><i class="icon_plus_alt"></i></a>
+												@php
+														if(json_decode($food->ingredients, true) == null){
+															$ingKey = 0;
+														} else {
+														$ingKey = (int)key(array_slice(json_decode($food->ingredients, true), -1, 1, true));
+													}
+												@endphp
+											<label>Përbërësit opsional</label><a href="#0" id="extIng" onclick="addIngRow({{$food->id}}, {{$ingKey}})" style="float: right"><i class="icon_plus_alt"></i></a>
 	                                        <div class="table-responsive">
 											<table class="table table-striped notifications">
-												<tbody id="tbody">
+												<tbody id="tbody{{$food->id}}">
 													<div id="div">
 													@if($food->ingredients != null)
 														@foreach(json_decode($food->ingredients, true) as $key => $ingredient)
+													<div id="div">
 														<tr id="ingredients{{$key}}">
 															<td style="width:20%">
 																<input type="text" id="ingPrice" name="ingredients[{{$key}}][ingPrice]" class="form-control" value="{{$ingredient['ingPrice']}}" placeholder="+ €2.50">
@@ -408,6 +416,7 @@
 																	<input type="radio" id="ingDefault" name="ingredients[{{$key}}][ingDefault]" @if(!$ingredient['ingDefault']) checked @endif value="0">&nbsp;Jo</label>
 															</td>
 															</tr>
+														</div>
 															@endforeach
 														@endif
 														@php
@@ -592,13 +601,20 @@
 
 		var i = 0;
 		$(document).ready(function(){
-		   $("#but").click(function(){
+		   $("#newIng").click(function(){
 		   	i++;
 
 		   	$("#tbody").append('<tr id="ingredients'+i+'"><td style="width:20%"><input type="text" id="ingPrice" name="ingredients['+i+'][ingPrice]" class="form-control" placeholder="+ €2.50"></td><td style="width:50%"><input type="text" id="ingName" name="ingredients['+i+'][ingName]" class="form-control" placeholder="Ketchap"></td><td style="width:30%"><label><input type="radio" id="ingDefault" name="ingredients['+i+'][ingDefault]" checked value="1">&nbsp;Po</label><label class="margin_left"><input type="radio" id="ingDefault" name="ingredients['+i+'][ingDefault]" value="0">&nbsp;Jo</label></td></tr>');
 		   });
 		});
 
+
+	function addIngRow(divId){
+			var ingKey = $('#tbody'+divId+'').children().length - 1;
+		   	ingKey++;
+
+		   	$('#tbody'+divId+'').append('<tr id="ingredients'+ingKey+'"><td style="width:20%"><input type="text" id="ingPrice" name="ingredients['+ingKey+'][ingPrice]" class="form-control" placeholder="+ €2.50"></td><td style="width:50%"><input type="text" id="ingName" name="ingredients['+ingKey+'][ingName]" class="form-control" placeholder="Ketchap"></td><td style="width:30%"><label><input type="radio" id="ingDefault" name="ingredients['+ingKey+'][ingDefault]" checked value="1">&nbsp;Po</label><label class="margin_left"><input type="radio" id="ingDefault" name="ingredients['+ingKey+'][ingDefault]" value="0">&nbsp;Jo</label></td></tr>');
+	}
 
 		if ($('.dropzone').length > 0) {
 			Dropzone.autoDiscover = false;
