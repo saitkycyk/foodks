@@ -21,7 +21,11 @@ use Illuminate\Support\Facades\Storage;
 */
 Auth::loginUsingId(1);
 Route::get('/test', function () {
+	$res = User::find(1);
+	dd($res->foods->sortByDesc('created_at'));
+	foreach($res->foods->orderBy('created_at') as $food){
 
+	}
 	// City::create([
 	// 	'name' => 'test',
 	// 	'location' => 'idk',
@@ -51,5 +55,7 @@ Route::post('/admin/address', 'RestaurantController@changeAddress')->name('chang
 Route::post('/admin/info', 'RestaurantController@changeInfo')->name('changeRestaurantInfo');
 Route::post('/admin/changepassword', 'RestaurantController@changePassword')->name('changeRestaurantPassword');
 Route::post('/admin/changeemail', 'RestaurantController@changeEmail')->name('changeRestaurantEmail');
-Route::post('/admin/food/create', 'RestaurantController@createFood')->name('createFood');
+Route::post('/admin/food/create', 'FoodController@create')->name('createFood');
+Route::patch('/admin/food/update/{food}', 'FoodController@update')->name('updateFood');
+Route::delete('/admin/food/delete/{food}', 'FoodController@delete')->name('deleteFood');
 

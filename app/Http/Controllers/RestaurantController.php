@@ -16,45 +16,6 @@ use Illuminate\Support\Str;
 class RestaurantController extends Controller
 {
 
-	public function createFood(Request $request)
-	{
-		$data = $request->validate([
-			'category' => 'required',
-			'name' => 'required',
-			'price' => 'required|numeric',
-			'description' => 'nullable',
-			'drink' => 'required|boolean',
-			'ingredients.*.ingPrice' => 'nullable|numeric',
-			'ingredients.*.ingName' => 'nullable',
-			'ingredients.*.ingDefault' => 'boolean',
-		]);
-
-		$ingredients = [];
-		foreach($data['ingredients'] as $ingredient){
-			if($ingredient['ingName'] == null){
-				continue;
-			}
-
-			array_push($ingredients, $ingredient);
-		}
-
-		$request->validate([
-			'file' => 'nullable|mimes:jpeg,bmp,png,svg'
-		]);
-
-		$data['user_id'] = auth()->user()->id;
-		$food = Food::create($data);
-		empty($ingredients) ? $food->ingredients = null : $food->ingredients = json_encode($ingredients);
-
-		$path = $request->file('file')->storeAs('public/foods', 'Food'.$food->id.'.jpg');
-
-		$food->picture = $path;
-		$food->save();
-
-		return back();
-	}
-
-
 	public function changePassword(Request $request)
 	{
 		if(Hash::check($request->old_password, auth()->user()->password)){

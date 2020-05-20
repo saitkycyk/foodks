@@ -2,53 +2,93 @@
 
 namespace App\Http\Controllers;
 
+use App\Food;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class FoodController extends Controller
 {
-    public function show()
-    {
 
+    public function create(Request $request)
+    {
+        $data = $request->validate([
+            'category' => 'required',
+            'name' => 'required',
+            'price' => 'required|numeric',
+            'description' => 'nullable',
+            'drink' => 'required|boolean',
+            'ingredients.*.ingPrice' => 'nullable|numeric',
+            'ingredients.*.ingName' => 'nullable',
+            'ingredients.*.ingDefault' => 'boolean',
+        ]);
+
+        $ingredients = [];
+        foreach($data['ingredients'] as $ingredient){
+            if($ingredient['ingName'] == null){
+                continue;
+            }
+
+            array_push($ingredients, $ingredient);
+        }
+
+        $request->validate([
+            'picture' => 'nullable|mimes:jpeg,bmp,png,svg'
+        ]);
+
+        $data['user_id'] = auth()->user()->id;
+        $food = Food::create($data);
+        empty($ingredients) ? $food->ingredients = null : $food->ingredients = json_encode($ingredients);
+
+        $path = $request->file('picture')->storeAs('public/foods', 'Food'.$food->id.'.jpg');
+
+        $food->picture = $path;
+        $food->save();
+
+        return back();
     }
 
-    public function create()
-    {
-
-    }
-
-    public function edit()
-    {
-
-    }
-
-    public function store(Request $request)
-    {
-        $this->authorize('isRestaurant', User::class);
-        $food = $this->validateFood($request);
-
-        $food['user_id'] = auth()->id();
-        $food['picture'] = $request->file('picture')->store('FoodLogo');
-        $food['picture'] = Storage::url($food['picture']);
-        Food::create($food);
-
-        return back();        
-    }
 
     public function update(Food $food, Request $request)
     {
         $this->authorize('isFoodOwner', $food);
 
-        $data = $this->validateFood($request);
-        $food->update($data);
+        $data = $request->validate([
+            'category' => 'required',
+            'name' => 'required',
+            'price' => 'required|numeric',
+            'description' => 'nullable',
+            'drink' => 'required|boolean',
+            'ingredients.*.ingPrice' => 'nullable|numeric',
+            'ingredients.*.ingName' => 'nullable',
+            'ingredients.*.ingDefault' => 'boolean',
+        ]);
 
-        if (!is_null(request('picture'))) {
-            if($food->picture){
-                Storage::delete($food->picture);
+        $ingredients = [];
+        foreach($data['ingredients'] as $ingredient){
+            if($ingredient['ingName'] == null){
+                continue;
             }
-            $food->update(['picture'=>request()->file('picture')->store('FoodLogo')]);
+
+            array_push($ingredients, $ingredient);
         }
+
+        $request->validate([
+            'picture' => 'nullable|mimes:jpeg,bmp,png,svg'
+        ]);
+
+        $food->update($data);
+        empty($ingredients) ? $food->ingredients = null : $food->ingredients = json_encode($ingredients);
+
+        if($request->picture != null){
+
+            $path = $request->file('picture')->storeAs('public/foods', 'Food'.$food->id.'.jpg');
+            $food->picture = $path;
+        }
+        $food->save();
+
+        return back();
     }
+
 
     public function delete(Food $food)
     {
@@ -56,6 +96,11 @@ class FoodController extends Controller
 
         $food->delete();
         Storage::delete($food->picture);
+
+        $food->picture = null;
+        $food->save();
+
+        return back();
     }
 
     public function validateFood($request)

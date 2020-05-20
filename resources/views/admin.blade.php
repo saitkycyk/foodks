@@ -235,9 +235,9 @@
 								<div class="row">
 									<div class="col-sm-3">
 										<div class="form-group">
-											<label>Shkarko logon e restorantit</label>
+											<label>Shkarko logon e ushqimit</label>
 											<div id="logo_picture">
-												<input name="file" type="file">
+												<input name="picture" type="file">
 											</div>
 										</div>
 									</div>
@@ -313,6 +313,154 @@
 					</div><!-- End wrapper_indent -->
 					</form>
 					<hr class="styled_2">
+
+
+
+
+					@foreach($restaurant->foods->sortByDesc('created_at') as $food)
+					<form action="/admin/food/update/{{$food->id}}" method="POST">
+						@csrf
+						@method('PATCH')
+						<div class="wrapper_indent">
+							<div class="form-group">
+								<label>Kategoria e Menu-s</label>
+								<input class="form-control" type="text" value="{{$food->category}}" name="category" list="categories"/>
+								<datalist id="categories">
+									@foreach($restaurant->foods as $foodCat)
+								    	<option value="{{$foodCat->category}}">{{$foodCat->category}}</option>
+								    @endforeach
+								</datalist>
+							</div>
+
+							<div class="menu-item-section clearfix">
+								<h4>Ushqimi</h4>
+								<div>
+								</div>
+							</div>
+
+							<div class="strip_menu_items">
+								<div class="row">
+									<div class="col-sm-3">
+										<div class="form-group">
+											<label>Ndrysho logon e ushqimit</label>
+											<div id="logo_picture">
+												<input name="picture" type="file">
+											</div>
+										</div>
+									</div>
+									<div class="col-sm-9">
+										<div class="row">
+											<div class="col-md-8">
+												<div class="form-group">
+													<label>Emri</label>
+													<input type="text"  name="name" value="{{$food->name}}" class="form-control">
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="form-group">
+													<label>Cmimi</label>
+													<input type="text" name="price" value="{{$food->price}}" placeholder="2.00" class="form-control">
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label>Përshkrimi</label>
+											<input type="text" name="description" value="{{$food->description}}" class="form-control">
+										</div>
+
+										<div class="form-group">
+											<label>Lloji ushqimit</label>
+											<div class="table-responsive">
+												<table class="table table-striped edit-options">
+													<tbody>
+														<tr>
+															<td style="width:30%">
+																<label>
+																	<input type="radio" name="drink" @if(!$food->drink) checked @endif class="icheck" value="0">Ushqim</label>
+																<label class="margin_left">
+																	<input type="radio" name="drink" @if($food->drink) checked @endif  class="icheck" value="1">Pije</label>
+															</td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div><!-- End form-group -->
+
+										<div class="form-group">
+											<label>Përbërësit opsional</label><a href="#0" id="but" style="float: right"><i class="icon_plus_alt"></i></a>
+	                                        <div class="table-responsive">
+											<table class="table table-striped notifications">
+												<tbody id="tbody">
+													<div id="div">
+													@if($food->ingredients != null)
+														@foreach(json_decode($food->ingredients, true) as $key => $ingredient)
+														<tr id="ingredients{{$key}}">
+															<td style="width:20%">
+																<input type="text" id="ingPrice" name="ingredients[{{$key}}][ingPrice]" class="form-control" value="{{$ingredient['ingPrice']}}" placeholder="+ €2.50">
+															</td>
+															<td style="width:50%">
+																<input type="text" id="ingName" name="ingredients[{{$key}}][ingName]" class="form-control" value="{{$ingredient['ingName']}}" placeholder="Ketchap">
+															</td>
+															<td style="width:30%">
+																<label>
+																	<input type="radio" id="ingDefault" name="ingredients[{{$key}}][ingDefault]" @if($ingredient['ingDefault']) checked @endif value="1">&nbsp;Po</label>
+																<label class="margin_left">
+																	<input type="radio" id="ingDefault" name="ingredients[{{$key}}][ingDefault]" @if(!$ingredient['ingDefault']) checked @endif value="0">&nbsp;Jo</label>
+															</td>
+															</tr>
+															@endforeach
+														@endif
+														@php
+														if(json_decode($food->ingredients, true) == null){
+															$key = 0;
+														} else {
+														$key = (int)key(array_slice(json_decode($food->ingredients, true), -1, 1, true)) + 1;
+													}
+														@endphp
+														<tr id="ingredients{{$key}}">
+															<td style="width:20%">
+																<input type="text" id="ingPrice" name="ingredients[{{$key}}][ingPrice]" class="form-control" placeholder="+ €2.50">
+															</td>
+															<td style="width:50%">
+																<input type="text" id="ingName" name="ingredients[{{$key}}][ingName]" class="form-control" placeholder="Ketchap">
+															</td>
+															<td style="width:30%">
+																<label>
+																	<input type="radio" id="ingDefault" name="ingredients[{{$key}}][ingDefault]" value="1">&nbsp;Po</label>
+																<label class="margin_left">
+																	<input type="radio" id="ingDefault" name="ingredients[{{$key}}][ingDefault]" value="0">&nbsp;Jo</label>
+															</td>
+															</tr>
+													</div>
+												</tbody>
+											</table>
+	                                        </div>
+										</div><!-- End form-group -->
+									</div>
+								</div><!-- End row -->
+							</div><!-- End strip_menu_items -->
+						</div><!-- End wrapper_indent -->
+						<button type="submit" class="btn_1 green" style="display: inline-block; float: right">Ruaj</button>
+						</form>
+						<form action="/admin/food/delete/{{$food->id}}" method="POST">
+							@csrf
+							@method('DELETE')
+							<button type="submit" class="btn_1 red" style="background-color: red; display: inline-block; float: right; margin-right: 3%">Fshije</button>
+						</form>
+						<br><br>
+					<hr class="styled_2">
+
+					@endforeach
+
+
+
+
+
+
+
+
+
+
 				</section><!-- End section 2 -->
 
 
