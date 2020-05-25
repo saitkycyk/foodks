@@ -24,7 +24,7 @@ $factory->define(Food::class, function (Faker $faker) {
 	$rand = array_rand($array);
 
 	return [
-		'user_id' => User::inRandomOrder()->first()->id,
+		'user_id' => User::where('restaurant', true)->inRandomOrder()->first()->id,
 		'name' => $faker->name,
 		'description' => $faker->sentence(),
 		'category' => $array[$rand],

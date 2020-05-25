@@ -92,6 +92,8 @@
 					</li>
 					<li><a href="#section-3" class="icon-settings"><span>Siguria dhe politika</span></a>
 					</li>
+					<li><a href="#section-4" class="icon-settings"><span>Preferencat</span></a>
+					</li>
 				</ul>
 			</nav>
 			<div class="content">
@@ -318,7 +320,7 @@
 
 
 					@foreach($restaurant->foods->sortByDesc('created_at') as $food)
-					<form action="/admin/food/update/{{$food->id}}" method="POST">
+					<form action="/admin/food/update/{{$food->id}}" method="POST"  enctype="multipart/form-data">
 						@csrf
 						@method('PATCH')
 						<div class="wrapper_indent">
@@ -460,25 +462,11 @@
 					<hr class="styled_2">
 
 					@endforeach
-
-
-
-
-
-
-
-
-
-
 				</section><!-- End section 2 -->
 
 
-
-
 				<section id="section-3">
-
 					<div class="row">
-                    
 						<div class="col-md-6 col-sm-6 add_bottom_15">
 							<div class="indent_title_in">
 								<i class="icon_lock_alt"></i>
@@ -552,9 +540,71 @@
 					</div><!-- End row -->
 
 					<hr class="styled_2">
-                    
-                    
 				</section><!-- End section 3 -->
+
+				<section id="section-4">
+
+					<div class="indent_title_in">
+						<i class="icon_search_alt"></i>
+						<h3>Preferencat e restorantit</h3>
+						<p>Ndryshoni preferencat e restorantit tuaj këtu!</p>
+					</div>
+
+					<div class="wrapper_indent">
+					<form action="admin/preferences" method="POST">
+					@csrf
+
+						<div class="row">
+							<div class="col-sm-6">
+					            <div class="form-group">
+					                 <label>Emri juaj</label>
+					                 <input type="text" class="form-control" id="name_contact" name="userName" placeholder="Agon" value="{{$restaurant->preferences['userName'] ?? ''}}" required>
+					            </div>
+							</div>
+							<div class="col-sm-6">
+					            <div class="form-group">
+					            	<label>Mbiemri juaj</label>
+					            	<input type="text" class="form-control" id="lastname_contact" name="lastName" placeholder="Gashi" value="{{$restaurant->preferences['lastName'] ?? ''}}" required>
+					         	</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label>Website(optinal)</label>
+									<input type="text" id="restaurant_web" value="{{$restaurant->preferences['restaurantWeb'] ?? ''}}" name="restaurantWeb" class="form-control" placeholder="http://">
+								</div>
+							</div>
+							<div class="col-md-6">
+							    <div class="form-group">
+							    	<label>Kodi Postar</label>
+							    	<input type="text" id="restaurant_postal_code" value="{{$restaurant->preferences['restaurantZip'] ?? ''}}" name="restaurantZip" class="form-control" placeholder="20000">
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="form-group">
+									<label>Orari punës</label>
+									<input type="text" id="works" name="works" placeholder="10:00-22:00" value="{{$restaurant->works}}" class="form-control">
+								</div>
+							</div>
+							<div class="col-sm-2">
+								<div class="form-group">
+									<label>Porosia minimale në €</label>
+									<input type="text" id="porosiamin" name="restaurant_min_order" placeholder="5" value="{{$restaurant->preferences["min_order"] ?? ''}}" class="form-control">
+								</div>
+							</div>
+						</div>
+							<button type="submit" class="btn_1">Ruaj ndryshimet</button>
+						</form>
+					</div><!-- End wrapper_indent -->
+
+				</section><!-- End section 1 -->
+
+
 
 			</div><!-- End content -->
 		</div>

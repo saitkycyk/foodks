@@ -28,6 +28,8 @@
                         @endif
                         @if(!auth()->user()->restaurant)
                         <li><a href="/profile">Profili</a></li>
+                        @elseif(auth()->user()->restaurant)
+                        <li><a href="{{'/restaurant/'.auth()->user()->id.'/profile'}}">Profili</a></li>
                         @endif
                         <form hidden id="form1" action="/logout" method="post">
                             @csrf

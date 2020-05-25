@@ -16,8 +16,30 @@ use Illuminate\Support\Str;
 class RestaurantController extends Controller
 {
 
+	public function changePreferences(Request $request)
+	{
+		$this->authorize('isRestaurant', User::class);
+
+		$data['works'] = $request->works;
+		$preferences = auth()->user()->preferences;
+
+		$preferences['min_order'] = $request->restaurant_min_order;
+		$preferences['userName'] = $request->userName;
+		$preferences['lastName'] = $request->lastName;
+		$preferences['restaurantZip'] = $request->restaurantZip;
+		$preferences['restaurantWeb'] = $request->restaurantWeb;
+
+		$data['preferences'] = $preferences;
+
+		auth()->user()->update($data);
+
+		return back();
+	}
+
 	public function changePassword(Request $request)
 	{
+		$this->authorize('isRestaurant', User::class);
+
 		if(Hash::check($request->old_password, auth()->user()->password)){
 			try{
 				$newPassword = $request->validate([
@@ -40,6 +62,8 @@ class RestaurantController extends Controller
 
 	public function changeEmail(Request $request)
 	{
+		$this->authorize('isRestaurant', User::class);
+
 		if($request->old_email == auth()->user()->email){
 			try{
 				$newEmail = $request->validate([
@@ -49,7 +73,7 @@ class RestaurantController extends Controller
 				session()->flash('email', 'Emaili nuk përputhet me emailin e vjetër ose ky email është e zënë!');
 				return back();
 			}
-			dd('hooop hemserim nereye');
+
 			auth()->user()->update($newEmail);
 
 			session()->flash('email', 'Emaili u ndryshua me sukses!');
@@ -135,13 +159,13 @@ class RestaurantController extends Controller
 
 		$data += [
 			'restaurant' => 1,
-			'preferences' => json_encode([
+			'preferences' => [
 				'userName' => $request->userName,
 				'lastName' => $request->lastName,
 				'restaurantWeb' => $request->restaurantWeb,
 				'restaurantNr' => $request->restaurantNr,
 				'restaurantZip' => $request->restaurantZip
-			])
+			]
 		];
 
 		$data['password'] = bcrypt($data['password']);

@@ -153,7 +153,7 @@
                 @php $i=0; @endphp
                 @foreach($popularFoods as $popularFood)
                 @php $i++; @endphp
-                <a href="detail_page.html" class="strip_list">
+                <a href="restaurant/{{$popularFood->restaurant->id}}" class="strip_list">
                     <div class="ribbon_1">Popular</div>
                     <div class="desc">
                         <div class="thumb_strip">

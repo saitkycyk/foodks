@@ -83,7 +83,6 @@
     <div class="row">
 
         <div class="col-md-3">
-            <p><a href="list_page.html" class="btn_side">Back to search</a></p>
             <div class="box_style_1">
                 <ul id="cat_nav">
                     @foreach($restaurant->foods->groupBy('category') as $key => $category)
@@ -126,7 +125,7 @@
                     @foreach($category as $food)
                     <tr>
                         <td>
-                            <figure class="thumb_menu_list"><img src="{{$food->picture}}" alt="thumb"></figure>
+                            <figure class="thumb_menu_list"><img src="{{$food->picture ? url("{$food->picture}") : url('/public/logos/food-default.png')}}" alt="thumb"></figure>
                             <h5>{{$food->name}}</h5>
                             <p>
                                 {{$food->description}}

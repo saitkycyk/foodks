@@ -140,7 +140,7 @@
         </div>
         <h3>Rreth nesh</h3>
         <p class="add_bottom_30">
-          {{json_decode($restaurant->preferences)->description ?? null}}
+          {{$restaurant->preferences['description'] ?? null}}
         </p>
         <div id="summary_review">
           <div id="general_rating">
