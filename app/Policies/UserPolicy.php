@@ -14,4 +14,8 @@ class UserPolicy
         return $user->restaurant;
     }
 
+    public function isUser($user)
+    {
+        return !$user->restaurant;
+    }
 }

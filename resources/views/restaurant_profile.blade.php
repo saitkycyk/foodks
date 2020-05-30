@@ -33,7 +33,14 @@
 <script src="js/html5shiv.min.js"></script>
 <script src="js/respond.min.js"></script>
 <![endif]-->
-
+<style type="text/css">
+  .sp-image {
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+    height: 100% !important;
+    width: 100% !important;
+  }
+</style>
 </head>
 
 <body>
@@ -90,9 +97,9 @@
 
     <div class="col-md-4">
       <p>
-        <a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap">View on map</a>
-      </p>
-      <div class="box_style_2">
+{{--         <a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap">View on map</a>
+      </p> --}}
+{{--       <div class="box_style_2">
         <h4 class="nomargin_top">Opening time <i class="icon_clock_alt pull-right"></i></h4>
         <ul class="opening_list">
           <li>Monday<span>12.00am-11.00pm</span></li>
@@ -103,7 +110,7 @@
           <li>Saturday<span>12.00am-11.00pm</span></li>
           <li>Sunday <span class="label label-danger">Closed</span></li>
         </ul>
-      </div>
+      </div> --}}
       <div class="box_style_2 hidden-xs" id="help">
         <i class="icon_lifesaver"></i>
         <h4>Duhet <span>Ndihmë?</span></h4>
@@ -121,7 +128,7 @@
 
             @foreach($restaurant->foods as $food)
             <div class="sp-slide">
-              <img alt="" class="sp-image" src="../src/css/images/blank.gif" data-src="{{$food->picture ?? '/img/no-image.png'}}">
+              <img alt="" class="sp-image" src="{{url('/public/logos/blank.gif')}}" data-src="{{$food->picture ? url("{$food->picture}") : url('/public/logos/no-image.png')}}">
               <p class="sp-layer sp-black sp-padding" data-horizontal="50" data-vertical="50" data-show-transition="down" data-show-delay="500">
                 {{$food->name}}
               </p>
@@ -134,7 +141,7 @@
           </div>
           <div class="sp-thumbnails">
             @foreach($restaurant->foods as $food)
-            <img alt="" class="sp-thumbnail" src="{{$food->picture}}">
+            <img alt="" class="sp-thumbnail" src="{{$food->picture ? url("{$food->picture}") : url('/public/logos/no-image.png')}}">
             @endforeach
           </div>
         </div>
@@ -391,7 +398,7 @@
     <script src="/assets/validate.js"></script>
 
     <!-- SPECIFIC SCRIPTS -->
-    <script src="/http://maps.googleapis.com/maps/api/js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js"></script>
     <script src="/js/map_single.js"></script>
     <script src="/js/infobox.js"></script>
     <script src="/js/jquery.sliderPro.min.js"></script>

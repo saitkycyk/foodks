@@ -19,20 +19,13 @@ use Illuminate\Support\Facades\Storage;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Auth::loginUsingId(50);
+Auth::loginUsingId(50);
 Route::get('/test', function () {
 	$res = User::find(1);
 	dd($res->foods->sortByDesc('created_at'));
 	foreach($res->foods->orderBy('created_at') as $food){
 
 	}
-	// City::create([
-	// 	'name' => 'test',
-	// 	'location' => 'idk',
-	// 	'created_at' => now()
-	// ]);
-	// $res = User::where('restaurant', true)->first();
-	// return json_decode($res->preferences)->description;
 
 });
 Route::get('/', 'HomeController@homepage')->name('index');
@@ -48,6 +41,8 @@ Route::get('/about', 'HomeController@about')->name('about');
 Route::get('/register/restaurant', 'RestaurantController@create')->name('createRestaurant');
 Route::post('/register/restaurant', 'RestaurantController@store')->name('storeRestaurant');
 
+Route::get('/profile', 'UserController@profilePage')->name('userProfile');
+Route::post('/profile/info', 'UserController@changeInfo')->name('changeUserInfo');
 
 Route::get('/admin', 'RestaurantController@adminPage')->name('adminPage');
 Route::post('/admin/logo', 'RestaurantController@changeLogo')->name('changeRestaurantLogo');

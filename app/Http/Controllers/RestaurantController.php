@@ -38,8 +38,6 @@ class RestaurantController extends Controller
 
 	public function changePassword(Request $request)
 	{
-		$this->authorize('isRestaurant', User::class);
-
 		if(Hash::check($request->old_password, auth()->user()->password)){
 			try{
 				$newPassword = $request->validate([
@@ -62,8 +60,6 @@ class RestaurantController extends Controller
 
 	public function changeEmail(Request $request)
 	{
-		$this->authorize('isRestaurant', User::class);
-
 		if($request->old_email == auth()->user()->email){
 			try{
 				$newEmail = $request->validate([
@@ -118,7 +114,7 @@ class RestaurantController extends Controller
 			'file' => 'required|mimes:jpeg,bmp,png,svg'
 		]);
 
-		$path = $request->file('file')->storeAs('public/logos', 'RestaurantLogo'.auth()->user()->id.'.jpg');
+		$path = $request->file('file')->storeAs('public/logos', 'AccountLogo'.auth()->user()->id.'.jpg');
 
 		auth()->user()->update(['picture' => $path]);
 
