@@ -16,12 +16,17 @@ class CreateOrderGroupsTable extends Migration
         Schema::create('order_groups', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('restaurant_id');
             $table->string('payment_type');
             $table->string('status')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('user_id')
+            ->references('id')
+            ->on('users');
+
+            $table->foreign('restaurant_id')
             ->references('id')
             ->on('users');
         });

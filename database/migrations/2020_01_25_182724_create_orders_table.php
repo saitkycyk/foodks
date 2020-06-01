@@ -17,6 +17,7 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('food_id');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('restaurant_id');
             $table->unsignedBigInteger('order_group_id');
             $table->json('ingredients')->nullable();
             $table->integer('quantity');
@@ -28,6 +29,10 @@ class CreateOrdersTable extends Migration
             ->on('foods');
 
             $table->foreign('user_id')
+            ->references('id')
+            ->on('users');
+
+            $table->foreign('restaurant_id')
             ->references('id')
             ->on('users');
         });

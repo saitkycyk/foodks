@@ -165,8 +165,10 @@
 						{{-- <div class="ribbon_1">Popular</div> --}}
 						<div class="desc">
 							<div class="thumb_strip">
-								<img src="{{$restaurant->picture ?? 'public/logos/default.jpg'}}" alt="">
+								<img src="{{$restaurant->picture ? url("{$restaurant->picture}") : url('/public/logos/default.jpg')}}" alt="">
 							</div>
+
+
 {{-- 							<div class="rating">
 								<i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i>
 							</div> --}}

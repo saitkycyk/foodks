@@ -18,4 +18,9 @@ class UserPolicy
     {
         return !$user->restaurant;
     }
+
+    public function checkIfRestaurant($user, $restaurant)
+    {
+        return $restaurant->restaurant;
+    }
 }

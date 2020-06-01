@@ -21,9 +21,9 @@ use Illuminate\Support\Str;
 
 $factory->define(Review::class, function (Faker $faker) {
     return [
-        'food_id' => Food::inRandomOrder()->first()->id,
-        'user_id' => User::inRandomOrder()->first()->id,
-        'rate' => rand(0,5),
+        'restaurant_id' => User::where('restaurant', 1)->inRandomOrder()->first()->id,
+        'user_id' => User::where('restaurant', 0)->inRandomOrder()->first()->id,
+        'rate' => rand(1,5),
         'review' => $faker->sentence(),
         'created_at' => now()
     ];

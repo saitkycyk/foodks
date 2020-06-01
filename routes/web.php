@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Storage;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::loginUsingId(50);
+Auth::loginUsingId(2);
 Route::get('/test', function () {
 	$res = User::find(1);
 	dd($res->foods->sortByDesc('created_at'));
@@ -54,3 +54,6 @@ Route::post('/admin/changeemail', 'RestaurantController@changeEmail')->name('cha
 Route::post('/admin/food/create', 'FoodController@create')->name('createFood');
 Route::patch('/admin/food/update/{food}', 'FoodController@update')->name('updateFood');
 Route::delete('/admin/food/delete/{food}', 'FoodController@delete')->name('deleteFood');
+
+Route::post('/restaurant/{id}/profile/rate', 'ReviewController@rateRestaurant')->name('rateRestaurant');
+Route::delete('/restaurant/{id}/profile/rate', 'ReviewController@deleteRestaurantRating')->name('deleteRestaurantRating');

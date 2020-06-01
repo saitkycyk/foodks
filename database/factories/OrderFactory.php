@@ -22,7 +22,8 @@ use Illuminate\Support\Str;
 
 $factory->define(Order::class, function (Faker $faker) {
     return [
-        'user_id' => User::inRandomOrder()->first()->id,
+        'user_id' => User::where('restaurant', 0)->inRandomOrder()->first()->id,
+        'restaurant_id' => User::where('restaurant', 1)->inRandomOrder()->first()->id,
         'food_id' => Food::inRandomOrder()->first()->id,
         'order_group_id' => Order_Group::inRandomOrder()->first()->id,
         'quantity' => 1,

@@ -69,7 +69,7 @@ class User extends Authenticatable
 
     public function restaurantReviews()
     {
-        return $this->hasMany(Review::class, 'restaurant_id', 'id');
+        return $this->hasMany(Review::class, 'restaurant_id', 'id')->orderBy('updated_at', 'desc');
     }
 
     public function restaurants()

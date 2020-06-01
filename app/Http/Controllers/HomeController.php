@@ -31,7 +31,7 @@ class HomeController extends Controller
         $popularFoods = Food::withCount('orders')->orderBy('orders_count', 'desc')->paginate(6);
 
         foreach($popularFoods as $popularFood){
-            $popularFood['rating'] = $popularFood->reviews->avg('rate');
+            $popularFood['rating'] = $popularFood->restaurant->restaurantReviews->avg('rate');
         }
 
         return view('index', compact(['restaurants', 'users', 'orders', 'popularFoods']));

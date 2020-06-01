@@ -59,7 +59,7 @@
         <div id="sub_content">
             <div id="thumb"><img src="{{$restaurant->picture}}" alt=""></div>
             <div class="rating">(<small><a href="restaurant/{{$restaurant->id}}/profile">{{$restaurant->restaurantReviews->count()}} reviews</a></small>)</div>
-            <h1>{{$restaurant->name}}</h1>
+            <h1><a href="{{route('restaurant-profile', ['id' => $restaurant->id])}}">{{$restaurant->name}}</a></h1>
             {{-- <div><em>Mexican / American</em></div> --}}
             <div><i class="icon_pin"></i>{{$restaurant->address}}{{-- <strong>Delivery charge:</strong> $10, free over $15. --}}</div>
         </div><!-- End sub_content -->

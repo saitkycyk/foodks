@@ -19,10 +19,13 @@ use Illuminate\Support\Str;
 */
 
 $factory->define(Order_Group::class, function (Faker $faker) {
+	$status = ['pending', 'accepted', 'onway', 'canceled', 'delivered'];
+
     return [
-        'user_id' => User::inRandomOrder()->first()->id,
+        'user_id' => User::where('restaurant', 0)->inRandomOrder()->first()->id,
+        'restaurant_id' => User::where('restaurant', 1)->inRandomOrder()->first()->id,
         'payment_type' => $faker->boolean() ? 'door' : 'card',
-        'status' => 'finished',
+        'status' => $status[array_rand($status)],
         'created_at' => now()
     ];
 });

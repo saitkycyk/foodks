@@ -2,12 +2,44 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Review;
 use App\Food;
+use App\Review;
+use App\User;
+use Illuminate\Http\Request;
 
 class ReviewController extends Controller
 {
+	public function rateRestaurant(User $id, Request $request)
+	{
+		$this->authorize('isUser', User::class);
+		$this->authorize('checkIfRestaurant', $id);
+
+		$data = $request->validate([
+			'review' => 'nullable|string',
+			'rate' => 'required|numeric|in:1,2,3,4,5'
+		]);
+
+		$review = Review::updateOrCreate([
+			'user_id' => auth()->user()->id,
+			'restaurant_id' => $id->id
+		], $data);
+
+		return back();
+	}
+
+
+	public function deleteRestaurantRating(User $id, Request $request)
+	{
+		$this->authorize('isUser', User::class);
+		$this->authorize('checkIfRestaurant', $id);
+
+		$review = Review::where('user_id', auth()->user()->id)->where('restaurant_id', $id->id)->first();
+
+		$review->delete();
+		
+		return back();
+	}
+
 
 	public function getFoodRatings(Food $food)
 	{
