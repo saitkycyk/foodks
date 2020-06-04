@@ -180,7 +180,11 @@
                             @foreach(auth()->user()->cart as $order)
                             <tr>
                                 <td>
-                                    <a href="#0" class="remove_item"><i class="icon_minus_alt"></i></a> <strong>{{$order->quantity}}x </strong> {{$order->food->name}}
+                                    <form action="{{route('deleteOrder', ['order' => $order->id])}}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <a href="javascript:;" onclick="parentNode.submit();" class="remove_item"><i class="icon_minus_alt"></i></a> <strong>{{$order->quantity}}x </strong> {{$order->food->name}}
+                                    </form>
                                 </td>
                                 <td>
                                     <strong class="pull-right">€ {{$order->price ?? 0}}</strong>
@@ -190,26 +194,26 @@
                         </tbody>
                     </table>
 
-                <hr>
-                <table class="table table_summary">
-                    <tbody>
-                        <tr>
-                            <td class="total">
-                                TOTAL <span class="pull-right">€ {{auth()->user()->cart->sum('price')}}</span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <hr>
-                <form action="createOrder" method="POST" id="placeOrder">
-                    @csrf
-                    <a class="btn_full" href="#">Porosit tani</a>
-                </form>
-            </div><!-- End cart_box -->
-        </div><!-- End theiaStickySidebar -->
-    </div><!-- End col-md-3 -->
+                    <hr>
+                    <table class="table table_summary">
+                        <tbody>
+                            <tr>
+                                <td class="total">
+                                    TOTAL <span class="pull-right">€ {{auth()->user()->cart->sum('price')}}</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <hr>
+                    <form action="createOrder" method="POST" id="placeOrder">
+                        @csrf
+                        <a class="btn_full" href="{{route('orderDetailPage', ['id' => $restaurant->id])}}">Porosit tani</a>
+                    </form>
+                </div><!-- End cart_box -->
+            </div><!-- End theiaStickySidebar -->
+        </div><!-- End col-md-3 -->
 
-</div><!-- End row -->
+    </div><!-- End row -->
 </div><!-- End container -->
 <!-- End Content =============================================== -->
 

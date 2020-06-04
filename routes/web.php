@@ -21,8 +21,9 @@ use Illuminate\Support\Facades\Storage;
 */
 Auth::loginUsingId(2);
 Route::get('/test', function () {
-	$food = Food::find(86);
-	dd(json_decode($food->ingredients, true));
+	$user = User::find(2);
+
+	return dd($user->cart->isEmpty());
 
 });
 Route::get('/', 'HomeController@homepage')->name('index');
@@ -60,3 +61,13 @@ Route::delete('/restaurant/{id}/profile/rate', 'ReviewController@deleteRestauran
 
 //ordering system
 Route::post('/orders/{food}/create', 'OrderController@store')->name('createOrder');
+Route::delete('/orders/{order}/delete', 'OrderController@delete')->name('deleteOrder');
+
+//checkout system
+Route::get('/restaurant/{id}/details', 'OrderController@orderDetailPage')->name('orderDetailPage');
+Route::post('/restaurant/{id}/checkout/create', 'OrderController@storeCheckout')->name('createOrder');
+Route::get('/checkout/{orderGroup}/payment', 'OrderController@orderPaymentPage')->name('orderPaymentPage');
+
+Route::post('/checkout/{orderGroup}/final', 'OrderController@finishPayment')->name('finalizeOrder');
+
+Route::get('/checkout/review', 'OrderController@orderReviewPage')->name('orderReviewPage');

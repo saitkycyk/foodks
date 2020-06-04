@@ -192,10 +192,12 @@ class RestaurantController extends Controller
 	}
 
 
-	public function restaurantMenu(User $id)
+	public function restaurantMenu($id)
 	{
-		if($id->restaurant){
-			$restaurant = $id;
+		$user = User::findOrFail($id);
+
+		if($user->restaurant){
+			$restaurant = $user;
 			return view('restaurant_menu', compact('restaurant'));
 		}
 

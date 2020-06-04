@@ -12,6 +12,60 @@ use Illuminate\Support\Str;
 
 class OrderController extends Controller
 {
+	public function orderPaymentPage($orderGroup)
+	{
+		$orderGroup = Order_Group::findOrFail($orderGroup);
+
+		$this->authorize('isOrderGroupOwner', $orderGroup);
+
+		$restaurant = $orderGroup->restaurant;
+
+		return view('order-payment', compact('restaurant'));
+	}
+
+
+	public function storeCheckout($id, Request $request)
+	{
+		$restaurant = User::findOrFail($id);
+
+		$data = $request->validate([
+			'phone' => 'required',
+			'address' => 'required',
+		]);
+
+		auth()->user()->update($data);
+
+		$checkout = Order_Group::create([
+			'user_id' => auth()->user()->id,
+			'restaurant_id' => $restaurant->id,
+			'status' => "unfinished",
+			'note' => $request->note
+		]);
+
+		return redirect()->route('orderPaymentPage', ['orderGroup' => $checkout->id]);
+	}
+
+
+	public function orderDetailPage($restaurant)
+	{
+		abort_if(auth()->user()->cart->isEmpty(), 404);
+
+		$restaurant = User::findOrFail($restaurant);
+
+		return view('order-details', compact('restaurant'));
+	}
+
+
+	public function delete(Order $order)
+	{
+		$this->authorize('isOrderOwner', $order);
+
+		$order->delete();
+
+		return back();
+	}
+
+
 	public function store(Food $food, Request $request)
 	{
 		$price = 0;
@@ -41,6 +95,16 @@ class OrderController extends Controller
 
 		return back();
 	}
+
+
+
+
+
+
+
+
+
+
 
 	public function createOrderGroup(Request $request)
 	{

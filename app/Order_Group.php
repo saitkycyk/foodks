@@ -11,9 +11,9 @@ class Order_Group extends Model
 {
 	use SoftDeletes;
 
-	protected $table = 'order_groups';
+	protected $guarded = [];
 
-	protected $guarded = 'id';
+	protected $table = 'order_groups';
 
 	public function orders()
 	{
@@ -23,5 +23,10 @@ class Order_Group extends Model
 	public function user()
 	{
 		return $this->belongsTo(User::class, 'user_id', 'id');
+	}
+
+	public function restaurant()
+	{
+		return $this->belongsTo(User::class, 'restaurant_id', 'id');
 	}
 }
