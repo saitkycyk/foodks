@@ -111,147 +111,103 @@
                     <thead>
                         <tr>
                             <th>
-                               Ushqimi
-                           </th>
-                           <th>
-                               Çmimi
-                           </th>
-                           <th>
-                               Shtoj
-                           </th>
-                       </tr>
-                   </thead>
-                   <tbody>
-                    @foreach($category as $food)
-                    <tr>
-                        <td>
-                            <figure class="thumb_menu_list"><img src="{{$food->picture ? url("{$food->picture}") : url('/public/logos/food-default.png')}}" alt="thumb"></figure>
-                            <h5>{{$food->name}}</h5>
-                            <p>
-                                {{$food->description}}
-                            </p>
-                        </td>
-                        <td>
-                            <strong>€ {{$food->price}}</strong>
-                        </td>
-                        <td class="options">
-                            <div class="dropdown dropdown-options">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i class="icon_plus_alt2"></i></a>
-                                <div class="dropdown-menu">
-                                    <h5>Select an option</h5>
-                                    <label>
-                                        <input type="radio" value="option1" name="options_1" checked>Medium <span>+ $3.30</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" value="option2" name="options_1" >Large <span>+ $5.30</span>
-                                    </label>
-                                    <label>
-                                        <input type="radio" value="option3" name="options_1" >Extra Large <span>+ $8.30</span>
-                                    </label>
-                                    <h5>Add ingredients</h5>
-                                    <label>
-                                        <input type="checkbox" value="">Extra Tomato <span>+ $4.30</span>
-                                    </label>
-                                    <label>
-                                        <input type="checkbox" value="">Extra Peppers <span>+ $2.50</span>
-                                    </label>
-                                    <a href="#0" class="add_to_basket">Shtoj</a>
+                                Ushqimi
+                            </th>
+                            <th>
+                                Çmimi
+                            </th>
+                            <th>
+                                Shtoj
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($category as $food)
+                        <tr>
+                            <td>
+                                <figure class="thumb_menu_list"><img src="{{$food->picture ? url("{$food->picture}") : url('/public/logos/food-default.png')}}" alt="thumb"></figure>
+                                <h5>{{$food->name}}</h5>
+                                <p>
+                                    {{$food->description}}
+                                </p>
+                            </td>
+                            <td>
+                                <strong>€ {{$food->price}}</strong>
+                            </td>
+                            <td class="options">
+                                <div class="dropdown dropdown-options">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i class="icon_plus_alt2"></i></a>
+                                    <div class="dropdown-menu">
+                                        <form id="ingForm" action="{{route('createOrder', ['food' => $food->id])}}" method="POST">
+                                            @csrf
+                                            @if($food->ingredients != null)
+                                            <h5>Përbërësit opcionale</h5>
+                                            @foreach(json_decode($food->ingredients, true) as $key => $ingredient)
+                                            <label>
+                                                <input name="ingredients[{{$key}}]" type="checkbox" @if($ingredient['ingDefault'] == 1) checked @endif value="{{$ingredient['ingName']}}">{{$ingredient['ingName']}}
+                                                <span>€ {{$ingredient['ingPrice'] ?? '0'}}</span>
+                                            </label>
+                                            @endforeach
+                                            @endif
+                                            <hr>
+                                            <label>
+                                                <span style="margin-top: 4px">Nr. i porosisë</span>
+                                                <input style="width: 40%" name="quantity" type="number" value="1" min="1">
+                                            </label>
+
+                                            <a href="javascript:;" onclick="parentNode.submit();" class="add_to_basket">Shtoj</a>
+
+                                        </form>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            <hr>
-            @endforeach
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+                <hr>
+                @endforeach
 
-        </div><!-- End box_style_1 -->
-    </div><!-- End col-md-6 -->
+            </div><!-- End box_style_1 -->
+        </div><!-- End col-md-6 -->
 
-    <div class="col-md-3" id="sidebar">
-        <div class="theiaStickySidebar">
-            <div id="cart_box" >
-                <h3>Your order <i class="icon_cart_alt pull-right"></i></h3>
+        <div class="col-md-3" id="sidebar">
+            <div class="theiaStickySidebar">
+                <div id="cart_box" >
+                    <h3>Porositë <i class="icon_cart_alt pull-right"></i></h3>
+                    <table class="table table_summary">
+                        <tbody>
+                            @foreach(auth()->user()->cart as $order)
+                            <tr>
+                                <td>
+                                    <a href="#0" class="remove_item"><i class="icon_minus_alt"></i></a> <strong>{{$order->quantity}}x </strong> {{$order->food->name}}
+                                </td>
+                                <td>
+                                    <strong class="pull-right">€ {{$order->price ?? 0}}</strong>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
+                <hr>
                 <table class="table table_summary">
                     <tbody>
                         <tr>
-                            <td>
-                                <a href="#0" class="remove_item"><i class="icon_minus_alt"></i></a> <strong>1x</strong> Enchiladas
-                            </td>
-                            <td>
-                                <strong class="pull-right">$11</strong>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="#0" class="remove_item"><i class="icon_minus_alt"></i></a> <strong>2x</strong> Burrito
-                            </td>
-                            <td>
-                                <strong class="pull-right">$14</strong>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="#0" class="remove_item"><i class="icon_minus_alt"></i></a> <strong>1x</strong> Chicken
-                            </td>
-                            <td>
-                                <strong class="pull-right">$20</strong>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="#0" class="remove_item"><i class="icon_minus_alt"></i></a> <strong>2x</strong> Corona Beer
-                            </td>
-                            <td>
-                                <strong class="pull-right">$9</strong>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="#0" class="remove_item"><i class="icon_minus_alt"></i></a> <strong>2x</strong> Cheese Cake
-                            </td>
-                            <td>
-                                <strong class="pull-right">$12</strong>
+                            <td class="total">
+                                TOTAL <span class="pull-right">€ {{auth()->user()->cart->sum('price')}}</span>
                             </td>
                         </tr>
                     </tbody>
                 </table>
                 <hr>
-                <div class="row" id="options_2">
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                        <label><input type="radio" value="" checked name="option_2" class="icheck">Delivery</label>
-                    </div>
-                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-6">
-                        <label><input type="radio" value="" name="option_2" class="icheck">Take Away</label>
-                    </div>
-                </div><!-- Edn options 2 -->
-
-                <hr>
-                <table class="table table_summary">
-                    <tbody>
-                        <tr>
-                            <td>
-                               Subtotal <span class="pull-right">$56</span>
-                           </td>
-                       </tr>
-                       <tr>
-                        <td>
-                           Delivery fee <span class="pull-right">$10</span>
-                       </td>
-                   </tr>
-                   <tr>
-                    <td class="total">
-                       TOTAL <span class="pull-right">$66</span>
-                   </td>
-               </tr>
-           </tbody>
-       </table>
-       <hr>
-       <a class="btn_full" href="cart.html">Order now</a>
-   </div><!-- End cart_box -->
-</div><!-- End theiaStickySidebar -->
-</div><!-- End col-md-3 -->
+                <form action="createOrder" method="POST" id="placeOrder">
+                    @csrf
+                    <a class="btn_full" href="#">Porosit tani</a>
+                </form>
+            </div><!-- End cart_box -->
+        </div><!-- End theiaStickySidebar -->
+    </div><!-- End col-md-3 -->
 
 </div><!-- End row -->
 </div><!-- End container -->

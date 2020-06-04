@@ -15,6 +15,10 @@ class Order extends Model
 		'id'
 	];
 
+    protected $casts = [
+        'ingredients' => 'json',
+    ];
+    
 	public function food()
 	{
 		return $this->belongsTo(Food::class, 'food_id', 'id');

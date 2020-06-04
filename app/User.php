@@ -52,6 +52,11 @@ class User extends Authenticatable
         return $this->hasMany(Order_Group::class, 'user_id', 'id');
     }
 
+    public function cart()
+    {
+        return $this->hasMany(Order::class, 'user_id', 'id')->whereNull('order_group_id');
+    }
+
     public function review()
     {
         return $this->hasMany(Review::class, 'user_id', 'id');

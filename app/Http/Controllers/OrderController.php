@@ -2,22 +2,47 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Session;
+use App\Food;
+use App\Order;
 use App\Order_Group;
 use App\User;
-use App\Order;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class OrderController extends Controller
 {
-
-	public function create()
+	public function store(Food $food, Request $request)
 	{
-		return view('order-create');
+		$price = 0;
+		$quantity = 1;
+
+		if($request->ingredients != null){
+			$foodIngredients = json_decode($food->ingredients, true);
+
+			$ingredients = [];
+			foreach($request->ingredients ?? [] as $key => $ingredient) {
+				array_push($ingredients, $foodIngredients[$key]);
+				$price += (double)$foodIngredients[$key]['ingPrice'];
+			}
+		}
+
+		$price += (double)$food->price;
+		$quantity = $request->quantity ?? 1;
+
+		$order = Order::create([
+			'food_id' => $food->id,
+			'user_id' => auth()->user()->id,
+			'restaurant_id' => $food->restaurant->id,
+			'ingredients' => $ingredients ?? null,
+			'quantity' => $quantity,
+			'price' => (double)$price * (int)$quantity
+		]);
+
+		return back();
 	}
 
-	public function store(Request $request)
+	public function createOrderGroup(Request $request)
 	{
 		$orders = $this->validateOrder($request);
 		$order_group = Order_Group::create([
@@ -30,8 +55,6 @@ class OrderController extends Controller
 			$order['order_group'] = $order_group->id;
 			Order::create($order);
 		}
-
-		return back();
 	}
 	//foreach at front and find orders and display
 	public function showUserOrders()

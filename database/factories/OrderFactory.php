@@ -26,7 +26,8 @@ $factory->define(Order::class, function (Faker $faker) {
         'restaurant_id' => User::where('restaurant', 1)->inRandomOrder()->first()->id,
         'food_id' => Food::inRandomOrder()->first()->id,
         'order_group_id' => Order_Group::inRandomOrder()->first()->id,
-        'quantity' => 1,
+        'price' => (double)rand(10,50) / 10,
+        'quantity' => rand(1,3),
         'created_at' => now()
     ];
 });

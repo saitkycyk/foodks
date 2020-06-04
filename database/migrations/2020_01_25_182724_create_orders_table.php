@@ -18,9 +18,10 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('food_id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('restaurant_id');
-            $table->unsignedBigInteger('order_group_id');
+            $table->unsignedBigInteger('order_group_id')->nullable();
             $table->json('ingredients')->nullable();
-            $table->integer('quantity');
+            $table->integer('quantity')->nullable()->default(1);
+            $table->integer('price')->nullable()->default(0);
             $table->timestamps();
             $table->softDeletes();
 
