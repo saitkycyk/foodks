@@ -12,6 +12,35 @@ use Illuminate\Support\Str;
 
 class OrderController extends Controller
 {
+	public function finishPayment($orderGroup, Request $request)
+	{
+		$orderGroup = Order_Group::findOrFail($orderGroup);
+
+		$this->authorize('isOrderGroupOwner', $orderGroup);
+
+		$orders = Order::whereNull('order_group_id')->get();
+		abort_if($orders->isEmpty(), 404);
+
+		$restaurant = $orderGroup->restaurant;
+
+		$request->validate([
+			'payment_method' => 'required'
+		]);
+
+		foreach($orders as $order) {
+
+			$order->order_group_id = $orderGroup->id;
+			$order->save();
+		}
+
+		$orderGroup->payment_type = $request->payment_method;
+		$orderGroup->status = 'pending';
+		$orderGroup->save();
+
+		return view('order-review', compact('orders'));
+	}
+
+
 	public function orderPaymentPage($orderGroup)
 	{
 		$orderGroup = Order_Group::findOrFail($orderGroup);
@@ -20,7 +49,7 @@ class OrderController extends Controller
 
 		$restaurant = $orderGroup->restaurant;
 
-		return view('order-payment', compact('restaurant'));
+		return view('order-payment', compact(['restaurant', 'orderGroup']));
 	}
 
 
@@ -35,14 +64,14 @@ class OrderController extends Controller
 
 		auth()->user()->update($data);
 
-		$checkout = Order_Group::create([
+		$orderGroup = Order_Group::create([
 			'user_id' => auth()->user()->id,
 			'restaurant_id' => $restaurant->id,
 			'status' => "unfinished",
 			'note' => $request->note
 		]);
 
-		return redirect()->route('orderPaymentPage', ['orderGroup' => $checkout->id]);
+		return view('order-payment', compact(['orderGroup', 'restaurant']));
 	}
 
 
@@ -56,8 +85,10 @@ class OrderController extends Controller
 	}
 
 
-	public function delete(Order $order)
+	public function delete($order)
 	{
+		$order = Order::findOrFail($order);
+
 		$this->authorize('isOrderOwner', $order);
 
 		$order->delete();
@@ -66,8 +97,10 @@ class OrderController extends Controller
 	}
 
 
-	public function store(Food $food, Request $request)
+	public function store($food, Request $request)
 	{
+		$food = Food::findOrFail($food);
+
 		$price = 0;
 		$quantity = 1;
 
@@ -96,57 +129,4 @@ class OrderController extends Controller
 		return back();
 	}
 
-
-
-
-
-
-
-
-
-
-
-	public function createOrderGroup(Request $request)
-	{
-		$orders = $this->validateOrder($request);
-		$order_group = Order_Group::create([
-			'payment_type' => $orders['payment_type'],
-			'status' => 'pending',
-			'user_id' => auth()->id()
-		]);
-
-		foreach($orders as $order){
-			$order['order_group'] = $order_group->id;
-			Order::create($order);
-		}
-	}
-	//foreach at front and find orders and display
-	public function showUserOrders()
-	{
-		$order_groups = auth()->user()->order_groups;
-		return view('order-show', compact('order_groups'));
-	}
-
-	public function cancelOrder(Order_Group $order_group)
-	{
-		$this->authorize('isOrderOwner', User::class);
-		if($order_group->created_at->addMinutes(10) >= now()){
-			Session::flash('message', 'Ju nuk mund të anuloni porosinë më!');
-			return back();
-		}
-		$order_group->status = 'canceled';
-		$order_group->save();
-
-		return back();
-	}
-
-	public function validateOrder($request)
-	{
-		return $request->validate([
-			'order.*.food_id'		=> 'required|numeric',
-			'payment_type' 			=> 'required|string',
-			'order.*.ingredients' 	=> 'nullable|json',
-			'order.*.quantity'		=> 'required|numeric',
-		]);
-	}
 }

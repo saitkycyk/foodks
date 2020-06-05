@@ -57,24 +57,24 @@
 <section class="parallax-window" id="short" data-parallax="scroll" data-image-src="/img/sub_header_1.jpg" data-natural-width="1400" data-natural-height="350">
     <div id="subheader">
         <div id="sub_content">
-         <h1>Vendos porosinë</h1>
-         <div class="bs-wizard">
-            <div class="col-xs-4 bs-wizard-step active">
+           <h1>Vendos porosinë</h1>
+           <div class="bs-wizard">
+            <div class="col-xs-4 bs-wizard-step complete">
               <div class="text-center bs-wizard-stepnum"><strong>1.</strong> Detajet</div>
               <div class="progress"><div class="progress-bar"></div></div>
-              <a href="#0" class="bs-wizard-dot"></a>
+              <a href="#" class="bs-wizard-dot"></a>
           </div>
 
-          <div class="col-xs-4 bs-wizard-step disabled">
+          <div class="col-xs-4 bs-wizard-step complete">
               <div class="text-center bs-wizard-stepnum"><strong>2.</strong> Pagesa</div>
               <div class="progress"><div class="progress-bar"></div></div>
-              <a href="cart_2.html" class="bs-wizard-dot"></a>
+              <a href="#" class="bs-wizard-dot"></a>
           </div>
 
-          <div class="col-xs-4 bs-wizard-step disabled">
+          <div class="col-xs-4 bs-wizard-step active">
               <div class="text-center bs-wizard-stepnum"><strong>3.</strong> Perfundo!</div>
               <div class="progress"><div class="progress-bar"></div></div>
-              <a href="cart_3.html" class="bs-wizard-dot"></a>
+              <a href="#" class="bs-wizard-dot"></a>
           </div>  
       </div><!-- End bs-wizard --> 
   </div><!-- End sub_content -->
@@ -87,7 +87,7 @@
         <ul>
             <li><a href="#">Kryefaqja</a></li>
             <li><a href="#">Menu</a></li>
-            <li>Detajet e Porosisë</li>
+            <li>Përfundimi i pagesës</li>
         </ul>
         <a href="#" class="search-overlay-menu-btn"><i class="icon-search-6"></i> Search</a>
     </div>
@@ -96,82 +96,43 @@
 <!-- Content ================================================== -->
 <div class="container margin_60_35">
     <div class="row">
+        <div class="col-md-offset-3 col-md-6">
+            <div class="box_style_2">
+                <h2 class="inner">Porosia është konfirmuar!</h2>
+                <div id="confirm">
+                    <i class="icon_check_alt2"></i>
+                    <h3>Faleminderit!</h3>
+                    <p>
+                        Porosia juaj është konfirmuar me sukses dhe është dërguar në restorant, mund të kontrolloni statusin e porosisë nga menyja e 'Shiqo Porositë'., 
+                    </p>
+                </div>
+                <h4>Përmbledhje</h4>
+                <table class="table table-striped nomargin">
+                    <tbody>
 
-        <div class="col-md-3">
-
-            <div class="box_style_2 hidden-xs" id="help">
-                <i class="icon_lifesaver"></i>
-                <h4>Duhet <span>Ndihmë?</span></h4>
-                <a href="#" class="phone">{{$restaurant->phone}}</a>
-                <small>{{$restaurant->works}}</small>
-            </div>
-        </div><!-- End col-md-3 -->
-        
-        <div class="col-md-6">
-            <div class="box_style_2" id="order_process">
-                <form action="{{route('checkoutOrder', ['id' => $restaurant->id])}}" method="POST" id="detailsForm">
-                    @csrf
-                    <h2 class="inner">Konfirmoni detajet rreth porosisë</h2>
-                    <div class="form-group">
-                        <label>Numri Telefonit</label>
-                        <input type="text" id="tel_order" name="phone" class="form-control" placeholder="Telephone/mobile" value="{{auth()->user()->phone}}" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Adresa se ku do të dërgohet porosia</label>
-                        <input type="text" id="address_order" name="address" class="form-control" value="{{auth()->user()->address}}" placeholder="Adresa juaj" required>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <label>Koment rreth porosisë</label>
-                            <textarea class="form-control" style="height:150px" placeholder="Të pjeket më shumë..." name="note" id="notes"></textarea>
-                        </div>
-                    </div>
-                </form>
-            </div><!-- End box_style_1 -->
-        </div><!-- End col-md-6 -->
-
-        <div class="col-md-3" id="sidebar">
-            <div class="theiaStickySidebar">
-                <div id="cart_box" >
-                    <h3>Porositë <i class="icon_cart_alt pull-right"></i></h3>
-                    <table class="table table_summary">
-                        <tbody>
-                            @foreach(auth()->user()->cart as $order)
-                            <tr>
-                                <td>
-                                    <form action="{{route('deleteOrder', ['order' => $order->id])}}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="javascript:;" onclick="parentNode.submit();" class="remove_item"><i class="icon_minus_alt"></i></a> <strong>{{$order->quantity}}x </strong> {{$order->food->name}}
-                                    </form>
-                                </td>
-                                <td>
-                                    <strong class="pull-right">€ {{$order->price ?? 0}}</strong>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-
-                    <hr>
-                    <table class="table table_summary">
-                        <tbody>
-                            <tr>
-                                <td class="total">
-                                    TOTAL <span class="pull-right">€ {{auth()->user()->cart->sum('price')}}</span>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <hr>
-                        <a class="btn_full" href="javascript:;" onclick="document.getElementById('detailsForm').submit();" >Vazhdo</a>
-                        <a class="btn_full_outline" href="{{route('restaurant-menu', ['id' => $restaurant->id])}}"><i class="icon-right"></i> Kthehu mbrapa</a>
-                </div><!-- End cart_box -->
-            </div><!-- End theiaStickySidebar -->
-        </div><!-- End col-md-3 -->
-
-    </div><!-- End row -->
+                        @foreach($orders as $order)
+                        <tr>
+                            <td>
+                                <strong>{{$order->quantity}}x </strong> {{$order->food->name}}
+                            </td>
+                            <td>
+                                <strong class="pull-right">€ {{$order->price ?? 0}}</strong>
+                            </td>
+                        </tr>
+                        @endforeach
+                        <tr>
+                            <td class="total_confirm">
+                                TOTAL
+                            </td>
+                            <td class="total_confirm">
+                                <span class="pull-right">€ {{$orders->sum('price')}}</span>
+                            </td>
+                        </tr>
+                    </tbody>
+        </table>
+    </div>
+</div>
+</div><!-- End row -->
 </div><!-- End container -->
 <!-- End Content =============================================== -->
 

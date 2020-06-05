@@ -64,10 +64,7 @@ Route::post('/orders/{food}/create', 'OrderController@store')->name('createOrder
 Route::delete('/orders/{order}/delete', 'OrderController@delete')->name('deleteOrder');
 
 //checkout system
-Route::get('/restaurant/{id}/details', 'OrderController@orderDetailPage')->name('orderDetailPage');
-Route::post('/restaurant/{id}/checkout/create', 'OrderController@storeCheckout')->name('createOrder');
-Route::get('/checkout/{orderGroup}/payment', 'OrderController@orderPaymentPage')->name('orderPaymentPage');
-
+Route::get('/restaurant/{id}/checkout/details', 'OrderController@orderDetailPage')->name('orderDetailPage');
+Route::post('/restaurant/{id}/checkout/create', 'OrderController@storeCheckout')->name('checkoutOrder');
 Route::post('/checkout/{orderGroup}/final', 'OrderController@finishPayment')->name('finalizeOrder');
-
 Route::get('/checkout/review', 'OrderController@orderReviewPage')->name('orderReviewPage');

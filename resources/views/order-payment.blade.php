@@ -57,8 +57,8 @@
 <section class="parallax-window" id="short" data-parallax="scroll" data-image-src="/img/sub_header_1.jpg" data-natural-width="1400" data-natural-height="350">
     <div id="subheader">
         <div id="sub_content">
-           <h1>Vendos porosinë</h1>
-           <div class="bs-wizard">
+         <h1>Vendos porosinë</h1>
+         <div class="bs-wizard">
             <div class="col-xs-4 bs-wizard-step complete">
               <div class="text-center bs-wizard-stepnum"><strong>1.</strong> Detajet</div>
               <div class="progress"><div class="progress-bar"></div></div>
@@ -111,61 +111,63 @@
             <div class="box_style_2">
                 <h2 class="inner">Mënyra e pagesës që ekzistojnë</h2>
 
-
-                @if($restaurant->door_payment == 1 )
-                <div class="payment_select nomargin">
-                    <label><input type="radio" value="door_payment" name="payment_method" class="icheck">Paguaj në derë</label>
-                    <i class="icon_wallet"></i>
-                </div>
-                @endif
-
-                @if($restaurant->card_payment == 1)
-                <hr>
-                <div class="payment_select">
-                    <label><input type="radio" value="card_payment" checked name="payment_method" class="icheck">Paguaj me kartelë</label>
-                    <i class="icon_creditcard"></i>
-                </div>
-                <div class="form-group">
-                    <label>Emri dhe mbiemri në kartelë</label>
-                    <input type="text" class="form-control" id="name_card_order" name="name_card_order" placeholder="Emri dhe mbiemri">
-                </div>
-                <div class="form-group">
-                    <label>Numri kartelës</label>
-                    <input type="text" id="card_number" name="card_number" class="form-control" placeholder="Numri kartelës">
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label>Data e skadimit</label>
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <input type="text" id="expire_month" name="expire_month" class="form-control" placeholder="mm">
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-6">
-                                <div class="form-group">
-                                    <input type="text" id="expire_year" name="expire_year" class="form-control" placeholder="yyyy">
-                                </div>
-                            </div>
-                        </div>
+                <form id="paymentForm" action="{{route('finalizeOrder', ['orderGroup' => $orderGroup->id])}}" method="POST">
+                    @csrf
+                    @if($restaurant->door_payment == 1 )
+                    <div class="payment_select nomargin">
+                        <label><input type="radio" value="door_payment" checked name="payment_method" class="icheck">Paguaj në derë</label>
+                        <i class="icon_wallet"></i>
                     </div>
-                    <div class="col-md-6 col-sm-12">
-                        <div class="form-group">
-                            <label>Kodi sigurisë</label>
+                    @endif
+
+                    @if($restaurant->card_payment == 1)
+                    <hr>
+                    <div class="payment_select">
+                        <label><input type="radio" value="card_payment" name="payment_method" class="icheck">Paguaj me kartelë</label>
+                        <i class="icon_creditcard"></i>
+                    </div>
+                    <div class="form-group">
+                        <label>Emri dhe mbiemri në kartelë</label>
+                        <input type="text" class="form-control" id="name_card_order" name="name_card_order" placeholder="Emri dhe mbiemri">
+                    </div>
+                    <div class="form-group">
+                        <label>Numri kartelës</label>
+                        <input type="text" id="card_number" name="card_number" class="form-control" placeholder="Numri kartelës">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Data e skadimit</label>
                             <div class="row">
-                                <div class="col-md-4 col-sm-6">
+                                <div class="col-md-6 col-sm-6">
                                     <div class="form-group">
-                                        <input type="text" id="ccv" name="ccv" class="form-control" placeholder="CCV">
+                                        <input type="text" id="expire_month" name="expire_month" class="form-control" placeholder="mm">
                                     </div>
                                 </div>
-                                <div class="col-md-8 col-sm-6">
-                                    <img src="/img/icon_ccv.gif" width="50" height="29" alt="ccv"><small>3 numrat e fundit</small>
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <input type="text" id="expire_year" name="expire_year" class="form-control" placeholder="yyyy">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div><!--End row -->
-                @endif
+                        <div class="col-md-6 col-sm-12">
+                            <div class="form-group">
+                                <label>Kodi sigurisë</label>
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-6">
+                                        <div class="form-group">
+                                            <input type="text" id="ccv" name="ccv" class="form-control" placeholder="CCV">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8 col-sm-6">
+                                        <img src="/img/icon_ccv.gif" width="50" height="29" alt="ccv"><small>3 numrat e fundit</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--End row -->
+                    @endif
+                </form>
             </div><!-- End box_style_1 -->
         </div><!-- End col-md-6 -->
 
@@ -178,11 +180,7 @@
                             @foreach(auth()->user()->cart as $order)
                             <tr>
                                 <td>
-                                    <form action="{{route('deleteOrder', ['order' => $order->id])}}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a href="javascript:;" onclick="parentNode.submit();" class="remove_item"><i class="icon_minus_alt"></i></a> <strong>{{$order->quantity}}x </strong> {{$order->food->name}}
-                                    </form>
+                                    <strong>{{$order->quantity}}x </strong> {{$order->food->name}}
                                 </td>
                                 <td>
                                     <strong class="pull-right">€ {{$order->price ?? 0}}</strong>
@@ -205,8 +203,7 @@
                     <hr>
                     <form action="createOrder" method="POST" id="placeOrder">
                         @csrf
-                        <a class="btn_full" href="#">Vazhdo</a>
-                        <a class="btn_full_outline" href="{{route('restaurant-menu', ['id' => $restaurant->id])}}"><i class="icon-right"></i> Kthehu mbrapa</a>
+                        <a class="btn_full" href="javascript:;" onclick="document.getElementById('paymentForm').submit();">Përfundo</a>
                     </form>
                 </div><!-- End cart_box -->
             </div><!-- End theiaStickySidebar -->
