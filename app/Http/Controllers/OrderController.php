@@ -9,9 +9,49 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class OrderController extends Controller
 {
+
+	public function changeOrderGroupStatus($orderGroup, Request $request)
+	{
+		$orderGroup = Order_Group::findOrFail($orderGroup);
+
+		$this->authorize('isOrderGroupRestaurant', $orderGroup);
+
+		$request->validate([
+			'operation' => 'required|in:delivered,canceled,onway,accepted'
+		]);
+
+		if($orderGroup->status != 'canceled' && $orderGroup->status != 'delivered') {
+			$orderGroup->status = $request->operation;
+			$orderGroup->save();
+		}
+
+		return back();
+	}
+
+
+	public function showRestaurantOrders()
+	{
+		$this->authorize('isRestaurant', User::class);
+
+		// $orderGroups = Order_Group::where('restaurant_id', auth()->user()->id)->where('status', 'pending')->with('orders')->paginate(1);
+		$restaurantOrders = auth()->user()->restaurantOrderGroups->load('orders');
+
+		$orderGroups = $restaurantOrders->filter(function ($value, $key) {
+			return $value['status'] == 'pending' || $value['status'] == 'accepted' || $value['status'] == 'onway';
+		});
+
+		$oldOrderGroups = $restaurantOrders->filter(function ($value, $key) {
+			return $value['status'] == 'canceled' || $value['status'] == 'delivered';
+		});
+
+		return view('restaurant_orders', compact(['orderGroups', 'oldOrderGroups']));
+	}
+
+
 	public function cancelOrderGroup($orderGroup)
 	{
 		$orderGroup = Order_Group::findOrFail($orderGroup);
@@ -20,6 +60,7 @@ class OrderController extends Controller
 
 		if($orderGroup->status == 'pending') {
 			$orderGroup->status = 'canceled';
+			$orderGroup->save();
 		}
 
 		return back();
@@ -32,6 +73,7 @@ class OrderController extends Controller
 
 		$orderGroups = auth()->user()->order_groups->where('status', 'pending')->load('orders');
 		$oldOrderGroups = auth()->user()->order_groups->where('status', '!=', 'pending')->where('status', '!=', 'unfinished')->load('orders');
+
 		return view('user_orders', compact(['orderGroups', 'oldOrderGroups']));
 	}
 

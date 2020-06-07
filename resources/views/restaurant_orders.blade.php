@@ -62,7 +62,7 @@
 <section class="parallax-window" id="short" data-parallax="scroll" data-image-src="/img/sub_header_cart.jpg" data-natural-width="1400" data-natural-height="350">
 	<div id="subheader">
 		<div id="sub_content">
-			<h1>Porositë</h1>
+			<h1>Menaxhimi Porosive</h1>
 			<p></p>
 		</div><!-- End sub_content -->
 	</div><!-- End subheader -->
@@ -74,7 +74,7 @@
 		<ul>
 			<li><a href="/">Kryefaqja</a>
 			</li>
-			<li>Porositë</li>
+			<li>Menaxhimi Porosive</li>
 		</ul>
 		<a href="#0" class="search-overlay-menu-btn"><i class="icon-search-6"></i> Search</a>
 	</div>
@@ -108,8 +108,8 @@
 					<table class="table table-bordered" style="border:2px solid #c5c5c5;">
 						<thead>
 							<tr>
-								<th>Emri Restorantit</th>
-								<th>Komenti porosisë</th>
+								<th>Emri Klientit</th>
+								<th>Komenti i porosisë</th>
 								<th>Mënyra e pagesës</th>
 								<th>Statusi</th>
 								<th>Porositur më</th>
@@ -120,7 +120,7 @@
 						</thead>
 						<tbody>
 							<tr>
-								<td>{{$orderGroup->restaurant->name}}</td>
+								<td>{{$orderGroup->user->name.' '.$orderGroup->user->lastname}}</td>
 								<td title="{{$orderGroup->note}}">{{$orderGroup->note}}</td>
 								<td>{{$orderGroup->payment_type == 'door_payment' ? 'Në derë' : 'Me kartelë'}}</td>
 								<td @if($orderGroup->status == 'pending') style="color: orange" @else style="color: green" @endif>{{ucfirst($orderGroup->status)}}</td>
@@ -128,10 +128,16 @@
 								<td title="{{$orderGroup->updated_at->diffForHumans()}}">{{$orderGroup->updated_at}}</td>
 								<th>€ {{$orderGroup->orders->sum('price')}}</th>
 								<td>
-									<form action="{{route('cancelOrderGroup', ['orderGroup' => $orderGroup->id])}}" method="POST">
+									<form action="{{route('changeOrderGroupStatus', ['orderGroup' => $orderGroup->id])}}" method="POST">
 										@csrf
-										@method('DELETE')
-										<a href="javascript:;" onclick="parentNode.submit();" style="color: red">Anulo</a>
+										@method('PATCH')
+										<select name="operation">
+											<option value="accepted" selected>Accepted</option>
+											<option value="canceled">Canceled</option>
+											<option value="onway">Onway</option>
+											<option value="delivered">Delivered</option>
+										</select>
+										<a href="javascript:;" onclick="parentNode.submit();" style="color: green">&nbsp;&nbsp;Ruaj</a>
 									</form>
 								</td>
 							</tr>
@@ -212,7 +218,7 @@
 								<td>{{$oldOrderGroup->payment_type == 'door_payment' ? 'Në derë' : 'Me kartelë'}}</td>
 								<td @if($oldOrderGroup->status == 'canceled') style="color: red" @else style="color: green" @endif>{{ucfirst($oldOrderGroup->status)}}</td>
 								<td title="{{$orderGroup->created_at->diffForHumans()}}">{{$orderGroup->created_at}}</td>
-								<td title="{{$orderGroup->updated_at->diffForHumans()}}">{{$orderGroup->updated_at}}</td></td>
+								<td title="{{$orderGroup->updated_at->diffForHumans()}}">{{$orderGroup->updated_at}}</td>
 								<th>€ {{$oldOrderGroup->orders->sum('price')}}</th>
 							</tr>
 							<tr>
