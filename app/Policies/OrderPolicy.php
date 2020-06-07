@@ -11,9 +11,9 @@ class OrderPolicy
 {
 	use HandlesAuthorization;
 
-	public function isOrderGroupFoodOwner($user, Order_Group $order_group)
+	public function isOrderGroupRestaurant($user, Order_Group $order_group)
 	{
-		return $user->id == $order_group->orders->food->user_id;
+		return $user->id == $order_group->restaurant_id;
 	}
 
 	public function isOrderGroupOwner($user, Order_Group $order_group)

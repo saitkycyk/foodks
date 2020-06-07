@@ -12,6 +12,30 @@ use Illuminate\Support\Str;
 
 class OrderController extends Controller
 {
+	public function cancelOrderGroup($orderGroup)
+	{
+		$orderGroup = Order_Group::findOrFail($orderGroup);
+
+		$this->authorize('isOrderGroupOwner', $orderGroup);
+
+		if($orderGroup->status == 'pending') {
+			$orderGroup->status = 'canceled';
+		}
+
+		return back();
+	}
+
+
+	public function showUserOrders()
+	{
+		$this->authorize('isUser', User::class);
+
+		$orderGroups = auth()->user()->order_groups->where('status', 'pending')->load('orders');
+		$oldOrderGroups = auth()->user()->order_groups->where('status', '!=', 'pending')->where('status', '!=', 'unfinished')->load('orders');
+		return view('user_orders', compact(['orderGroups', 'oldOrderGroups']));
+	}
+
+
 	public function finishPayment($orderGroup, Request $request)
 	{
 		$orderGroup = Order_Group::findOrFail($orderGroup);

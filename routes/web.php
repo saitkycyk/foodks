@@ -59,9 +59,16 @@ Route::delete('/admin/food/delete/{food}', 'FoodController@delete')->name('delet
 Route::post('/restaurant/{id}/profile/rate', 'ReviewController@rateRestaurant')->name('rateRestaurant');
 Route::delete('/restaurant/{id}/profile/rate', 'ReviewController@deleteRestaurantRating')->name('deleteRestaurantRating');
 
-//ordering system
+//user ordering system
+Route::get('/orders', 'OrderController@showUserOrders')->name('userOrders');
 Route::post('/orders/{food}/create', 'OrderController@store')->name('createOrder');
 Route::delete('/orders/{order}/delete', 'OrderController@delete')->name('deleteOrder');
+Route::delete('/orderGroup/{orderGroup}/cancel', 'OrderController@cancelOrderGroup')->name('cancelOrderGroup');
+
+//restaurant order management
+Route::get('/orders/restaurant', 'OrderController@showRestaurantOrders')->name('restaurantOrders');
+
+Route::patch('/orderGroup/{orderGroup}/status', 'OrderController@changeOrderGroupStatus')->name('changeOrderGroupStatus');
 
 //checkout system
 Route::get('/restaurant/{id}/checkout/details', 'OrderController@orderDetailPage')->name('orderDetailPage');
