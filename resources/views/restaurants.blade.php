@@ -69,9 +69,8 @@
 <div id="position">
 	<div class="container">
 		<ul>
-			<li><a href="#0">Home</a></li>
-			<li><a href="#0">Category</a></li>
-			<li>Page active</li>
+			<li><a href="/">Kryefaqja</a></li>
+			<li>Restorantet</li>
 		</ul>
 		<a href="#0" class="search-overlay-menu-btn"><i class="icon-search-6"></i> Search</a>
 	</div>
@@ -90,7 +89,7 @@
 				<a class="btn_map" data-toggle="collapse" href="#collapseMap" aria-expanded="false" aria-controls="collapseMap">View on map</a>
 			</p> --}}
 			<div id="filters_col">
-				<a data-toggle="collapse" href="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters" id="filters_col_bt">Filters <i class="icon-plus-1 pull-right"></i></a>
+				<a data-toggle="collapse" href="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters" id="filters_col_bt">Filtrimet <i class="icon-plus-1 pull-right"></i></a>
 				<div class="collapse" id="collapseFilters">
 {{-- 					<div class="filter_type">
 						<h6>Distance</h6>
@@ -108,7 +107,14 @@
 						</ul>
 					</div> --}}
 					<div class="filter_type">
-						<h6>Rating</h6>
+						<h6>Qyteti</h6>
+						<select id="citySelect" class="form-control" name="city_id" id="city">
+							<option value="all" onclick="">Të gjitha</option>
+							@foreach(\App\City::all() as $city)
+							<option value="{{$city->id}}" @if($city->id == auth()->user()->city_id)  selected="true" @endif>{{$city->name}}</option>
+							@endforeach
+						</select>
+						<h6>Vlerësimi</h6>
 						<ul>
 							<li><label><input type="checkbox" class="icheck"><span class="rating">
 								<i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i>
@@ -128,7 +134,7 @@
 						</ul>
 					</div>
 					<div class="filter_type">
-						<h6>Options</h6>
+						<h6>Mënyra e pagesës</h6>
 						<ul class="nomargin">
 							<li><label><input class="icheck" type="checkbox" value="/bla" name="checked" onClick="if (this.checked) { window.location = this.value; }" />Në Derë</label></li>
 							<li><label><input type="checkbox" class="icheck">Kartelë</label></li>
@@ -157,7 +163,7 @@
 				</div>
 			</div><!--End tools -->
 			<div class="row">
-			@foreach($restaurants as $key => $restaurant)
+				@foreach($restaurants as $key => $restaurant)
 			@if($key % 2 == 0)</div><div class="row"> @endif
 
 				<div class="col-md-6 col-sm-6 wow zoomIn" data-wow-delay="0.2s">
@@ -186,58 +192,63 @@
 						</div>
 					</a><!-- End strip_list-->
 				</div><!-- End col-md-6-->
-			@endforeach
-			@if($restaurants->count() % 2 != 0) </div> @endif
+				@endforeach
+				@if($restaurants->count() % 2 != 0) </div> @endif
 
-			{{$restaurants->links()}}          
-	</div><!-- End col-md-9-->
+				{{$restaurants->links()}}          
+			</div><!-- End col-md-9-->
 
-</div><!-- End row -->
-</div><!-- End container -->
-<!-- End Content =============================================== -->
-<!-- Footer ================================================== -->
-@include('layouts.footer')
-<!-- End Footer =============================================== -->
-<!-- Search Menu -->
-<div class="search-overlay-menu">
-	<span class="search-overlay-close"><i class="icon_close"></i></span>
-	<form role="search" id="searchform" method="get">
-		<input value="" name="q" type="search" placeholder="Search..." />
-		<button type="submit"><i class="icon-search-6"></i>
-		</button>
-	</form>
-</div>
-<!-- End Search Menu -->
+		</div><!-- End row -->
+	</div><!-- End container -->
+	<!-- End Content =============================================== -->
+	<!-- Footer ================================================== -->
+	@include('layouts.footer')
+	<!-- End Footer =============================================== -->
+	<!-- Search Menu -->
+	<div class="search-overlay-menu">
+		<span class="search-overlay-close"><i class="icon_close"></i></span>
+		<form role="search" id="searchform" method="get">
+			<input value="" name="q" type="search" placeholder="Search..." />
+			<button type="submit"><i class="icon-search-6"></i>
+			</button>
+		</form>
+	</div>
+	<!-- End Search Menu -->
 
-<!-- COMMON SCRIPTS -->
-<script src="js/jquery-2.2.4.min.js"></script>
-<script src="js/common_scripts_min.js"></script>
-<script src="js/functions.js"></script>
-<script src="assets/validate.js"></script>
+	<!-- COMMON SCRIPTS -->
+	<script src="js/jquery-2.2.4.min.js"></script>
+	<script src="js/common_scripts_min.js"></script>
+	<script src="js/functions.js"></script>
+	<script src="assets/validate.js"></script>
 
-<!-- SPECIFIC SCRIPTS -->
-<script  src="js/cat_nav_mobile.js"></script>
-<script>$('#cat_nav').mobileMenu();</script>
-<script src="http://maps.googleapis.com/maps/api/js"></script>
-<script src="js/map.js"></script>
-<script src="js/infobox.js"></script>
-<script src="js/ion.rangeSlider.js"></script>
-<script>
-	$(function () {
-		'use strict';
-		$("#range").ionRangeSlider({
-			hide_min_max: true,
-			keyboard: true,
-			min: 0,
-			max: 15,
-			from: 0,
-			to:5,
-			type: 'double',
-			step: 1,
-			prefix: "Km ",
-			grid: true
+	<!-- SPECIFIC SCRIPTS -->
+	<script  src="js/cat_nav_mobile.js"></script>
+	<script>$('#cat_nav').mobileMenu();</script>
+	<script src="http://maps.googleapis.com/maps/api/js"></script>
+	<script src="js/map.js"></script>
+	<script src="js/infobox.js"></script>
+	<script src="js/ion.rangeSlider.js"></script>
+	<script>
+
+		$('#citySelect').change(function () {
+			window.location = "/restaurants?city="+$(this).val();
 		});
-	});
-</script>
+
+		$(function () {
+			'use strict';
+			$("#range").ionRangeSlider({
+				hide_min_max: true,
+				keyboard: true,
+				min: 0,
+				max: 15,
+				from: 0,
+				to:5,
+				type: 'double',
+				step: 1,
+				prefix: "Km ",
+				grid: true
+			});
+		});
+	</script>
 </body>
 </html>

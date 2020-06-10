@@ -19,6 +19,7 @@
                         <li><a href="/">Kryefaqja</a></li>
                         <li><a href="/restaurants">Restorantët</a></li>
                         <li><a href="/about">Rreth nesh</a></li>
+                        <li><a href="/contacts">Kontakti</a></li>
                         @guest
                         <li><a href="#" data-toggle="modal" data-target="#login_2" id="login">Kyqu</a></li>
                         @endguest

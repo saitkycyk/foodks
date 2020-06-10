@@ -1,5 +1,6 @@
 <?php
 use App\City;
+use App\Events\OrdersUpdated;
 use App\Food;
 use App\Order;
 use App\Order_Group;
@@ -19,11 +20,16 @@ use Illuminate\Support\Facades\Storage;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::loginUsingId(1);
+Auth::loginUsingId(2);
 Route::get('/test', function () {
-	$user = User::find(2);
 
-	return dd($user->cart->isEmpty());
+	return restaurantRating(User::find(1));
+});
+
+Route::get('/update', function () {
+	
+	OrdersUpdated::dispatch(2);
+
 
 });
 Route::get('/', 'HomeController@homepage')->name('index');
@@ -31,11 +37,11 @@ Route::get('/', 'HomeController@homepage')->name('index');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/restaurants', 'RestaurantController@restaurantsPage')->name('restaurants');
 Route::get('/restaurant/{id}', 'RestaurantController@restaurantMenu')->name('restaurant-menu');
 Route::get('/restaurant/{id}/profile', 'RestaurantController@restaurantProfile')->name('restaurant-profile');
 Route::get('/about', 'HomeController@about')->name('about');
+Route::get('/contacts', 'HomeController@contacts')->name('contacts');
 Route::get('/register/restaurant', 'RestaurantController@create')->name('createRestaurant');
 Route::post('/register/restaurant', 'RestaurantController@store')->name('storeRestaurant');
 

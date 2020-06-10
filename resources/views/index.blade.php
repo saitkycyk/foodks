@@ -157,7 +157,7 @@
                     <div class="ribbon_1">Popular</div>
                     <div class="desc">
                         <div class="thumb_strip">
-                            <img src="{{$popularFood->picture}}" alt="">
+                            <img src="{{$popularFood->picture ? url("{$popularFood->picture}") : url('/public/logos/food-default.png')}}" alt="">
                         </div>
                         <div class="rating">
                             @php $r=0; @endphp

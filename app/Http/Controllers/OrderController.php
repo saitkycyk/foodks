@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\OrdersUpdated;
 use App\Food;
 use App\Order;
 use App\Order_Group;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class OrderController extends Controller
 {
@@ -28,6 +29,8 @@ class OrderController extends Controller
 			$orderGroup->status = $request->operation;
 			$orderGroup->save();
 		}
+
+		OrdersUpdated::dispatch($orderGroup->user_id);
 
 		return back();
 	}
@@ -62,6 +65,7 @@ class OrderController extends Controller
 			$orderGroup->status = 'canceled';
 			$orderGroup->save();
 		}
+		OrdersUpdated::dispatch($orderGroup->restaurant_id);
 
 		return back();
 	}
@@ -103,6 +107,8 @@ class OrderController extends Controller
 		$orderGroup->status = 'pending';
 		$orderGroup->save();
 
+		OrdersUpdated::dispatch($orderGroup->restaurant_id);
+		
 		return view('order-review', compact('orders'));
 	}
 

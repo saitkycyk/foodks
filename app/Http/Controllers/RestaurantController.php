@@ -206,7 +206,26 @@ class RestaurantController extends Controller
 
 	public function restaurantsPage()
 	{
-		$restaurants = User::where('restaurant', true)->paginate(10);
+		$restaurants = User::where('restaurant', true);
+
+		if(request()->has('city')) {
+
+			if(request()->city == 'all') {
+				$restaurants = $restaurants->paginate(10);
+
+				return view('restaurants', compact('restaurants'));
+			}
+
+			$restaurants = User::where('restaurant', true)->where('city_id', request('city'));
+		} else {
+
+			$restaurants = User::where('restaurant', true)->where('city_id', auth()->user()->id);
+
+			return redirect('/restaurants?city='.auth()->user()->city_id)->with('restaurants');
+		}
+
+		$restaurants = $restaurants->paginate(10);
+
 		return view('restaurants', compact('restaurants'));
 	}
 

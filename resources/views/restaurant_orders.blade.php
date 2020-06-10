@@ -9,6 +9,8 @@
 	<meta name="keywords" content="pizza, delivery food, fast food, sushi, take away, chinese, italian food">
 	<meta name="description" content="">
 	<meta name="author" content="Ansonika">
+	<meta name="csrf-token" content="{{csrf_token()}}">
+
 	<title>QuickFood - Quality delivery or take away food</title>
 
 	<!-- Favicons-->
@@ -202,8 +204,8 @@
 					<table class="table table-bordered" style="border:2px solid #c5c5c5;">
 						<thead>
 							<tr>
-								<th>Emri Restorantit</th>
-								<th>Komenti porosisë</th>
+								<th>Emri Klientit</th>
+								<th>Komenti i porosisë</th>
 								<th>Mënyra e pagesës</th>
 								<th>Statusi</th>
 								<th>Porositur më</th>
@@ -281,7 +283,7 @@
 
 <!-- Search Menu -->
 <div class="search-overlay-menu">
-	<span class="search-overlay-close"><i class="icon_close"></i></span>
+	<span id="app" class="search-overlay-close"><i class="icon_close"></i></span>
 	<form role="search" id="searchform" method="get">
 		<input value="" name="q" type="search" placeholder="Search..." />
 		<button type="submit"><i class="icon-search-6"></i>
@@ -298,14 +300,24 @@
 
 <!-- Specific scripts -->
 <script src="/js/tabs.js"></script>
-<script>
-	new CBPFWTabs(document.getElementById('tabs'));
-</script>
-
+<script src="/js/app.js"></script>
 <script src="/js/bootstrap3-wysihtml5.min.js"></script>
 <script type="text/javascript">
+	var auth = {!! auth()->user()->id !!};
+
+	Echo.channel('orders' + auth)
+	.listen('OrdersUpdated', (e) => {
+		location.reload();
+	});
+
+	$.noConflict();
+	new CBPFWTabs(document.getElementById('tabs'));
 	$('.wysihtml5').wysihtml5({});
+
+
+
 </script>
+
 <script src="/js/dropzone.min.js"></script>
 
 </body>

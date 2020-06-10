@@ -289,10 +289,18 @@
 <script src="/js/common_scripts_min.js"></script>
 <script src="/js/functions.js"></script>
 <script src="/assets/validate.js"></script>
-
+<script src="/js/app.js"></script>
 <!-- Specific scripts -->
 <script src="/js/tabs.js"></script>
 <script>
+	var auth = {!! auth()->user()->id !!};
+
+	Echo.channel('orders' + auth)
+	.listen('OrdersUpdated', (e) => {
+		location.reload();
+	});
+	
+	$.noConflict();
 	new CBPFWTabs(document.getElementById('tabs'));
 </script>
 

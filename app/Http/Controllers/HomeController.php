@@ -37,21 +37,14 @@ class HomeController extends Controller
         return view('index', compact(['restaurants', 'users', 'orders', 'popularFoods']));
     }
 
-
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function index()
-    {
-        return view('home');
-    }
-
     public function about()
     {
         return view('about');
+    }
+
+    public function contacts()
+    {
+        return view('contacts');
     }
 
     public function addressCreate()
