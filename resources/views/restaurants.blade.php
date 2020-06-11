@@ -59,8 +59,8 @@
 <section class="parallax-window" id="short" data-parallax="scroll" data-image-src="img/sub_header_short.jpg" data-natural-width="1400" data-natural-height="350">
 	<div id="subheader">
 		<div id="sub_content">
-			<h1>24 results in your zone</h1>
-			<div><i class="icon_pin"></i> 135 Newtownards Road, Belfast, BT4 1AB</div>
+			<h1>{{$restaurants->count()}} rezultat/e për zonën tuaj</h1>
+			<div><i class="icon_pin"></i>@if(request()->has('city')) {{\App\City::find(request('city'))->name ?? 'Të gjithë'}} @endif</div>
 		</div><!-- End sub_content -->
 	</div><!-- End subheader -->
 </section><!-- End section -->
@@ -111,10 +111,10 @@
 						<select id="citySelect" class="form-control" name="city_id" id="city">
 							<option value="all" onclick="">Të gjitha</option>
 							@foreach(\App\City::all() as $city)
-							<option value="{{$city->id}}" @if($city->id == auth()->user()->city_id)  selected="true" @endif>{{$city->name}}</option>
+							<option value="{{$city->id}}" @if(request('city') == $city->id)  selected="true" @endif>{{$city->name}}</option>
 							@endforeach
 						</select>
-						<h6>Vlerësimi</h6>
+{{-- 						<h6>Vlerësimi</h6>
 						<ul>
 							<li><label><input type="checkbox" class="icheck"><span class="rating">
 								<i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i>
@@ -131,22 +131,26 @@
 							<li><label><input type="checkbox" class="icheck"><span class="rating">
 								<i class="icon_star voted"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i>
 							</span></label></li>
-						</ul>
+						</ul> --}}
 					</div>
-					<div class="filter_type">
+{{-- 					<div class="filter_type">
 						<h6>Mënyra e pagesës</h6>
 						<ul class="nomargin">
-							<li><label><input class="icheck" type="checkbox" value="/bla" name="checked" onClick="if (this.checked) { window.location = this.value; }" />Në Derë</label></li>
-							<li><label><input type="checkbox" class="icheck">Kartelë</label></li>
+							<li><label>
+								<input id="paymentType" class="icheck" checked type="checkbox" value="door" name="payment_type"/>Në Derë
+							</label></li>
+							<li><label>
+								<input id="paymentType" class="icheck" checked type="checkbox" value="card" name="payment_type"/>Kartelë
+							</label></li>
 						</ul>
-					</div>
+					</div> --}}
 				</div><!--End collapse -->
 			</div><!--End filters col-->
 		</div><!--End col-md -->
 
 		<div class="col-md-9">
 
-			<div id="tools">
+{{-- 			<div id="tools">
 				<div class="row">
 					<div class="col-md-3 col-sm-3 col-xs-6">
 						<div class="styled-select">
@@ -161,7 +165,7 @@
 						<a href="list_page.html" class="bt_filters"><i class="icon-list"></i></a>
 					</div>
 				</div>
-			</div><!--End tools -->
+			</div> --}}
 			<div class="row">
 				@foreach($restaurants as $key => $restaurant)
 			@if($key % 2 == 0)</div><div class="row"> @endif
@@ -183,7 +187,7 @@
 								Mexican / American
 							</div>
 							<div class="location">
-								{{$restaurant->address}}<br><span class="opening">{{$restaurant->works}}</span>Porosia minimale: {{$restaurant->preferences['min_order'] ?? ''}}
+								{{$restaurant->address}}<br><span class="opening">{{$restaurant->works}}</span> | Porosia minimale: {{$restaurant->preferences['min_order'] ?? ''}}
 							</div>
 							<ul>
 								<li>Në Derë<i class="{{$restaurant->door_payment ? 'icon_check_alt2 ok' : 'icon_close_alt2 no'}}"></i></li>
@@ -233,6 +237,43 @@
 		$('#citySelect').change(function () {
 			window.location = "/restaurants?city="+$(this).val();
 		});
+
+
+// $("#paymentType").change(function() {
+// console.log('activated');
+//     if(this.checked) {
+//         insertParam('door_payment', $(this).val());
+//     }
+// });
+
+// function insertParam(key, value) {
+//     key = encodeURIComponent(key);
+//     value = encodeURIComponent(value);
+//     console.log('activated');
+//     // kvp looks like ['key1=value1', 'key2=value2', ...]
+//     var kvp = document.location.search.substr(1).split('&');
+//     let i=0;
+
+//     for(; i<kvp.length; i++){
+//         if (kvp[i].startsWith(key + '=')) {
+//             let pair = kvp[i].split('=');
+//             pair[1] = value;
+//             kvp[i] = pair.join('=');
+//             break;
+//         }
+//     }
+
+//     if(i >= kvp.length){
+//         kvp[kvp.length] = [key,value].join('=');
+//     }
+
+//     // can return this or...
+//     let params = kvp.join('&');
+
+//     // reload page with new params
+//     document.location.search = params;
+// }
+
 
 		$(function () {
 			'use strict';
