@@ -171,6 +171,8 @@ class OrderController extends Controller
 
 	public function store($food, Request $request)
 	{
+		$this->authorize('isUser', User::class);
+		
 		$food = Food::findOrFail($food);
 
 		$price = 0;

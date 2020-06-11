@@ -58,7 +58,7 @@
     <div id="subheader">
         <div id="sub_content">
             <div id="thumb"><img src="{{$restaurant->picture}}" alt=""></div>
-            <div class="rating">(<small><a href="restaurant/{{$restaurant->id}}/profile">{{$restaurant->restaurantReviews->count()}} reviews</a></small>)</div>
+            <div class="rating">(<small><a href="/restaurant/{{$restaurant->id}}/profile">{{$restaurant->restaurantReviews->count()}} reviews</a></small>)</div>
             <h1><a href="{{route('restaurant-profile', ['id' => $restaurant->id])}}">{{$restaurant->name}}</a></h1>
             {{-- <div><em>Mexican / American</em></div> --}}
             <div><i class="icon_pin"></i>{{$restaurant->address}}{{-- <strong>Delivery charge:</strong> $10, free over $15. --}}</div>
@@ -70,9 +70,9 @@
 <div id="position">
     <div class="container">
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Category</a></li>
-            <li>Page active</li>
+            <li><a href="/">Kryefaqja</a></li>
+            <li><a href="/restaurants">Restorantët</a></li>
+            <li>Menu</li>
         </ul>
         <a href="#" class="search-overlay-menu-btn"><i class="icon-search-6"></i> Search</a>
     </div>
@@ -177,7 +177,7 @@
                     <h3>Porositë <i class="icon_cart_alt pull-right"></i></h3>
                     <table class="table table_summary">
                         <tbody>
-                            @foreach(auth()->user()->cart as $order)
+                            @foreach(auth()->user()->cart->where('restaurant_id', $restaurant->id) as $order)
                             <tr>
                                 <td>
                                     <form action="{{route('deleteOrder', ['order' => $order->id])}}" method="POST">

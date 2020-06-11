@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Storage;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::loginUsingId(2);
+Auth::loginUsingId(4);
 Route::get('/test', function () {
 
 	return restaurantRating(User::find(1));
@@ -73,7 +73,6 @@ Route::delete('/orderGroup/{orderGroup}/cancel', 'OrderController@cancelOrderGro
 
 //restaurant order management
 Route::get('/orders/restaurant', 'OrderController@showRestaurantOrders')->name('restaurantOrders');
-
 Route::patch('/orderGroup/{orderGroup}/status', 'OrderController@changeOrderGroupStatus')->name('changeOrderGroupStatus');
 
 //checkout system
