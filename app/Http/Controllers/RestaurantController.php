@@ -216,17 +216,20 @@ class RestaurantController extends Controller
 				return view('restaurants', compact('restaurants'));
 			}
 
-			$restaurants = User::where('restaurant', true)->where('city_id', request('city'));
+			$restaurants = $restaurants->where('city_id', request('city'))->paginate(10);
+
+			return view('restaurants', compact('restaurants'));
+
 		} else {
+			if(auth()->user() != null) {
+				$restaurants = $restaurants->where('city_id', auth()->user()->id);
 
-			$restaurants = User::where('restaurant', true)->where('city_id', auth()->user()->id);
-
-			return redirect('/restaurants?city='.auth()->user()->city_id)->with('restaurants');
+				return redirect('/restaurants?city='.auth()->user()->city_id)->with('restaurants');
+			}
 		}
 
 		$restaurants = $restaurants->paginate(10);
-
-		return view('restaurants', compact('restaurants'));
+		return redirect('/restaurants?city=all')->with('restaurants');
 	}
 
 	public function denyOrder(Order_Group $order_group)

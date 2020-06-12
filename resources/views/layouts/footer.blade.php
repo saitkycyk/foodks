@@ -10,12 +10,9 @@
             <div class="col-md-3 col-sm-3">
                 <h3>Rreth</h3>
                 <ul>
-                    <li><a href="about.html">Rreth nesh</a></li>
-                    {{-- <li><a href="faq.html">Faq</a></li> --}}
-                    <li><a href="contacts.html">Kontakti</a></li>
-                    <li><a href="#0" data-toggle="modal" data-target="#login_2">Kyqu</a></li>
-                    <li><a href="#0" data-toggle="modal" data-target="#register">Regjistrohu</a></li>
-                    <li><a href="#0">Termat dhe kushtet</a></li>
+                    <li><a href="/about">Rreth nesh</a></li>
+                    <li><a href="/contacts">Kontakti</a></li>
+                    <li><a href="#">Termat dhe kushtet</a></li>
                 </ul>
             </div>
             <div class="col-md-3 col-sm-3" id="newsletter">
@@ -113,8 +110,7 @@
   </div>
 </div>
 </div><!-- End modal -->   
-
-@if($errors->has(['password', 'name']))
+@if($errors->has('password') || $errors->has('name'))
 <script type="text/javascript">
     window.addEventListener('load', function () {
         $("#register").modal()
@@ -130,7 +126,7 @@
         <form action="/register" method="POST" class="popup-form" id="myRegister">
             @csrf
             <div class="login_icon"><i class="icon_lock_alt"></i></div>
-            @if($errors->has(['password', 'name']))
+            @if($errors->has('password') || $errors->has('name'))
             <div class="alert alert-danger">
                 <ul>
                     @foreach ($errors->all() as $error)

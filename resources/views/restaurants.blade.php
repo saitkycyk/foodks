@@ -109,9 +109,9 @@
 					<div class="filter_type">
 						<h6>Qyteti</h6>
 						<select id="citySelect" class="form-control" name="city_id" id="city">
-							<option value="all" onclick="">Të gjitha</option>
+							<option value="all" >Të gjitha</option>
 							@foreach(\App\City::all() as $city)
-							<option value="{{$city->id}}" @if(request('city') == $city->id)  selected="true" @endif>{{$city->name}}</option>
+							<option value="{{$city->id}}" @if(request('city') == $city->id)  selected="true" @endif >{{$city->name}}</option>
 							@endforeach
 						</select>
 {{-- 						<h6>Vlerësimi</h6>

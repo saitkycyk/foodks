@@ -57,18 +57,18 @@
     <section class="header-video">
         <div id="hero_video">
             <div id="sub_content">
-                <h1>Order Takeaway or Delivery Food</h1>
+                <h1>Ushqimi juaj është vetëm disa klikime larg</h1>
                 <p>
-                    Ridiculus sociosqu cursus neque cursus curae ante scelerisque vehicula.
+                    Zgjedhni ushqimin që dëshironi, bëni pagesën në mënyrën që dëshironi, dhe ushqimi do të vijë tek ju.
                 </p>
                 <form method="post" action="/search">
                     <div id="custom-search-input">
-                        <div class="input-group">
+{{--                         <div class="input-group">
                             <input type="text" class=" search-query" placeholder="Your Address or postal code">
                             <span class="input-group-btn">
                                 <input type="submit" class="btn_search" value="submit">
                             </span>
-                        </div>
+                        </div> --}}
                     </div>
                 </form>
             </div><!-- End sub_content -->
@@ -77,7 +77,7 @@
         <div id="count" class="hidden-xs">
             <ul>
                 <li><span class="number">{{$restaurants}}</span> Restorante</li>
-                <li><span class="number">{{$orders}}</span> Porosi të dërguar</li>
+                <li><span class="number">{{$orders}}</span> Porosi të bëra</li>
                 <li><span class="number">{{$users}}</span> Përdorues të regjistruar</li>
             </ul>
         </div>
@@ -124,9 +124,9 @@
         <div class="col-md-3">
             <div class="box_home" id="four">
                 <span>4</span>
-                <h3>Dorëzim ose marrja nga restoranti</h3>
+                <h3>Dorëzim në derën tuaj</h3>
                 <p>
-                    Po pritoni? Nuk doni të pritni?
+                    Jeni shumë të uritur? Nuk doni të prisni?
                 </p>
             </div>
         </div>
@@ -196,7 +196,7 @@
    <div class="container">
     <h3>Zgjedh njërën nga {{$restaurants}} Restorantëve!</h3>
     <p>Ridiculus sociosqu cursus neque cursus curae ante scelerisque vehicula.</p>
-    <a href="list_page.html">Shih restorantët</a>
+    <a href="/restaurants">Shih restorantët</a>
 </div><!-- End container -->
 </div><!-- End hight_light -->
 

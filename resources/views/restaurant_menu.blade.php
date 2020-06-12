@@ -136,7 +136,7 @@
                             </td>
                             <td class="options">
                                 <div class="dropdown dropdown-options">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i class="icon_plus_alt2"></i></a>
+                                    <a href="#" id="showIng" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><i class="icon_plus_alt2"></i></a>
                                     <div class="dropdown-menu">
                                         <form id="ingForm" action="{{route('createOrder', ['food' => $food->id])}}" method="POST">
                                             @csrf
@@ -170,7 +170,7 @@
 
             </div><!-- End box_style_1 -->
         </div><!-- End col-md-6 -->
-
+        @auth
         <div class="col-md-3" id="sidebar">
             <div class="theiaStickySidebar">
                 <div id="cart_box" >
@@ -199,7 +199,7 @@
                         <tbody>
                             <tr>
                                 <td class="total">
-                                    TOTAL <span class="pull-right">€ {{auth()->user()->cart->sum('price')}}</span>
+                                    TOTAL <span class="pull-right">€ {{auth()->user()->cart->sum('price') ?? 0}}</span>
                                 </td>
                             </tr>
                         </tbody>
@@ -212,7 +212,7 @@
                 </div><!-- End cart_box -->
             </div><!-- End theiaStickySidebar -->
         </div><!-- End col-md-3 -->
-
+        @endauth
     </div><!-- End row -->
 </div><!-- End container -->
 <!-- End Content =============================================== -->
@@ -244,12 +244,21 @@
 <script  src="/js/cat_nav_mobile.js"></script>
 <script>$('#cat_nav').mobileMenu();</script>
 <script src="/js/theia-sticky-sidebar.js"></script>
-<script>
+
+<script type="text/javascript">
+
     jQuery('#sidebar').theiaStickySidebar({
       additionalMarginTop: 80
   });
-</script>
-<script>
+
+    $('#showIng').click(function(){ 
+        var auth = {!! auth()->user() !!} 
+        console.log();
+        if(auth == null) {
+            $("#login_2").modal();
+        }
+    });
+
     $('#cat_nav a[href^="#"]').on('click', function (e) {
         e.preventDefault();
         var target = this.hash;

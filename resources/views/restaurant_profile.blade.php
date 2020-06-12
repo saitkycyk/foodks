@@ -81,7 +81,7 @@
     <div class="container">
         <ul>
             <li><a href="/">Kryefaqja</a></li>
-            <li>Profili Restaurantit</li>
+            <li>Profili Restorantit</li>
         </ul>
         <a href="#0" class="search-overlay-menu-btn"><i class="icon-search-6"></i> Search</a>
     </div>
@@ -178,8 +178,10 @@
                     </ul>
                 </div>
             </div><!-- End row -->
+            @auth
             <hr class="styled">
             <a href="#" class="btn_1 add_bottom_15" data-toggle="modal" data-target="#myReview">@if(auth()->user()->review->where('restaurant_id', $restaurant->id)->isEmpty()) Vlerëso @else Ri-vlerëso @endif </a>
+            @endauth
         </div><!-- End summary_review -->
 
         @foreach($restaurant->restaurantReviews as $review)
@@ -221,6 +223,7 @@
     <div class="modal-dialog">
         <div class="modal-content modal-popup">
             <a href="#" class="close-link"><i class="icon_close_alt2"></i></a>
+            @auth
             <form method="post" action="{{route('rateRestaurant', ['id' => $restaurant->id])}}" id="rating" class="popup-form">
                 @csrf 
                 <div class="login_icon"><i class="icon_comment_alt"></i></div>
@@ -250,6 +253,7 @@
                     </form>
                 @endif
             </form>
+            @endauth
             <div id="message-rating"></div>
         </div>
     </div>
