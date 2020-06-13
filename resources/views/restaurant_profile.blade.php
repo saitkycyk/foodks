@@ -67,7 +67,7 @@
 <section class="parallax-window" data-parallax="scroll" data-image-src="/img/sub_header_1.jpg" data-natural-width="1400" data-natural-height="470">
     <div id="subheader">
         <div id="sub_content">
-            <div id="thumb"><img src="{{$restaurant->picture ? url("{$restaurant->picture}") : url('/public/logos/default.jpg')}}" ></div>
+            <div id="thumb"><img src="{{$restaurant->picture ? url("{$restaurant->picture}") : url('/public/logos/restaurant-default.jpg')}}" ></div>
             <div class="rating">(<small>{{$restaurant->restaurantReviews->count()}} reviews</small>)</div>
             <h1>{{$restaurant->name}}</h1>
             {{-- <div><em>Mexican / American</em></div> --}}

@@ -175,7 +175,7 @@
 						{{-- <div class="ribbon_1">Popular</div> --}}
 						<div class="desc">
 							<div class="thumb_strip">
-								<img src="{{$restaurant->picture ? url("{$restaurant->picture}") : url('/public/logos/default.jpg')}}" alt="">
+								<img src="{{$restaurant->picture ? url("{$restaurant->picture}") : url('/public/logos/restaurant-default.jpg')}}" alt="">
 							</div>
 
 
