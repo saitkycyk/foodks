@@ -176,8 +176,8 @@
  <div class="row">
    <div class="col-md-6 col-sm-6">
     <div class="form-group">
-     <label>Email:</label>
-     <input type="email" id="email_contact" name="email" class="form-control " placeholder="your_bussiness_email@email.com" required>
+     <label>Email i Restorantit:</label>
+     <input type="email" id="email_contact" name="email" class="form-control " placeholder="emaili_restorantit@email.com" required>
  </div>
 </div>
 <div class="col-md-6 col-sm-6">

@@ -127,6 +127,7 @@
 								<td title="{{$orderGroup->created_at->diffForHumans()}}">{{$orderGroup->created_at}}</td>
 								<td title="{{$orderGroup->updated_at->diffForHumans()}}">{{$orderGroup->updated_at}}</td>
 								<th>€ {{$orderGroup->orders->sum('price')}}</th>
+								@if($orderGroup->status == 'pending' || $orderGroup->status == 'accepted')
 								<td>
 									<form action="{{route('cancelOrderGroup', ['orderGroup' => $orderGroup->id])}}" method="POST">
 										@csrf
@@ -134,6 +135,11 @@
 										<a href="javascript:;" onclick="parentNode.submit();" style="color: red">Anulo</a>
 									</form>
 								</td>
+								@else
+								<td style="color: grey">
+									Anulo
+								</td>
+								@endif
 							</tr>
 							<tr>
 								<td colspan="8">
@@ -211,8 +217,8 @@
 								<td title="{{$oldOrderGroup->note}}">{{$oldOrderGroup->note}}</td>
 								<td>{{$oldOrderGroup->payment_type == 'door_payment' ? 'Në derë' : 'Me kartelë'}}</td>
 								<td @if($oldOrderGroup->status == 'canceled') style="color: red" @else style="color: green" @endif>{{ucfirst($oldOrderGroup->status)}}</td>
-								<td title="{{$orderGroup->created_at->diffForHumans()}}">{{$orderGroup->created_at}}</td>
-								<td title="{{$orderGroup->updated_at->diffForHumans()}}">{{$orderGroup->updated_at}}</td></td>
+								<td title="{{$oldOrderGroup->created_at->diffForHumans()}}">{{$oldOrderGroup->created_at}}</td>
+								<td title="{{$oldOrderGroup->updated_at->diffForHumans()}}">{{$oldOrderGroup->updated_at}}</td></td>
 								<th>€ {{$oldOrderGroup->orders->sum('price')}}</th>
 							</tr>
 							<tr>

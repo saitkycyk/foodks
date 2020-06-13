@@ -12,7 +12,6 @@
 |
 */
 
-
 Auth::routes();
 
 Route::get('/', 'HomeController@homepage')->name('index');

@@ -61,7 +61,7 @@ class OrderController extends Controller
 
 		$this->authorize('isOrderGroupOwner', $orderGroup);
 
-		if($orderGroup->status == 'pending') {
+		if($orderGroup->status == 'pending' || $orderGroup->status == 'accepted') {
 			$orderGroup->status = 'canceled';
 			$orderGroup->save();
 		}
@@ -75,8 +75,15 @@ class OrderController extends Controller
 	{
 		$this->authorize('isUser', User::class);
 
-		$orderGroups = auth()->user()->order_groups->where('status', 'pending')->load('orders');
-		$oldOrderGroups = auth()->user()->order_groups->where('status', '!=', 'pending')->where('status', '!=', 'unfinished')->load('orders');
+		$userOrders = auth()->user()->order_groups->load('orders');
+
+		$orderGroups = $userOrders->filter(function ($value, $key) {
+			return $value['status'] == 'pending' || $value['status'] == 'accepted' || $value['status'] == 'onway';
+		});
+
+		$oldOrderGroups = $userOrders->filter(function ($value, $key) {
+			return $value['status'] == 'canceled' || $value['status'] == 'delivered';
+		});
 
 		return view('user_orders', compact(['orderGroups', 'oldOrderGroups']));
 	}
@@ -175,6 +182,8 @@ class OrderController extends Controller
 		
 		$food = Food::findOrFail($food);
 
+		$this->confirmUserPhoneCity($food);
+
 		$price = 0;
 		$quantity = 1;
 
@@ -201,6 +210,16 @@ class OrderController extends Controller
 		]);
 
 		return back();
+	}
+
+
+	protected function confirmUserPhoneCity($food)
+	{
+		abort_if(auth()->user()->phone == null, 403, 'Nuk mund të porositni pa shtuar një numër të telefonit në profilin tuaj!');
+
+		abort_if(auth()->user()->city_id == null, 403, 'Nuk mund të porositni pa shtuar një qytet dhe adres në profilin tuaj!');
+
+		abort_if($food->restaurant->city_id != auth()->user()->city_id, 403, 'Restoranti nuk gjendet në qytetin tuaj, ju lutem porositni nga njëra restorantët që gjenden në qytetin tuaj!');
 	}
 
 }

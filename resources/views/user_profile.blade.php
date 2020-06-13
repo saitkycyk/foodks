@@ -147,7 +147,7 @@
 									<label>Qyteti</label>
 									<select class="form-control" name="city_id" id="city">
 										@foreach(\App\City::all() as $city)
-										<option value="{{$city->id}}" @if($city->id == $user->city->id)  selected="true" @endif>{{$city->name}}</option>
+										<option value="{{$city->id}}" @if(isset($user->city) && $city->id == $user->city->id)  selected="true" @endif>{{$city->name}}</option>
 										@endforeach
 									</select>
 								</div>
@@ -177,7 +177,7 @@
 				<hr class="styled_2">
 				<div class="row">
 					<div class="indent_title_in" style="float: left">
-						<img height="100" width="100" src="{{$user->picture ? url("{$user->picture}") : url('/public/logos/user-default.png')}}" alt="" class="img-circle">
+						<img height="100" width="100" src="{{$user->picture ? url("{$user->picture}") : asset('img/default_pictures/user-default.png')}}" alt="" class="img-circle">
 					</div>
 
 					<div class="wrapper_indent add_bottom_45" style="margin-left: 18%">

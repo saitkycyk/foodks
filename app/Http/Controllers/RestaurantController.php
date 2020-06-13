@@ -31,6 +31,22 @@ class RestaurantController extends Controller
 
 		$data['preferences'] = $preferences;
 
+		$request->validate([
+			'payment_type' => 'required|in:door,card,all'
+		]);
+
+
+		if($request->payment_type == 'door') {
+			$data['door_payment'] = 1;
+			$data['card_payment'] = 0;
+		} else if($request->payment_type == 'card') {
+			$data['door_payment'] = 0;
+			$data['card_payment'] = 1;
+		} else {
+			$data['door_payment'] = 1;
+			$data['card_payment'] = 1;
+		}
+
 		auth()->user()->update($data);
 
 		return back();
@@ -41,7 +57,7 @@ class RestaurantController extends Controller
 		if(Hash::check($request->old_password, auth()->user()->password)){
 			try{
 				$newPassword = $request->validate([
-					'password' => 'required|confirmed'
+					'password' => 'required|confirmed|min:8'
 				]);
 			} catch (\Exception $e) {
 				session()->flash('password', 'Konfirmimi i fjalëkalimit është dështuar, provoni përsëri!');

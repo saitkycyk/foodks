@@ -219,8 +219,8 @@
 								<td title="{{$oldOrderGroup->note}}">{{$oldOrderGroup->note}}</td>
 								<td>{{$oldOrderGroup->payment_type == 'door_payment' ? 'Në derë' : 'Me kartelë'}}</td>
 								<td @if($oldOrderGroup->status == 'canceled') style="color: red" @else style="color: green" @endif>{{ucfirst($oldOrderGroup->status)}}</td>
-								<td title="{{$orderGroup->created_at->diffForHumans()}}">{{$orderGroup->created_at}}</td>
-								<td title="{{$orderGroup->updated_at->diffForHumans()}}">{{$orderGroup->updated_at}}</td>
+								<td title="{{$oldOrderGroup->created_at->diffForHumans()}}">{{$oldOrderGroup->created_at}}</td>
+								<td title="{{$oldOrderGroup->updated_at->diffForHumans()}}">{{$oldOrderGroup->updated_at}}</td>
 								<th>€ {{$oldOrderGroup->orders->sum('price')}}</th>
 							</tr>
 							<tr>
@@ -303,6 +303,9 @@
 <script src="/js/app.js"></script>
 <script src="/js/bootstrap3-wysihtml5.min.js"></script>
 <script type="text/javascript">
+	new CBPFWTabs(document.getElementById('tabs'));
+	$('.wysihtml5').wysihtml5({});
+
 	var auth = {!! auth()->user()->id !!};
 
 	Echo.channel('orders' + auth)
@@ -311,10 +314,6 @@
 	});
 
 	$.noConflict();
-	new CBPFWTabs(document.getElementById('tabs'));
-	$('.wysihtml5').wysihtml5({});
-
-
 
 </script>
 

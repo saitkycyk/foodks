@@ -125,7 +125,7 @@
                         @foreach($category as $food)
                         <tr>
                             <td>
-                                <figure class="thumb_menu_list"><img src="{{$food->picture ? url("{$food->picture}") : url('/public/logos/food-default.png')}}" alt="thumb"></figure>
+                                <figure class="thumb_menu_list"><img src="{{$food->picture ? url("{$food->picture}") : asset('img/default_pictures/food-default.png')}}" alt="thumb"></figure>
                                 <h5>{{$food->name}}</h5>
                                 <p>
                                     {{$food->description}}
@@ -150,13 +150,14 @@
                                             @endforeach
                                             @endif
                                             <hr>
+                                            @if(!auth()->user()->restaurant)
                                             <label>
                                                 <span style="margin-top: 4px">Nr. i porosisë</span>
                                                 <input style="width: 40%" name="quantity" type="number" value="1" min="1">
                                             </label>
 
                                             <a href="javascript:;" onclick="parentNode.submit();" class="add_to_basket">Shtoj</a>
-
+                                            @endif
                                         </form>
                                     </div>
                                 </div>
@@ -171,6 +172,7 @@
             </div><!-- End box_style_1 -->
         </div><!-- End col-md-6 -->
         @auth
+        @if(!auth()->user()->restaurant)
         <div class="col-md-3" id="sidebar">
             <div class="theiaStickySidebar">
                 <div id="cart_box" >
@@ -212,6 +214,7 @@
                 </div><!-- End cart_box -->
             </div><!-- End theiaStickySidebar -->
         </div><!-- End col-md-3 -->
+        @endif
         @endauth
     </div><!-- End row -->
 </div><!-- End container -->

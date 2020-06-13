@@ -67,7 +67,7 @@
 <section class="parallax-window" data-parallax="scroll" data-image-src="/img/sub_header_1.jpg" data-natural-width="1400" data-natural-height="470">
     <div id="subheader">
         <div id="sub_content">
-            <div id="thumb"><img src="{{$restaurant->picture ? url("{$restaurant->picture}") : url('/public/logos/restaurant-default.jpg')}}" ></div>
+            <div id="thumb"><img src="{{$restaurant->picture ? url("{$restaurant->picture}") : asset('img/default_pictures/restaurant-default.jpg')}}" ></div>
             <div class="rating">(<small>{{$restaurant->restaurantReviews->count()}} reviews</small>)</div>
             <h1>{{$restaurant->name}}</h1>
             {{-- <div><em>Mexican / American</em></div> --}}
@@ -127,7 +127,7 @@
 
                 @foreach($restaurant->foods as $food)
                 <div class="sp-slide">
-                    <img alt="" class="sp-image" src="{{url('/public/logos/blank.gif')}}" data-src="{{$food->picture ? url("{$food->picture}") : url('/public/logos/no-image.png')}}">
+                    <img alt="" class="sp-image" src="{{asset('img/default_pictures/blank.gif')}}" data-src="{{$food->picture ? url("{$food->picture}") : asset('img/default_pictures/no-image.png')}}">
                     <p class="sp-layer sp-black sp-padding" data-horizontal="50" data-vertical="50" data-show-transition="down" data-show-delay="500">
                         {{$food->name}}
                     </p>
@@ -140,7 +140,7 @@
             </div>
             <div class="sp-thumbnails">
                 @foreach($restaurant->foods as $food)
-                <img alt="" class="sp-thumbnail" src="{{$food->picture ? url("{$food->picture}") : url('/public/logos/no-image.png')}}">
+                <img alt="" class="sp-thumbnail" src="{{$food->picture ? url("{$food->picture}") : asset('img/default_pictures/no-image.png')}}">
                 @endforeach
             </div>
         </div>
@@ -179,14 +179,16 @@
                 </div>
             </div><!-- End row -->
             @auth
+            @if(auth()->user()->id != $restaurant->id)
             <hr class="styled">
             <a href="#" class="btn_1 add_bottom_15" data-toggle="modal" data-target="#myReview">@if(auth()->user()->review->where('restaurant_id', $restaurant->id)->isEmpty()) Vlerëso @else Ri-vlerëso @endif </a>
+            @endif
             @endauth
         </div><!-- End summary_review -->
 
         @foreach($restaurant->restaurantReviews as $review)
         <div class="review_strip_single">
-            <img height="70" width="70" src="{{$review->user->picture ? url("{$review->user->picture}") : url('/public/logos/user-default.png')}}" alt="" class="img-circle">
+            <img height="70" width="70" src="{{$review->user->picture ? url("{$review->user->picture}") : asset('img/default_pictures/user-default.png')}}" alt="" class="img-circle">
             <small> - {{Carbon\Carbon::parse($review->created_at)->format('d/m/y')}} - </small>
             <h4>{{$review->user->name.' '.$review->user->lastname}}</h4>
             <p>
@@ -224,35 +226,35 @@
         <div class="modal-content modal-popup">
             <a href="#" class="close-link"><i class="icon_close_alt2"></i></a>
             @auth
-            <form method="post" action="{{route('rateRestaurant', ['id' => $restaurant->id])}}" id="rating" class="popup-form">
+            <form method="post" action="{{route('rateRestaurant', ['id' => $restaurant->id])}}" id="rating" class="popup-form" style="margin-bottom: 1%">
                 @csrf 
                 <div class="login_icon"><i class="icon_comment_alt"></i></div>
-                <input name="restaurant_name" id="restaurant_name" type="hidden" value="Mexican Taco Mex">
-                <div class="row">	
-                    <textarea name="review" id="review_text" class="form-control form-white" style="height:100px" placeholder="Shkruaj një koment"></textarea>
+                <div class="row">
+                @php
+                $userReview = auth()->user()->review->where('restaurant_id', $restaurant->id)->first();
+                @endphp	
+                    <textarea name="review" id="review_text" class="form-control form-white" style="height:100px" placeholder="Shkruaj një koment">@if(!empty($userReview)) {{$userReview->review}} @endif</textarea>
                 </div>
 
                 <div class="row">
                     <select class="form-control form-black" name="rate" id="food_review">
                         <option value="">Zgjedh vlerën</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
+                        <option value="1" @if(!empty($userReview && $userReview->rate == 1)) selected @endif>1</option>
+                        <option value="2" @if(!empty($userReview && $userReview->rate == 2)) selected @endif>2</option>
+                        <option value="3" @if(!empty($userReview && $userReview->rate == 3)) selected @endif>3</option>
+                        <option value="4" @if(!empty($userReview && $userReview->rate == 4)) selected @endif>4</option>
+                        <option value="5" @if(!empty($userReview && $userReview->rate == 5)) selected @endif>5</option>
                     </select>                            
                 </div>
-
-
                 <input type="submit" value="Ruaj" class="btn btn-submit" id="submit-rating">
-                @if(!auth()->user()->review->where('restaurant_id', $restaurant->id)->isEmpty()) 
-                    <form method="POST" action="{{route('deleteRestaurantRating', ['id' => $restaurant->id])}}">
-                        @csrf
-                        @method('DELETE')
-                        <input type="submit" value="Fshijë" class="btn btn-submit" id="submit-rating">
-                    </form>
-                @endif
             </form>
+            @if(!auth()->user()->review->where('restaurant_id', $restaurant->id)->isEmpty()) 
+            <form method="POST" action="{{route('deleteRestaurantRating', ['id' => $restaurant->id])}}" class="popup-form" style="margin-top: 1%">
+                @csrf
+                @method('DELETE')
+                <input type="submit" value="Fshijë" class="btn btn-submit" id="submit-rating">
+            </form>
+            @endif
             @endauth
             <div id="message-rating"></div>
         </div>

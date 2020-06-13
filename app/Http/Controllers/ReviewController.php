@@ -9,10 +9,12 @@ use Illuminate\Http\Request;
 
 class ReviewController extends Controller
 {
-	public function rateRestaurant(User $id, Request $request)
+	public function rateRestaurant($id, Request $request)
 	{
+		$user = User::findOrFail($id);
+
 		$this->authorize('isUser', User::class);
-		$this->authorize('checkIfRestaurant', $id);
+		$this->authorize('checkIfRestaurant', $user);
 
 		$data = $request->validate([
 			'review' => 'nullable|string',
@@ -21,19 +23,21 @@ class ReviewController extends Controller
 
 		$review = Review::updateOrCreate([
 			'user_id' => auth()->user()->id,
-			'restaurant_id' => $id->id
+			'restaurant_id' => $user->id
 		], $data);
 
 		return back();
 	}
 
 
-	public function deleteRestaurantRating(User $id, Request $request)
+	public function deleteRestaurantRating($id, Request $request)
 	{
-		$this->authorize('isUser', User::class);
-		$this->authorize('checkIfRestaurant', $id);
+		$user = User::findOrFail($id);
 
-		$review = Review::where('user_id', auth()->user()->id)->where('restaurant_id', $id->id)->first();
+		$this->authorize('isUser', User::class);
+		$this->authorize('checkIfRestaurant', $user);
+
+		$review = Review::where('user_id', auth()->user()->id)->where('restaurant_id', $user->id)->first();
 
 		$review->delete();
 		

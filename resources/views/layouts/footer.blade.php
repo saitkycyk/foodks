@@ -99,8 +99,8 @@
                 </ul>
             </div>
             @endif
-            <input type="text" class="form-control form-white" name="email" placeholder="Username">
-            <input type="password" class="form-control form-white" name="password" placeholder="Password">
+            <input type="text" class="form-control form-white" name="email" placeholder="Email">
+            <input type="password" class="form-control form-white" name="password" placeholder="Fjalëkalimi">
             <div class="text-left">
               <a href="#" data-toggle="modal" data-target="#forget">Keni harruar fjalëkalimin?</a> | 
               <a href="#" data-toggle="modal" data-target="#register">Regjistrohu</a>
@@ -135,11 +135,11 @@
                 </ul>
             </div>
             @endif
-            <input type="text" class="form-control form-white" name="name" placeholder="Name">
-            <input type="text" class="form-control form-white" name="lastname" placeholder="Last Name">
+            <input type="text" class="form-control form-white" name="name" placeholder="Emri">
+            <input type="text" class="form-control form-white" name="lastname" placeholder="Mbiemri">
             <input type="email" class="form-control form-white" name="email" placeholder="Email">
-            <input type="password" class="form-control form-white" name="password" placeholder="Password"  id="password1">
-            <input type="password" class="form-control form-white" name="password_confirmation" placeholder="Confirm password"  id="password2">
+            <input type="password" class="form-control form-white" name="password" placeholder="Fjaleëkalimi"  id="password1">
+            <input type="password" class="form-control form-white" name="password_confirmation" placeholder="Konfirmo Fjalëkalimin"  id="password2">
             <div id="pass-info" class="clearfix"></div>
             <div class="checkbox-holder text-left">
               <div class="checkbox">

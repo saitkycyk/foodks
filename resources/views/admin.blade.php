@@ -180,30 +180,27 @@
 						</form>
 					</div><!-- End wrapper_indent -->
 
-					<hr class="styled_2">
-					<div class="indent_title_in">
-						<i class="icon_images"></i>
-						<h3>Logoja e restorantit</h3>
-						<p>
-							Shkarkoni një fotografi që representon restorantin tuaj!
-						</p>
+				<hr class="styled_2">
+				<div class="row">
+					<div class="indent_title_in" style="float: left">
+						<img height="100" width="100" src="{{$restaurant->picture ? url("{$restaurant->picture}") : url('/public/logos/restaurant-default.png')}}" alt="" class="img-circle">
 					</div>
 
-					<div class="wrapper_indent add_bottom_45">
-					<form action="admin/logo" method="POST" enctype="multipart/form-data">
-					@csrf
-						<div class="form-group">
-							<label>Shkarko logon e restorantit</label>
-							<div id="logo_picture">
-								<input name="file" type="file">
+					<div class="wrapper_indent add_bottom_45" style="margin-left: 18%">
+						<form action="admin/logo" method="POST" enctype="multipart/form-data">
+							@csrf
+							<div class="form-group">
+								<label>Shkarko fotografin e restorantit</label>
+								<div id="logo_picture">
+									<input name="file" type="file">
+								</div>
 							</div>
-						</div>
 
-						<button type="submit" class="btn_1">Ruaj ndryshimet</button>
+							<button type="submit" class="btn_1">Ruaj ndryshimet</button>
 						</form>
 					</div><!-- End wrapper_indent -->
-                    
-					<hr class="styled_2">
+				</div>
+				<hr class="styled_2">
 				</section><!-- End section 1 -->
 
 
@@ -295,6 +292,7 @@
 																<input type="text" id="ingName" name="ingredients[0][ingName]" class="form-control" placeholder="Ketchap">
 															</td>
 															<td style="width:30%">
+																Parazgjedhur?&nbsp;
 																<label>
 																	<input type="radio" id="ingDefault" name="ingredients[0][ingDefault]" checked value="1">&nbsp;Po</label>
 																<label class="margin_left">
@@ -377,6 +375,7 @@
 													<tbody>
 														<tr>
 															<td style="width:30%">
+																Parazgjedhur?&nbsp;
 																<label>
 																	<input type="radio" name="drink" @if(!$food->drink) checked @endif class="icheck" value="0">Ushqim</label>
 																<label class="margin_left">
@@ -595,6 +594,16 @@
 								<div class="form-group">
 									<label>Porosia minimale në €</label>
 									<input type="text" id="porosiamin" name="restaurant_min_order" placeholder="5" value="{{$restaurant->preferences["min_order"] ?? ''}}" class="form-control">
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="form-group">
+							     <label>Mënyra e pagesës</label>
+							     <select class="form-control" name="payment_type" id="paymentType">
+							        <option value="all" @if($restaurant->door_payment && $restaurant->card_payment) selected @endif>Të gjithë</option>
+							        <option value="door" @if($restaurant->door_payment && !$restaurant->card_payment) selected @endif>Në derë</option>
+							        <option value="card" @if(!$restaurant->door_payment && $restaurant->card_payment) selected @endif>Me kartelë</option>
+							     </select>
 								</div>
 							</div>
 						</div>
