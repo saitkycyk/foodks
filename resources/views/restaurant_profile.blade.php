@@ -168,11 +168,14 @@
                     <ul>
                         <li>Kualiteti përgjithshëm i  Restorantit
                             <div class="rating">
-                                @php $r=0; @endphp
-                                @while(round($restaurant->restaurantReviews->avg('rate')) != $r)
-                                <i class="icon_star voted"></i>
-                                @php $r++; @endphp
-                                @endwhile
+                                <?php $r=round($restaurant->restaurantReviews->avg('rate')); ?>
+                                @for($i = 1; $i <= 5; $i++)
+                                    @if($i<=$r)
+                                    <i class="icon_star voted"></i>
+                                    @else
+                                    <i class="icon_star"></i>
+                                    @endif
+                                @endfor
                             </div>
                         </li>
                     </ul>

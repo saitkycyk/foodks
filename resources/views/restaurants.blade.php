@@ -177,11 +177,16 @@
 							<div class="thumb_strip">
 								<img src="{{$restaurant->picture ? url("{$restaurant->picture}") : asset('img/default_pictures/restaurant-default.jpg')}}" alt="">
 							</div>
-
-
-{{-- 							<div class="rating">
-								<i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i>
-							</div> --}}
+							<div class="rating">
+								<?php $r=round($restaurant->restaurantReviews->avg('rate')); ?>
+								@for($i = 1; $i <= 5; $i++)
+								@if($i<=$r)
+								<i class="icon_star voted"></i>
+								@else
+								<i class="icon_star"></i>
+								@endif
+								@endfor
+							</div>
 							<h3>{{$restaurant->name}}</h3>
 							<div class="type">
 								Mexican / American
@@ -228,68 +233,12 @@
 	<!-- SPECIFIC SCRIPTS -->
 	<script  src="js/cat_nav_mobile.js"></script>
 	<script>$('#cat_nav').mobileMenu();</script>
-	<script src="http://maps.googleapis.com/maps/api/js"></script>
-	<script src="js/map.js"></script>
-	<script src="js/infobox.js"></script>
-	<script src="js/ion.rangeSlider.js"></script>
 	<script>
 
 		$('#citySelect').change(function () {
 			window.location = "/restaurants?city="+$(this).val();
 		});
 
-
-// $("#paymentType").change(function() {
-// console.log('activated');
-//     if(this.checked) {
-//         insertParam('door_payment', $(this).val());
-//     }
-// });
-
-// function insertParam(key, value) {
-//     key = encodeURIComponent(key);
-//     value = encodeURIComponent(value);
-//     console.log('activated');
-//     // kvp looks like ['key1=value1', 'key2=value2', ...]
-//     var kvp = document.location.search.substr(1).split('&');
-//     let i=0;
-
-//     for(; i<kvp.length; i++){
-//         if (kvp[i].startsWith(key + '=')) {
-//             let pair = kvp[i].split('=');
-//             pair[1] = value;
-//             kvp[i] = pair.join('=');
-//             break;
-//         }
-//     }
-
-//     if(i >= kvp.length){
-//         kvp[kvp.length] = [key,value].join('=');
-//     }
-
-//     // can return this or...
-//     let params = kvp.join('&');
-
-//     // reload page with new params
-//     document.location.search = params;
-// }
-
-
-		$(function () {
-			'use strict';
-			$("#range").ionRangeSlider({
-				hide_min_max: true,
-				keyboard: true,
-				min: 0,
-				max: 15,
-				from: 0,
-				to:5,
-				type: 'double',
-				step: 1,
-				prefix: "Km ",
-				grid: true
-			});
-		});
 	</script>
 </body>
 </html>
