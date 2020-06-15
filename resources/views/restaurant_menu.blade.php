@@ -150,7 +150,7 @@
                                             @endforeach
                                             @endif
                                             <hr>
-                                            @if(!auth()->user()->restaurant)
+                                            @if(auth()->user() && !auth()->user()->restaurant)
                                             <label>
                                                 <span style="margin-top: 4px">Nr. i porosisë</span>
                                                 <input style="width: 40%" name="quantity" type="number" value="1" min="1">
@@ -254,7 +254,7 @@
       additionalMarginTop: 80
   });
 
-    $('#showIng').click(function(){ 
+    $(document).delegate('#showIng', 'click', function(){
         var auth = {!! auth()->user() !!} 
         console.log();
         if(auth == null) {

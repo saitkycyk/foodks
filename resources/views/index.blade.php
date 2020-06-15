@@ -61,14 +61,14 @@
                 <p>
                     Zgjedhni ushqimin që dëshironi, bëni pagesën në mënyrën që dëshironi, dhe ushqimi do të vijë tek ju.
                 </p>
-                <form method="post" action="/search">
+                <form action="/restaurants" method="GET">
                     <div id="custom-search-input">
-{{--                         <div class="input-group">
-                            <input type="text" class=" search-query" placeholder="Your Address or postal code">
+                        <div class="input-group">
+                            <input type="text" class=" search-query" name="searchRestaurant" placeholder="Kërkoni restorantin këtu">
                             <span class="input-group-btn">
                                 <input type="submit" class="btn_search" value="submit">
                             </span>
-                        </div> --}}
+                        </div>
                     </div>
                 </form>
             </div><!-- End sub_content -->
