@@ -32,6 +32,7 @@
 	<link href="/css/admin.css" rel="stylesheet">
 	<link href="/css/bootstrap3-wysihtml5.min.css" rel="stylesheet">
 	<link href="/css/dropzone.css" rel="stylesheet">
+	<link rel="stylesheet" href="{{asset('assets/styles/toastr.css')}}">
 
 	<!--[if lt IE 9]>
       <script src="js/html5shiv.min.js"></script>
@@ -297,7 +298,7 @@
 <script src="/js/common_scripts_min.js"></script>
 <script src="/js/functions.js"></script>
 <script src="/assets/validate.js"></script>
-
+<script src="{{asset('assets/js/toastr.min.js')}}"></script>
 <!-- Specific scripts -->
 <script src="/js/tabs.js"></script>
 <script src="/js/app.js"></script>
@@ -310,7 +311,10 @@
 
 	Echo.channel('orders' + auth)
 	.listen('OrdersUpdated', (e) => {
-		location.reload();
+		toastr.info("Keni ndryshime të reja rreth porosive, ju lutem freskoni faqën!", "Njoftim!", {
+			timeOut: 0
+		});
+		// location.reload();
 	});
 
 	$.noConflict();

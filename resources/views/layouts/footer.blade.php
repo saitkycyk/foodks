@@ -103,7 +103,8 @@
             <input type="password" class="form-control form-white" name="password" placeholder="Fjalëkalimi">
             <div class="text-left">
               <a href="#" data-toggle="modal" data-target="#forget">Keni harruar fjalëkalimin?</a> | 
-              <a href="#" data-toggle="modal" data-target="#register">Regjistrohu</a>
+              <a href="#" data-toggle="modal" data-target="#register">Regjistrohu</a> |
+              <a href="/register/restaurant">Regjistro Restorantin</a>
           </div>
           <button type="submit" class="btn btn-submit">Kyqu</button>
       </form>

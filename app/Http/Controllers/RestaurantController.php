@@ -225,10 +225,13 @@ class RestaurantController extends Controller
 		$restaurants = User::where('restaurant', true);
 
 		if(request()->has('searchRestaurant')) {
-			$restaurant = $restaurants->where('name', 'LIKE', '%'.request('searchRestaurant').'%')->first();
+			if(request('searchRestaurant') != null) {
 
-			if($restaurant != null) {
-				return view('restaurant_menu', compact('restaurant'));
+				$restaurant = $restaurants->where('name', 'LIKE', '%'.request('searchRestaurant').'%')->first();
+
+				if($restaurant != null) {
+					return view('restaurant_menu', compact('restaurant'));
+				}
 			}
 		}
 

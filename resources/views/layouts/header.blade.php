@@ -28,12 +28,12 @@
                             <a href="javascript:void(0);" class="show-submenu">Llogaria<i class="icon-down-open-mini"></i></a>
                             <ul>
                                 @if(!auth()->user()->restaurant)
-                                <li><a href="/profile">Profili</a></li>
                                 <li><a href="/orders">Porositë</a></li>
+                                <li><a href="/profile">Profili</a></li>
                                 @elseif(auth()->user()->restaurant)
-                                <li><a href="/admin">Menaxhimi</a></li>
-                                <li><a href="{{'/restaurant/'.auth()->user()->id.'/profile'}}">Profili</a></li>
                                 <li><a href="/orders/restaurant">Porositë</a></li>
+                                <li><a href="{{'/restaurant/'.auth()->user()->id.'/profile'}}">Restoranti</a></li>
+                                <li><a href="/admin">Menaxhimi</a></li>
                                 @endif
                                 <form hidden id="logoutForm" action="/logout" method="post">
                                     @csrf
