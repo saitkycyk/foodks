@@ -11,14 +11,14 @@
                 <h3>Rreth</h3>
                 <ul>
                     <li><a href="/about">Rreth nesh</a></li>
-                    <li><a href="/contacts">Kontakti</a></li>
+                    <li><a href="/contacts">Na Kontaktoni</a></li>
                     <li><a href="#">Termat dhe kushtet</a></li>
                 </ul>
             </div>
             <div class="col-md-3 col-sm-3" id="newsletter">
                 <h3>Risitë</h3>
                 <p>
-                    Bëhu pjesë e risive tona për të marr informata te reja
+                    Abonohu në ueb faqen tonë dhe merr informatat me të rreja!
                 </p>
                 <div id="message-newsletter_2">
                 </div>
@@ -62,7 +62,7 @@
                         <li><a href="#0"><i class="icon-youtube-play"></i></a></li>
                     </ul>
                     <p>
-                        © Quick Food 2015
+                        © {{ucfirst(env('APP_NAME'))}} 2020
                     </p>
                 </div>
             </div>

@@ -57,9 +57,9 @@
     <section class="header-video">
         <div id="hero_video">
             <div id="sub_content">
-                <h1>Ushqimi juaj është vetëm disa klikime larg</h1>
+                <h1>Ke uri? Tani je vetëm disa klikime larg nga porosia jote!</h1>
                 <p>
-                    Zgjedhni ushqimin që dëshironi, bëni pagesën në mënyrën që dëshironi, dhe ushqimi do të vijë tek ju.
+                   Zgjidhni ushqimin që dëshironi, bëni pagesën me mënyrën që dëshironi dhe pranoni porosinë tek dera juaj!
                 </p>
                 <form action="/restaurants" method="GET">
                     <div id="custom-search-input">
@@ -99,7 +99,7 @@
                 <span>1</span>
                 <h3>Kërko nga adresa</h3>
                 <p>
-                    Gjej të gjitha restorantet në regjionin tuaj.
+                    Gjeni të gjitha restorantet në regjionin tuaj.
                 </p>
             </div>
         </div>
@@ -124,7 +124,7 @@
         <div class="col-md-3">
             <div class="box_home" id="four">
                 <span>4</span>
-                <h3>Dorëzim në derën tuaj</h3>
+                <h3>Prano porosinë në derë!</h3>
                 <p>
                     Jeni shumë të uritur? Nuk doni të prisni?
                 </p>
@@ -134,7 +134,7 @@
 
     <div id="delivery_time" class="hidden-xs">
         <strong><span>2</span><span>5</span></strong>
-        <h4>Minuta që zakonisht duhen për të dorëzuar porosinë!</h4>
+        <h4>Minuta deri ne pranimin e porosisë...</h4>
     </div>
 </div><!-- End container -->
 
@@ -142,9 +142,9 @@
     <div class="container margin_60">
 
         <div class="main_title">
-            <h2 class="nomargin_top">Zgjedh nga më të preferuarat</h2>
+            <h2 class="nomargin_top">Porositni ushqimin tuaj të preferuar në vetëm pak hapa</h2>
             <p>
-                Cum doctus civibus efficiantur in imperdiet deterruisset.
+                Dërgesë e shpejtë, ushqime të shijshme!
             </p>
         </div>
 
@@ -194,8 +194,8 @@
 
 <div class="high_light">
    <div class="container">
-    <h3>Zgjedh njërën nga {{$restaurants}} Restorantëve!</h3>
-    <p>Ridiculus sociosqu cursus neque cursus curae ante scelerisque vehicula.</p>
+    <h3>Zgjedh njërën nga {{$restaurants}} Restorantet të riregjistruara</h3>
+    <p>Shijoni zgjedhjen tuaj të përgatitur me mjeshtëri...</p>
     <a href="/restaurants">Shih restorantët</a>
 </div><!-- End container -->
 </div><!-- End hight_light -->
@@ -204,9 +204,9 @@
     <div class="parallax-content">
         <div class="sub_content">
             <i class="icon_mug"></i>
-            <h3>Ne po ashtu dërgojmë ushqimin edhe në vendin e punës!</h3>
+            <h3>Ne po ashtu ju dërgojmë ushqimin edhe në vendin e punës!</h3>
             <p>
-                Ridiculus sociosqu cursus neque cursus curae ante scelerisque vehicula.
+                Thoni lamtumirë urisë në vetëm pak hapa
             </p>
         </div><!-- End sub_content -->
     </div><!-- End subheader -->
@@ -224,9 +224,9 @@
     <div class="col-md-4 col-md-offset-4">
      <a class="box_work" href="/register/restaurant">
         <img src="img/submit_restaurant.jpg" width="848" height="480" alt="" class="img-responsive">
-        <h3>Regjistro Restorantin<span>Shërbej më shumë konsumatorë</span></h3>
-        <p>Lorem ipsum dolor sit amet, ut virtute fabellas vix, no pri falli eloquentiam adversarium. Ea legere labore eam. Et eum sumo ocurreret, eos ei saepe oratio omittantur, legere eligendi partiendo pro te.</p>
-        <div class="btn_1">Lexo më shumë</div>
+        <h3>Si të regjistroni biznesin tuaj?<span>Shërbej më shumë konsumatorë</span></h3>
+        <p>Ne rrisim fitimin tuaj dhe thjeshtojm procesin e porosisë suaj. Në vetëm një klikim mund të jeni pjesë e jona. Kliko "Aplikoni tani" për të plotësuar formularin dhe filloni shpërndarjen këtë javë.</p>
+        <div class="btn_1">Aplikoni tani</div>
     </a>
 </div>
 {{-- <div class="col-md-4">
