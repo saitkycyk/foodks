@@ -22,7 +22,7 @@ class CreateFoodsTable extends Migration
             $table->double('price', 8, 2);
             // $table->boolean('sale')->default(false);
             $table->text('picture')->nullable();
-            $table->json('ingredients')->nullable();
+            $table->text('ingredients')->nullable();
             $table->boolean('drink')->default(false);
             $table->timestamps();
             $table->softDeletes();

@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->boolean('restaurant')->default(false);
             $table->boolean('door_payment')->default(true);
             $table->boolean('card_payment')->default(false);
-            $table->json('preferences')->nullable();
+            $table->text('preferences')->nullable();
             $table->string('email')->unique();
             $table->string('picture')->nullable();
             $table->string('phone')->nullable();
@@ -33,6 +33,14 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('city_id')
+            ->references('id')
+            ->on('cities');
+
+            $table->foreign('road_id')
+            ->references('id')
+            ->on('roads');
         });
     }
 
