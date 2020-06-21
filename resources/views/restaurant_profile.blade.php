@@ -114,6 +114,7 @@
         <i class="icon_lifesaver"></i>
         <h4>Duhet <span>Ndihmë?</span></h4>
         <a href="#" class="phone">{{$restaurant->phone}}</a>
+        <small>{{$restaurant->preferences['workdays'] ?? ''}}</small></br>
         <small>{{$restaurant->works}}</small>
     </div>
 </div>

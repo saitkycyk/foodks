@@ -183,7 +183,7 @@
 				<hr class="styled_2">
 				<div class="row">
 					<div class="indent_title_in" style="float: left">
-						<img height="100" width="100" src="{{$restaurant->picture ? url("{$restaurant->picture}") : url('/public/logos/restaurant-default.png')}}" alt="" class="img-circle">
+						<img height="100" width="100" src="{{$restaurant->picture ? url("{$restaurant->picture}") : asset('img/default_pictures/restaurant-default.jpg')}}" alt="" class="img-circle">
 					</div>
 
 					<div class="wrapper_indent add_bottom_45" style="margin-left: 18%">
@@ -584,13 +584,13 @@
 						</div>
 
 						<div class="row">
-							<div class="col-sm-6">
+							<div class="col-sm-5">
 								<div class="form-group">
 									<label>Orari punës</label>
 									<input type="text" id="works" name="works" placeholder="10:00-22:00" value="{{$restaurant->works}}" class="form-control">
 								</div>
 							</div>
-							<div class="col-sm-2">
+							<div class="col-sm-3">
 								<div class="form-group">
 									<label>Porosia minimale në €</label>
 									<input type="text" id="porosiamin" name="restaurant_min_order" placeholder="5" value="{{$restaurant->preferences["min_order"] ?? ''}}" class="form-control">
@@ -607,6 +607,41 @@
 								</div>
 							</div>
 						</div>
+
+						<div class="row">
+							<div class="col-sm-3">
+								<div class="form-group">
+									<div class="dropup">
+	                                <div class="dropdown dropdown-options">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><label style="color: #777;text-decoration: underline;">Zgjedh ditët e punës</label></a>
+                                    <div class="dropdown-menu">
+                                            <label>
+                                                <input name="workdays[0]" type="checkbox" value="Hënë" @if(in_array('Hënë', explode(',', $restaurant->preferences['workdays'] ?? '') ?? [])) checked @endif>E Hënë
+                                            </label>
+                                            <label>
+                                                <input name="workdays[1]" type="checkbox" value="Martë" @if(in_array('Martë', explode(',', $restaurant->preferences['workdays'] ?? '') ?? [])) checked @endif>E Martë
+                                            </label>
+                                            <label>
+                                                <input name="workdays[2]" type="checkbox" value="Mërkurë" @if(in_array('Mërkurë', explode(',', $restaurant->preferences['workdays'] ?? '') ?? [])) checked @endif>E Mërkurë
+                                            </label>
+                                            <label>
+                                                <input name="workdays[3]" type="checkbox" value="Enjte" @if(in_array('Enjte', explode(',', $restaurant->preferences['workdays'] ?? '') ?? [])) checked @endif>E Enjte
+                                            </label>
+                                            <label>
+                                                <input name="workdays[4]" type="checkbox" value="Premte" @if(in_array('Premte', explode(',', $restaurant->preferences['workdays'] ?? '') ?? [])) checked @endif>E Premte
+                                            </label>
+                                            <label>
+                                                <input name="workdays[5]" type="checkbox" value="Shtunë" @if(in_array('Shtunë', explode(',', $restaurant->preferences['workdays'] ?? '') ?? [])) checked @endif>E Shtunë
+                                            </label>
+                                            <label>
+                                                <input name="workdays[6]" type="checkbox" value="Diel" @if(in_array('Diel', explode(',', $restaurant->preferences['workdays'] ?? '') ?? [])) checked @endif>E Diel
+                                            </label>
+                                    </div>
+                                </div>
+                                </div>
+								</div>
+							</div>
+							</div>
 							<button type="submit" class="btn_1">Ruaj ndryshimet</button>
 						</form>
 					</div><!-- End wrapper_indent -->

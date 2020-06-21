@@ -20,6 +20,11 @@ class RestaurantController extends Controller
 	{
 		$this->authorize('isRestaurant', User::class);
 
+		$request->validate([
+			'payment_type' => 'required|in:door,card,all',
+			'workdays.*' => 'nullable|in:Hënë,Martë,Mërkurë,Enjte,Premte,Shtunë,Diel'
+		]);
+
 		$data['works'] = $request->works;
 		$preferences = auth()->user()->preferences;
 
@@ -28,13 +33,9 @@ class RestaurantController extends Controller
 		$preferences['lastName'] = $request->lastName;
 		$preferences['restaurantZip'] = $request->restaurantZip;
 		$preferences['restaurantWeb'] = $request->restaurantWeb;
+		$preferences['workdays'] = $request->workdays ? implode(',', $request->workdays) : null;
 
 		$data['preferences'] = $preferences;
-
-		$request->validate([
-			'payment_type' => 'required|in:door,card,all'
-		]);
-
 
 		if($request->payment_type == 'door') {
 			$data['door_payment'] = 1;
