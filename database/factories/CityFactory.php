@@ -20,7 +20,6 @@ use Illuminate\Support\Str;
 $factory->define(City::class, function (Faker $faker) {
     return [
         'name' => $faker->city,
-        'location' => $faker->address,
         'created_at' => now()
     ];
 });

@@ -19,7 +19,7 @@
                         <li><a href="/">Kryefaqja</a></li>
                         <li><a href="/restaurants">Restorantët</a></li>
                         <li><a href="/about">Rreth nesh</a></li>
-                        <li><a href="/contacts">Kontakti</a></li>
+                        <li id="app"><a href="/contacts">Kontakti</a></li>
                         @guest
                         <li><a href="#" data-toggle="modal" data-target="#login_2" id="login">Kyqu</a></li>
                         @endguest
@@ -32,7 +32,7 @@
                                 <li><a href="/profile">Profili</a></li>
                                 @elseif(auth()->user()->restaurant)
                                 <li><a href="/orders/restaurant">Porositë</a></li>
-                                <li><a href="{{'/restaurant/'.auth()->user()->id.'/profile'}}">Restoranti</a></li>
+                                <li><a href="{{'/restaurant/'.auth()->user()->id.'/profile'}}">Profili</a></li>
                                 <li><a href="/admin">Menaxhimi</a></li>
                                 @endif
                                 <form hidden id="logoutForm" action="/logout" method="post">
@@ -47,4 +47,23 @@
             </nav>
         </div><!-- End row -->
     </div><!-- End container -->
+
+
+    <script src="/js/jquery-2.2.4.min.js"></script>
+    <link rel="stylesheet" href="{{asset('assets/styles/toastr.css')}}">
+    <script src="{{asset('assets/js/toastr.min.js')}}"></script>
+    <script src="/js/app.js"></script>
+    <script type="text/javascript">
+
+        var auth = {!! auth()->user()->id !!};
+        Echo.channel('orders' + auth)
+        .listen('OrdersUpdated', (e) => {
+            toastr.info("Keni ndryshime të reja në porosi, ju lutem freskoni faqën!", "Njoftim!", {
+                timeOut: 0
+            });
+        });
+
+        $.noConflict();
+    </script>
+
 </header>

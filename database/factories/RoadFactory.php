@@ -23,7 +23,6 @@ $factory->define(Road::class, function (Faker $faker) {
         'city_id' => City::inRandomOrder()->first()->id,
         'road_nr' => rand(1,500),
         'name' => $faker->streetName,
-        'location' => $faker->streetAddress,
         'created_at' => now()
     ];
 });

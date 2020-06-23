@@ -32,7 +32,6 @@
 	<link href="/css/admin.css" rel="stylesheet">
 	<link href="/css/bootstrap3-wysihtml5.min.css" rel="stylesheet">
 	<link href="/css/dropzone.css" rel="stylesheet">
-	<link rel="stylesheet" href="{{asset('assets/styles/toastr.css')}}">
 
 	<!--[if lt IE 9]>
       <script src="js/html5shiv.min.js"></script>
@@ -107,11 +106,13 @@
 				<div class="wrapper_indent">
 
 					@foreach($orderGroups->sortByDesc('updated_at') as $orderGroup)
-					<caption><h1>Porosia {{$orderGroup->id}}</h1></caption>
+					<caption><h1>Porosia {{$orderGroup->id}}</h1><strong>{{$orderGroup->user->name.' '.$orderGroup->user->lastname}}</strong></caption>
 					<table class="table table-bordered" style="border:2px solid #c5c5c5;">
 						<thead>
 							<tr>
-								<th>Emri Klientit</th>
+								<th>Emri Konsumatorit</th>
+								<th>Lokacioni</th>
+								<th>Nr.Tel</th>
 								<th>Komenti i porosisë</th>
 								<th>Mënyra e pagesës</th>
 								<th>Statusi</th>
@@ -124,13 +125,15 @@
 						<tbody>
 							<tr>
 								<td>{{$orderGroup->user->name.' '.$orderGroup->user->lastname}}</td>
+								<td title="{{'Rr. '.$orderGroup->user->road->name.', Adr. '.$orderGroup->user->address}}">{{'Rr. '.$orderGroup->user->road->name.', Adr. '.$orderGroup->user->address}}</td>
+								<td style="width: 100px" title="{{$orderGroup->user->phone}}">{{$orderGroup->user->phone}}</td>
 								<td title="{{$orderGroup->note}}">{{$orderGroup->note}}</td>
 								<td>{{$orderGroup->payment_type == 'door_payment' ? 'Në derë' : 'Me kartelë'}}</td>
 								<td @if($orderGroup->status == 'pending') style="color: orange" @else style="color: green" @endif>{{ucfirst($orderGroup->status)}}</td>
 								<td title="{{$orderGroup->created_at->diffForHumans()}}">{{$orderGroup->created_at}}</td>
 								<td title="{{$orderGroup->updated_at->diffForHumans()}}">{{$orderGroup->updated_at}}</td>
-								<th>€ {{$orderGroup->orders->sum('price')}}</th>
-								<td>
+								<th style="width: 80px">€ {{$orderGroup->orders->sum('price')}}</th>
+								<td style="width: 150px">
 									<form action="{{route('changeOrderGroupStatus', ['orderGroup' => $orderGroup->id])}}" method="POST">
 										@csrf
 										@method('PATCH')
@@ -145,7 +148,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td colspan="8">
+								<td colspan="10">
 									<hr>
 									@if(!$orderGroup->orders->isEmpty())
 									<table class="table table-striped">
@@ -205,7 +208,9 @@
 					<table class="table table-bordered" style="border:2px solid #c5c5c5;">
 						<thead>
 							<tr>
-								<th>Emri Klientit</th>
+								<th>Emri Konsumatorit</th>
+								<th>Lokacioni</th>
+								<th>Nr.Tel</th>
 								<th>Komenti i porosisë</th>
 								<th>Mënyra e pagesës</th>
 								<th>Statusi</th>
@@ -217,15 +222,17 @@
 						<tbody>
 							<tr>
 								<td>{{$oldOrderGroup->restaurant->name}}</td>
+								<td style="overflow: hidden; text-overflow: ellipsis" title="{{'Rr.'.$oldOrderGroup->user->road->name.', Adr.'.$oldOrderGroup->user->address}}">{{'Rr.'.$oldOrderGroup->user->road->name.', Adr.'.$oldOrderGroup->user->address}}</td>
+								<td style="width: 100px" title="{{$oldOrderGroup->user->phone}}">{{$oldOrderGroup->user->phone}}</td>
 								<td title="{{$oldOrderGroup->note}}">{{$oldOrderGroup->note}}</td>
 								<td>{{$oldOrderGroup->payment_type == 'door_payment' ? 'Në derë' : 'Me kartelë'}}</td>
 								<td @if($oldOrderGroup->status == 'canceled') style="color: red" @else style="color: green" @endif>{{ucfirst($oldOrderGroup->status)}}</td>
 								<td title="{{$oldOrderGroup->created_at->diffForHumans()}}">{{$oldOrderGroup->created_at}}</td>
 								<td title="{{$oldOrderGroup->updated_at->diffForHumans()}}">{{$oldOrderGroup->updated_at}}</td>
-								<th>€ {{$oldOrderGroup->orders->sum('price')}}</th>
+								<td style="width: 80px">€ {{$oldOrderGroup->orders->sum('price')}}</td>
 							</tr>
 							<tr>
-								<td colspan="8">
+								<td colspan="10">
 									<hr>
 									@if(!$oldOrderGroup->orders->isEmpty())
 									<table class="table table-striped">
@@ -298,27 +305,12 @@
 <script src="/js/common_scripts_min.js"></script>
 <script src="/js/functions.js"></script>
 <script src="/assets/validate.js"></script>
-<script src="{{asset('assets/js/toastr.min.js')}}"></script>
 <!-- Specific scripts -->
 <script src="/js/tabs.js"></script>
-<script src="/js/app.js"></script>
 <script src="/js/bootstrap3-wysihtml5.min.js"></script>
 <script type="text/javascript">
 	new CBPFWTabs(document.getElementById('tabs'));
 	$('.wysihtml5').wysihtml5({});
-
-	var auth = {!! auth()->user()->id !!};
-
-	Echo.channel('orders' + auth)
-	.listen('OrdersUpdated', (e) => {
-		toastr.info("Keni ndryshime të reja rreth porosive, ju lutem freskoni faqën!", "Njoftim!", {
-			timeOut: 0
-		});
-		// location.reload();
-	});
-
-	$.noConflict();
-
 </script>
 
 <script src="/js/dropzone.min.js"></script>

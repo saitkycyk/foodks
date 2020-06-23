@@ -18,7 +18,6 @@ class CreateRoadsTable extends Migration
             $table->unsignedBigInteger('city_id');
             $table->string('road_nr');
             $table->string('name');
-            $table->string('location');
             $table->timestamps();
             $table->softDeletes();
 
