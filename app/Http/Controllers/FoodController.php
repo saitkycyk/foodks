@@ -40,7 +40,7 @@ class FoodController extends Controller
         empty($ingredients) ? $food->ingredients = null : $food->ingredients = json_encode($ingredients);
 
         $path = $request->file('picture')->storeAs('public/foods', 'Food'.$food->id.'.jpg');
-
+        $path = str_replace('public', 'storage', $path);
         $food->picture = $path;
         $food->save();
 
@@ -82,6 +82,7 @@ class FoodController extends Controller
         if($request->picture != null){
 
             $path = $request->file('picture')->storeAs('public/foods', 'Food'.$food->id.'.jpg');
+            $path = str_replace('public', 'storage', $path);
             $food->picture = $path;
         }
         $food->save();
@@ -95,8 +96,9 @@ class FoodController extends Controller
         $this->authorize('isFoodOwner', $food);
 
         $food->delete();
-        Storage::delete($food->picture);
 
+        $path = str_replace('storage', 'public', $food->picture);
+        Storage::delete($path);
         $food->picture = null;
         $food->save();
 

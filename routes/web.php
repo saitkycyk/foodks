@@ -28,6 +28,7 @@ Route::middleware('auth:web')->group(function () {
 	//user
 	Route::get('/profile', 'UserController@profilePage')->name('userProfile');
 	Route::post('/profile/info', 'UserController@changeInfo')->name('changeUserInfo');
+	Route::delete('/profile/delete', 'UserController@deleteUser')->name('deleteUser');
 
 	//restaurant
 	Route::get('/admin', 'RestaurantController@adminPage')->name('adminPage');

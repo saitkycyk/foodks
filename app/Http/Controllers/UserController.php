@@ -32,4 +32,12 @@ class UserController extends Controller
 		return back();
 	}
 
+
+	public function deleteUser()
+	{
+		auth()->user()->delete();
+
+		return redirect()->route('index');
+	}
+
 }

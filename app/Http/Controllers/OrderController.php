@@ -40,7 +40,6 @@ class OrderController extends Controller
 	{
 		$this->authorize('isRestaurant', User::class);
 
-		// $orderGroups = Order_Group::where('restaurant_id', auth()->user()->id)->where('status', 'pending')->with('orders')->paginate(1);
 		$restaurantOrders = auth()->user()->restaurantOrderGroups->load('orders');
 
 		$orderGroups = $restaurantOrders->filter(function ($value, $key) {

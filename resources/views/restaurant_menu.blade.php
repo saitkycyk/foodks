@@ -57,7 +57,7 @@
 <section class="parallax-window" data-parallax="scroll" data-image-src="/img/sub_header_1.jpg" data-natural-width="1400" data-natural-height="470">
     <div id="subheader">
         <div id="sub_content">
-            <div id="thumb"><img src="{{$restaurant->picture}}" alt=""></div>
+            <div id="thumb"><img src="{{$restaurant->picture ? url("{$restaurant->picture}") : asset('img/default_pictures/restaurant-default.png')}}" alt=""></div>
             <div class="rating">(<small><a href="/restaurant/{{$restaurant->id}}/profile">{{$restaurant->restaurantReviews->count()}} reviews</a></small>)</div>
             <h1><a href="{{route('restaurant-profile', ['id' => $restaurant->id])}}">{{$restaurant->name}}</a></h1>
             {{-- <div><em>Mexican / American</em></div> --}}
@@ -126,7 +126,7 @@
                         @foreach($category as $food)
                         <tr>
                             <td>
-                                <figure class="thumb_menu_list"><img src="{{$food->picture ? url("{$food->picture}") : asset('img/default_pictures/food-default.png')}}" alt="thumb"></figure>
+                                <figure class="thumb_menu_list"><img src="{{$food->picture ? url("/{$food->picture}") : asset('img/default_pictures/food-default.png')}}" alt="thumb"></figure>
                                 <h5>{{$food->name}}</h5>
                                 <p>
                                     {{$food->description}}

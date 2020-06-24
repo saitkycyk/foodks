@@ -233,6 +233,9 @@
 							<div class="strip_menu_items">
 								<div class="row">
 									<div class="col-sm-3">
+										<div class="indent_title_in" style="float: left">
+											<img height="100" width="100" src="{{asset('img/default_pictures/food-default.png')}}" alt="" class="img-circle">
+										</div>
 										<div class="form-group">
 											<label>Shkarko logon e ushqimit</label>
 											<div id="logo_picture">
@@ -341,6 +344,9 @@
 							<div class="strip_menu_items">
 								<div class="row">
 									<div class="col-sm-3">
+										<div class="indent_title_in" style="float: left">
+											<img height="100" width="100" src="{{$food->picture ? url("{$food->picture}") : asset('img/default_pictures/food-default.png')}}" alt="" class="img-circle">
+										</div>
 										<div class="form-group">
 											<label>Ndrysho logon e ushqimit</label>
 											<div id="logo_picture">

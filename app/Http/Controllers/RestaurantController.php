@@ -133,7 +133,7 @@ class RestaurantController extends Controller
 
 		$path = $request->file('file')->storeAs('public/logos', 'AccountLogo'.auth()->user()->id.'.jpg');
 
-		auth()->user()->update(['picture' => $path]);
+		auth()->user()->update(['picture' => str_replace('public', 'storage', $path)]);
 
 		return back();
 	}

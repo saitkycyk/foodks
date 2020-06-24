@@ -48,7 +48,7 @@
         </div><!-- End row -->
     </div><!-- End container -->
 
-
+    @auth
     <script src="/js/jquery-2.2.4.min.js"></script>
     <link rel="stylesheet" href="{{asset('assets/styles/toastr.css')}}">
     <script src="{{asset('assets/js/toastr.min.js')}}"></script>
@@ -65,5 +65,5 @@
 
         $.noConflict();
     </script>
-
+    @endauth
 </header>
