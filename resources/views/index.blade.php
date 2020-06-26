@@ -8,7 +8,7 @@
     <meta name="keywords" content="pizza, delivery food, fast food, sushi, take away, chinese, italian food">
     <meta name="description" content="">
     <meta name="author" content="Ansonika">
-    <title>QuickFood - Quality delivery or take away food</title>
+    
 
     <!-- Favicons-->
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
@@ -194,7 +194,7 @@
 
 <div class="high_light">
    <div class="container">
-    <h3>Zgjedh njërën nga {{$restaurants}} Restorantet të riregjistruara</h3>
+    <h3>Zgjedh njërën nga {{$restaurants}} Restorantet të regjistruara</h3>
     <p>Shijoni zgjedhjen tuaj të përgatitur me mjeshtëri...</p>
     <a href="/restaurants">Shih restorantët</a>
 </div><!-- End container -->

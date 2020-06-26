@@ -9,7 +9,6 @@
 	<meta name="keywords" content="pizza, delivery food, fast food, sushi, take away, chinese, italian food">
 	<meta name="description" content="">
 	<meta name="author" content="Ansonika">
-	<title>QuickFood - Quality delivery or take away food</title>
 
 	<!-- Favicons-->
 	<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
@@ -62,8 +61,8 @@
 	<section class="parallax-window" id="short" data-parallax="scroll" data-image-src="/img/sub_header_cart.jpg" data-natural-width="1400" data-natural-height="350">
 		<div id="subheader">
 			<div id="sub_content">
-				<h1>Admin section</h1>
-				<p>Qui debitis meliore ex, tollit debitis conclusionemque te eos.</p>
+				<h1>Seksioni i Administratorit</h1>
+				<p>Këtu mund të ndryshoni informacionet rreth restorantit tuaj, fjalëkalimin, emailin, dhe mund të menaxhoni ushqimet e restorantit.</p>
 				<p></p>
 			</div><!-- End sub_content -->
 		</div><!-- End subheader -->
@@ -237,7 +236,7 @@
 											<img height="100" width="100" src="{{asset('img/default_pictures/food-default.png')}}" alt="" class="img-circle">
 										</div>
 										<div class="form-group">
-											<label>Shkarko logon e ushqimit</label>
+											<label>Shkarko një fotografi të ushqimit</label>
 											<div id="logo_picture">
 												<input name="picture" type="file">
 											</div>
@@ -348,7 +347,7 @@
 											<img height="100" width="100" src="{{$food->picture ? url("{$food->picture}") : asset('img/default_pictures/food-default.png')}}" alt="" class="img-circle">
 										</div>
 										<div class="form-group">
-											<label>Ndrysho logon e ushqimit</label>
+											<label>Ndrysho fotografinë e ushqimit</label>
 											<div id="logo_picture">
 												<input name="picture" type="file">
 											</div>

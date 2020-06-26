@@ -8,7 +8,6 @@
 	<meta name="keywords" content="pizza, delivery food, fast food, sushi, take away, chinese, italian food">
 	<meta name="description" content="">
 	<meta name="author" content="Ansonika">
-	<title>QuickFood - Quality delivery or take away food</title>
 
 	<!-- Favicons-->
 	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
@@ -109,12 +108,9 @@
 			</div>
 			<div class="col-md-6 nopadding">
 				<div class="features-content">
-					<h3>"Ex vero mediocrem"</h3>
+					<h3>Kush mund ta përdorë Hajatedera.com?</h3>
 					<p>
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a lorem quis neque interdum consequat ut sed sem. Duis quis tempor nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus.
-					</p>
-					<p>
-						Per ea erant aeque corpora, an agam tibique nec. At recusabo expetendis vim. Tractatos principes mel te, dolor solet viderer usu ad.
+						Hajatedera është mënyra më e lehtë për një klient për të porositur ushqimin online dhe një mundësi e shkëlqyer për restorantin, për të rritur të ardhurat dhe klientët.
 					</p>
 				</div>
 			</div>

@@ -8,7 +8,6 @@
     <meta name="keywords" content="pizza, delivery food, fast food, sushi, take away, chinese, italian food">
     <meta name="description" content="">
     <meta name="author" content="Ansonika">
-    <title>QuickFood - Quality delivery or take away food</title>
 
     <!-- Favicons-->
     <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
@@ -103,7 +102,7 @@
                     <i class="icon_check_alt2"></i>
                     <h3>Faleminderit!</h3>
                     <p>
-                        Porosia juaj është konfirmuar me sukses dhe është dërguar në restorant, mund të kontrolloni statusin e porosisë nga menyja e 'Shiqo Porositë'., 
+                        Porosia juaj është konfirmuar me sukses dhe është dërguar në restorant, gjendjen e porosisë mund të kontrolloni nga <a href="/orders">Menaxhimi i Porosive</a>. 
                     </p>
                 </div>
                 <h4>Përmbledhje</h4>

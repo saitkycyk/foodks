@@ -8,7 +8,6 @@
     <meta name="keywords" content="pizza, delivery food, fast food, sushi, take away, chinese, italian food">
     <meta name="description" content="">
     <meta name="author" content="Ansonika">
-    <title>QuickFood - Quality delivery or take away food</title>
 
     <!-- Favicons-->
     <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
@@ -56,7 +55,7 @@
         <div id="subheader">
             <div id="sub_content">
                 <h1>Punoni me ne</h1>
-                <p>Qui debitis meliore ex, tollit debitis conclusionemque te eos.</p>
+                <p>Akoma nuk keni një llogari tuajën? Çfarë po prisni ende?!</p>
                 <p></p>
             </div><!-- End sub_content -->
         </div><!-- End subheader -->
@@ -78,7 +77,7 @@
         <div class="main_title margin_mobile">
             <h2 class="nomargin_top">Rrit numrin e klientëve</h2>
             <p>
-                Cum doctus civibus efficiantur in imperdiet deterruisset.
+                Mjafton që të regjistroheni për t'u bërë pjesë e listës sonë të restoranteve. Do të përfitoni shumë!
             </p>
         </div>
         <div class="row">
@@ -87,7 +86,7 @@
                     <i class="icon_datareport"></i>
                     <h3><span>Rrit</span> shitjet</h3>
                     <p>
-                        Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex, appareat similique an usu.
+                        Hajatedera.com është mënyra më e lehtë për një klient për të porositur ushqimin online dhe një mundësi e shkëlqyer për restorantin, për të rritur të ardhurat dhe klientët.
                     </p>
                 </div>
             </div>
@@ -96,7 +95,7 @@
                     <i class="icon_chat_alt"></i>
                     <h3><span>24h</span> online ndihmë</h3>
                     <p>
-                        Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex, appareat similique an usu.
+                        Në vetëm pak hapa porositni ushqimin tuaj të preferuar në adresën që dëshironi. Stafi i hajatedera do të kujdeset për ju kur ju keni nevojë! Parashtroni pyetjet tuaja 24/7, stafi ynë do t’ju përgjigjet në vetëm pak minuta!
                     </p>
                 </div>
             </div>
@@ -107,7 +106,7 @@
                     <i class="icon_bag_alt"></i>
                     <h3><span>Sistem specifike për</span> transport</h3>
                     <p>
-                        Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex, appareat similique an usu.
+                        Hajatedera ju mundëson te ndiqni porosinë tuaj në çdo moment përmes sistemit tracking, ku ju mund të mësoni se për sa minuta do t’ju arrij porosia juaj në shtëpi!
                     </p>
                 </div>
             </div>
@@ -116,7 +115,7 @@
                     <i class="icon_mobile"></i>
                     <h3>Mbështetje<span> mobile</span></h3>
                     <p>
-                        Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex, appareat similique an usu.
+                        Nuk ka pasur kurrë një mënyrë më të lehtë për të bërë një porosi online. Me hajatedera.com ju kurrë nuk do të jeni të uritur. Shkarkoni aplikacionin hajatedera.com ne mobilin tuaj! 
                     </p>
                 </div>
             </div>
@@ -127,7 +126,7 @@
                     <i class="icon_wallet"></i>
                     <h3>Pagesë<span> kesh</span></h3>
                     <p>
-                        Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex, appareat similique an usu.
+                        Hajatedera.com ju mundëson qe porosinë ta paguani me para te gatshme ne momentin qe pranoni porosinë tek dera juaj.
                     </p>
                 </div>
             </div>
@@ -136,7 +135,7 @@
                     <i class="icon_creditcard"></i>
                     <h3>Pagesë me<span> kartelë</span></h3>
                     <p>
-                        Lorem ipsum dolor sit amet, vix erat audiam ei. Cum doctus civibus efficiantur in. Nec id tempor imperdiet deterruisset, doctus volumus explicari qui ex, appareat similique an usu.
+                        Ju mund te bëni pagesat edhe përmes kartelës bankare. Nëpërmjet sistemit 3D Secure pagesa juaj do të bëhet shpejtë, lehtë dhe totalisht e sigurt!
                     </p>
                 </div>
             </div>

@@ -300,7 +300,7 @@ header{
 	z-index:99999;
 }
 header.sticky{
-	background-color: #ac0000;
+	background-color: rgb(172, 0, 0, 0.7);
 	-webkit-box-shadow: 0px 2px 10px -2px rgba(0, 0, 0, 0.41);
 	-moz-box-shadow:0px 2px 10px -2px rgba(0, 0, 0, 0.41);
 	box-shadow:0px 2px 10px -2px rgba(0, 0, 0, 0.41);
@@ -657,7 +657,7 @@ video {
 }
 .high_light{
 	padding:60px 0 60px 0;
-	background:#85c99d;
+	background:#ac0000;
 	color:#fff;
 	font-size:16px;
 }

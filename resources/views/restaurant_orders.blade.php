@@ -11,8 +11,6 @@
 	<meta name="author" content="Ansonika">
 	<meta name="csrf-token" content="{{csrf_token()}}">
 
-	<title>QuickFood - Quality delivery or take away food</title>
-
 	<!-- Favicons-->
 	<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
 	<link rel="apple-touch-icon" type="image/x-icon" href="/img/apple-touch-icon-57x57-precomposed.png">

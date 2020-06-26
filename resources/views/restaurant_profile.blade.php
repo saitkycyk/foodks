@@ -8,7 +8,6 @@
     <meta name="keywords" content="pizza, delivery food, fast food, sushi, take away, chinese, italian food">
     <meta name="description" content="">
     <meta name="author" content="Ansonika">
-    <title>QuickFood - Quality delivery or take away food</title>
 
     <!-- Favicons-->
     <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
@@ -68,7 +67,7 @@
     <div id="subheader">
         <div id="sub_content">
             <div id="thumb"><img src="{{$restaurant->picture ? url("{$restaurant->picture}") : asset('img/default_pictures/restaurant-default.jpg')}}" ></div>
-            <div class="rating">(<small>{{$restaurant->restaurantReviews->count()}} reviews</small>)</div>
+            <div class="rating">(<small>{{$restaurant->restaurantReviews->count()}} vlerësim/e</small>)</div>
             <h1>{{$restaurant->name}}</h1>
             {{-- <div><em>Mexican / American</em></div> --}}
             <div><i class="icon_pin"></i>{{$restaurant->address}}{{-- <strong>Delivery charge:</strong> $10, free over $15. --}}</div>
@@ -151,7 +150,7 @@
         </p>
         <div id="summary_review">
             <div id="general_rating">
-                {{$restaurant->restaurantReviews->count()}} Reviews
+                {{$restaurant->restaurantReviews->count()}} Vlerësim/e
                 <div class="rating">
                 </div>
             </div>
@@ -167,7 +166,7 @@
             <div class="row" id="rating_summary">
                 <div class="col-md-12">
                     <ul>
-                        <li>Kualiteti përgjithshëm i  Restorantit
+                        <li>Kualiteti përgjithshëm i Restorantit
                             <div class="rating">
                                 <?php $r=round($restaurant->restaurantReviews->avg('rate')); ?>
                                 @for($i = 1; $i <= 5; $i++)

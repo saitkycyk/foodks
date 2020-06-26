@@ -11,7 +11,7 @@
                 <h3>Rreth</h3>
                 <ul>
                     <li><a href="/about">Rreth nesh</a></li>
-                    <li><a href="/contacts">Na Kontaktoni</a></li>
+                    <li><a href="/contacts">Na kontaktoni</a></li>
                     <li><a href="#">Termat dhe kushtet</a></li>
                 </ul>
             </div>
@@ -145,7 +145,7 @@
             <div class="checkbox-holder text-left">
               <div class="checkbox">
                  <input type="checkbox" value="accept_2" id="check_2" name="check_2" />
-                 <label for="check_2"><span>Unë e pranoj<strong>Termat &amp; Kushtet</strong></span></label>
+                 <label for="check_2"><span>Unë e pranoj<strong>&nbsp;Termat &amp; Kushtet</strong></span></label>
              </div>
          </div>
          <button type="submit" class="btn btn-submit">Regjistrohu</button>
