@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Symfony\Component\Console\Input\Input;
 
 class RestaurantController extends Controller
 {
@@ -221,14 +222,14 @@ class RestaurantController extends Controller
 		return back();
 	}
 
-	public function restaurantsPage()
+	public function restaurantsPage(Request $request)
 	{
-		$restaurants = User::where('restaurant', true);
+		$restaurants = User::where('restaurant', true)->get();
 
-		if(request()->has('searchRestaurant')) {
+		if($request->has('searchRestaurant')) {
 			if(request('searchRestaurant') != null) {
 
-				$restaurant = $restaurants->where('name', 'LIKE', '%'.request('searchRestaurant').'%')->first();
+				$restaurant = User::where('restaurant', true)->where('name', 'LIKE', '%'.request('searchRestaurant').'%')->first();
 
 				if($restaurant != null) {
 					return view('restaurant_menu', compact('restaurant'));
@@ -236,29 +237,37 @@ class RestaurantController extends Controller
 			}
 		}
 
-		if(request()->has('city')) {
+		if($request->rating) {
+			$ratings = [];
 
-			if(request()->city == 'all') {
-				$restaurants = $restaurants->paginate(10);
-
-				return view('restaurants', compact('restaurants'));
+			foreach($request->rating as $key => $rate) {
+				array_push($ratings, $key);
 			}
 
-			$restaurants = $restaurants->where('city_id', request('city'))->paginate(10);
+			$restaurants = $restaurants->filter(function ($item, $key) use ($ratings){
 
-			return view('restaurants', compact('restaurants'));
+				return in_array((int)restaurantRating($item), $ratings);
+			});
+		}
+
+		if($request->has('city')) {
+
+			if($request->city != 'all') {
+
+				$restaurants = $restaurants->where('city_id', $request->city);
+			}
 
 		} else {
-			if(auth()->user() != null) {
-				$restaurants = $restaurants->where('city_id', auth()->user()->id);
-
-				return redirect('/restaurants?city='.auth()->user()->city_id)->with('restaurants');
+			if(auth()->user()) {
+				$restaurants = $restaurants->where('city_id', auth()->user()->city_id);
 			}
 		}
 
-		$restaurants = $restaurants->paginate(10);
-		return redirect('/restaurants?city=all')->with('restaurants');
+		$restaurants = paginateCollection($restaurants->values(), 10);
+
+		return view('restaurants', compact('restaurants'));
 	}
+
 
 	public function denyOrder(Order_Group $order_group)
 	{

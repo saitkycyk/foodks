@@ -55,10 +55,15 @@
 <!-- End Header =============================================== -->
 
 <!-- SubHeader =============================================== -->
+<?php if(auth()->user()) {
+	request('city') ?? request()->merge(['city' => auth()->user()->city_id]);
+} else {
+	request('city') ?? request()->merge(['city' => 'all']);
+} ?>
 <section class="parallax-window" id="short" data-parallax="scroll" data-image-src="img/sub_header_short.jpg" data-natural-width="1400" data-natural-height="350">
 	<div id="subheader">
 		<div id="sub_content">
-			<h1>{{$restaurants->count()}} rezultat/e për zonën tuaj</h1>
+			<h1>{{$restaurants->total()}} rezultat/e</h1>
 			<div><i class="icon_pin"></i>@if(request()->has('city')) {{\App\City::find(request('city'))->name ?? 'Të gjithë'}} @endif</div>
 		</div><!-- End sub_content -->
 	</div><!-- End subheader -->
@@ -106,31 +111,35 @@
 						</ul>
 					</div> --}}
 					<div class="filter_type">
+						{{dump(request('city'))}}
 						<h6>Qyteti</h6>
-						<select id="citySelect" class="form-control" name="city_id" id="city">
-							<option value="all" >Të gjitha</option>
-							@foreach(\App\City::all() as $city)
-							<option value="{{$city->id}}" @if(request('city') == $city->id)  selected="true" @endif >{{$city->name}}</option>
-							@endforeach
-						</select>
-{{-- 						<h6>Vlerësimi</h6>
-						<ul>
-							<li><label><input type="checkbox" class="icheck"><span class="rating">
-								<i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i>
-							</span></label></li>
-							<li><label><input type="checkbox" class="icheck"><span class="rating">
-								<i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i>
-							</span></label></li>
-							<li><label><input type="checkbox" class="icheck"><span class="rating">
-								<i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i><i class="icon_star"></i>
-							</span></label></li>
-							<li><label><input type="checkbox" class="icheck"><span class="rating">
-								<i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i>
-							</span></label></li>
-							<li><label><input type="checkbox" class="icheck"><span class="rating">
-								<i class="icon_star voted"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i>
-							</span></label></li>
-						</ul> --}}
+						<form action="/restaurants" method="GET">
+							<select id="citySelect" class="form-control" name="city" id="city">
+								<option value="all" >Të gjitha</option>
+								@foreach(\App\City::all() as $city)
+								<option value="{{$city->id}}" @if(request('city') == $city->id)  selected="true" @endif >{{$city->name}}</option>
+								@endforeach
+							</select>
+							<h6>Vlerësimi</h6>
+							<ul>
+								<li><label><input type="checkbox" name="rating[5]" class="icheck"><span class="rating">
+									<i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i>
+								</span></label></li>
+								<li><label><input type="checkbox" name="rating[4]" class="icheck"><span class="rating">
+									<i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i>
+								</span></label></li>
+								<li><label><input type="checkbox" name="rating[3]" class="icheck"><span class="rating">
+									<i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i><i class="icon_star"></i>
+								</span></label></li>
+								<li><label><input type="checkbox" name="rating[2]" class="icheck"><span class="rating">
+									<i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i>
+								</span></label></li>
+								<li><label><input type="checkbox" name="rating[1]" class="icheck"><span class="rating">
+									<i class="icon_star voted"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i><i class="icon_star"></i>
+								</span></label></li>
+							</ul>
+							<a class="btn_map collapsed" href="javascript:;" onclick="parentNode.submit();">Filtro</a>
+						</form>
 					</div>
 {{-- 					<div class="filter_type">
 						<h6>Mënyra e pagesës</h6>
@@ -203,7 +212,7 @@
 				@endforeach
 				@if($restaurants->count() % 2 != 0) </div> @endif
 
-				{{$restaurants->links()}}          
+				{{$restaurants->appends(request()->input())->links()}}          
 			</div><!-- End col-md-9-->
 
 		</div><!-- End row -->
@@ -234,9 +243,9 @@
 	<script>$('#cat_nav').mobileMenu();</script>
 	<script>
 
-		$('#citySelect').change(function () {
-			window.location = "/restaurants?city="+$(this).val();
-		});
+		//$('#citySelect').change(function () {
+		//	window.location = "/restaurants?city="+$(this).val();
+		//});
 
 	</script>
 </body>
