@@ -28,10 +28,46 @@ $factory->define(User::class, function (Faker $faker) {
         'address' => $faker->secondaryAddress,
         'city_id' => City::inRandomOrder()->first()->id,
         'road_id' => Road::inRandomOrder()->first()->id,
-        'works' => "10:00-20:00",
         'preferences' => [
             'min_order' => '5',
-            'description' => $faker->text
+            'description' => $faker->text,
+            // 'workdays' => [
+            //     'monday' => [
+            //         'from' => '08:00',
+            //         'to' => '22:00',
+            //         'enabled' => 'on'
+            //     ],
+            //     'tuesday' => [
+            //         'from' => '08:00',
+            //         'to' => '22:00',
+            //         'enabled' => 'on'
+            //     ], 
+            //     'wednesday' => [
+            //         'from' => '08:00',
+            //         'to' => '22:00',
+            //         'enabled' => 'on'
+            //     ], 
+            //     'thursday' => [
+            //         'from' => '08:00',
+            //         'to' => '22:00',
+            //         'enabled' => 'on'
+            //     ], 
+            //     'friday' => [
+            //         'from' => '08:00',
+            //         'to' => '22:00',
+            //         'enabled' => 'on'
+            //     ], 
+            //     'saturday' => [
+            //         'from' => '08:00',
+            //         'to' => '24:00',
+            //         'enabled' => 'on'
+            //     ], 
+            //     'sunday' => [
+            //         'from' => '08:00',
+            //         'to' => '24:00',
+            //         'enabled' => 'on'
+            //     ], 
+            // ]
         ],
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),

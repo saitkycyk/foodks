@@ -11,7 +11,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Auth::loginUsingId(2);
+Auth::loginUsingId(3);
 Auth::routes();
 
 Route::get('/', 'HomeController@homepage')->name('index');

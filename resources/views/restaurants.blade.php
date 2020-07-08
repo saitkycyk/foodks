@@ -198,7 +198,7 @@
 							<div class="type">
 							</div>
 							<div class="location">
-								{{$restaurant->address}}<br><span class="opening">                                
+								{{$restaurant->road->name}}<br><span class="opening">                                
 									@if($day = $restaurant->preferences['workdays'][strtolower(now()->englishDayOfWeek)] ?? null)
                                     {{$day['from'].'-'.$day['to']}}
                                 @else Mbyllur
