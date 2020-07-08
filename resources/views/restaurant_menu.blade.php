@@ -94,8 +94,14 @@
                 <i class="icon_lifesaver"></i>
                 <h4>Duhet <span>Ndihmë?</span></h4>
                 <a href="#" class="phone">{{$restaurant->phone}}</a>
-                <small>{{$restaurant->preferences['workdays'] ?? ''}}</small></br>
-                <small>{{$restaurant->works}}</small>
+                <?php $trl = ['monday' => 'E Hënë', 'tuesday' => 'E Martë', 'wednesday' => 'E Mërkurë', 'thursday' => 'E Enjte', 'friday' => 'E Premte', 'saturday' => 'E Shtunë', 'sunday' => 'E Diel']?>
+                @foreach($restaurant->preferences['workdays'] ?? [] as $key => $workday)
+                    @if($workday != null)
+                    <small>{{$trl[$key].' | '.$workday['from'].'-'.$workday['to']}}</small></br>
+                    @else
+                    <small style="color: #C33">{{$trl[$key].' | Mbyllur'}}</small></br>
+                    @endif
+                @endforeach
             </div>
         </div><!-- End col-md-3 -->
         

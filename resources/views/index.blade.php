@@ -171,7 +171,12 @@
 
                         </div>
                         <div class="location">
-                            {{$popularFood->restaurant->address}} <span class="opening">{{$popularFood->restaurant->works}}</span>
+                                    {{$popularFood->restaurant->address}} | <span class="opening">
+                                @if($day = $popularFood->restaurant->preferences['workdays'][strtolower(now()->englishDayOfWeek)] ?? null)
+                                    {{$day['from'].'-'.$day['to']}}
+                                @else Mbyllur
+                                @endif
+                            </span>
                         </div>
                         <ul>
                             <li>Në Derë<i class="{{$popularFood->restaurant->door_payment ? 'icon_check_alt2 ok' : 'icon_close_alt2 no'}}"></i></li>

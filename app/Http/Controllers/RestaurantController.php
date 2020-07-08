@@ -26,7 +26,8 @@ class RestaurantController extends Controller
 			'workdays.*' => 'nullable|in:Hënë,Martë,Mërkurë,Enjte,Premte,Shtunë,Diel'
 		]);
 
-		$data['works'] = $request->works;
+		$workdays = $this->getWorkDays($request);
+		// $data['works'] = $request->works;
 		$preferences = auth()->user()->preferences;
 
 		$preferences['min_order'] = $request->restaurant_min_order;
@@ -34,7 +35,7 @@ class RestaurantController extends Controller
 		$preferences['lastName'] = $request->lastName;
 		$preferences['restaurantZip'] = $request->restaurantZip;
 		$preferences['restaurantWeb'] = $request->restaurantWeb;
-		$preferences['workdays'] = $request->workdays ? implode(',', $request->workdays) : null;
+		$preferences['workdays'] = $workdays;
 
 		$data['preferences'] = $preferences;
 
@@ -52,6 +53,22 @@ class RestaurantController extends Controller
 		auth()->user()->update($data);
 
 		return back();
+	}
+
+
+	protected function getWorkDays($request)
+	{
+		$workdays = [];
+
+		foreach($request->workhours as $key => $workday) {
+			if($workday['from'] && $workday['to'] && isset($workday['enabled'])){
+				$workdays[$key] = $workday;
+			} else {
+				$workdays[$key] = null;
+			}
+		}
+
+		return $workdays;
 	}
 
 	public function changePassword(Request $request)

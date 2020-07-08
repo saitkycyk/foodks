@@ -111,7 +111,6 @@
 						</ul>
 					</div> --}}
 					<div class="filter_type">
-						{{dump(request('city'))}}
 						<h6>Qyteti</h6>
 						<form action="/restaurants" method="GET">
 							<select id="citySelect" class="form-control" name="city" id="city">
@@ -197,10 +196,13 @@
 							</div>
 							<h3>{{$restaurant->name}}</h3>
 							<div class="type">
-								Mexican / American
 							</div>
 							<div class="location">
-								{{$restaurant->address}}<br><span class="opening">{{$restaurant->works}}</span> | Porosia minimale: {{$restaurant->preferences['min_order'] ?? ''}}
+								{{$restaurant->address}}<br><span class="opening">                                
+									@if($day = $restaurant->preferences['workdays'][strtolower(now()->englishDayOfWeek)] ?? null)
+                                    {{$day['from'].'-'.$day['to']}}
+                                @else Mbyllur
+                                @endif</span> | Porosia minimale: {{$restaurant->preferences['min_order'] ?? ''}}
 							</div>
 							<ul>
 								<li>Në Derë<i class="{{$restaurant->door_payment ? 'icon_check_alt2 ok' : 'icon_close_alt2 no'}}"></i></li>

@@ -589,12 +589,12 @@
 						</div>
 
 						<div class="row">
-							<div class="col-sm-5">
+{{-- 							<div class="col-sm-5">
 								<div class="form-group">
 									<label>Orari punës</label>
 									<input type="text" id="works" name="works" placeholder="10:00-22:00" value="{{$restaurant->works}}" class="form-control">
 								</div>
-							</div>
+							</div> --}}
 							<div class="col-sm-3">
 								<div class="form-group">
 									<label>Porosia minimale në €</label>
@@ -613,10 +613,8 @@
 							</div>
 						</div>
 
-						<div class="row">
-							<div class="col-sm-3">
-								<div class="form-group">
-									<div class="dropup">
+					<hr class="styled_2">
+					{{--<div class="dropup">
 	                                <div class="dropdown dropdown-options">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><label style="color: #777;text-decoration: underline;">Zgjedh ditët e punës</label></a>
                                     <div class="dropdown-menu">
@@ -643,11 +641,77 @@
                                             </label>
                                     </div>
                                 </div>
-                                </div>
-								</div>
+                                </div> --}}
+						<div class="row">
+							<div class="col-sm-4">
+								<div class="form-group">
+									<input type="checkbox" name="workhours[monday][enabled]" id="monday" @if($restaurant->preferences['workdays']['monday'] ?? null) checked @endif>
+									<label for="monday">E Hënë:</label>
+									<input type="time" id="monday" name="workhours[monday][from]" @if($restaurant->preferences['workdays']['monday']['from'] ?? null) value="{{$restaurant->preferences['workdays']['monday']['from']}}" @endif>
+									 deri 
+									<input type="time" id="monday" name="workhours[monday][to]" @if($restaurant->preferences['workdays']['monday']['to'] ?? null) value="{{$restaurant->preferences['workdays']['monday']['to']}}" @endif>
 							</div>
 							</div>
-							<button type="submit" class="btn_1">Ruaj ndryshimet</button>
+							<div class="col-sm-4">
+								<div class="form-group">
+									<input type="checkbox" name="workhours[tuesday][enabled]" id="tuesday" @if($restaurant->preferences['workdays']['tuesday'] ?? null) checked @endif>
+									<label for="tuesday">E Martë:</label>
+									<input type="time" id="tuesday" name="workhours[tuesday][from]" @if($restaurant->preferences['workdays']['tuesday']['from'] ?? null) value="{{$restaurant->preferences['workdays']['tuesday']['from']}}" @endif>
+									 deri 
+									<input type="time" id="tuesday" name="workhours[tuesday][to]" @if($restaurant->preferences['workdays']['tuesday']['to'] ?? null) value="{{$restaurant->preferences['workdays']['tuesday']['to']}}" @endif>
+							</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="form-group">
+									<input type="checkbox" name="workhours[wednesday][enabled]" id="wednesday" @if($restaurant->preferences['workdays']['wednesday'] ?? null) checked @endif>
+									<label for="wednesday">E Mërkurë:</label>
+									<input type="time" id="wednesday" name="workhours[wednesday][from]" @if($restaurant->preferences['workdays']['wednesday']['from'] ?? null) value="{{$restaurant->preferences['workdays']['wednesday']['from']}}" @endif>
+									 deri 
+									<input type="time" id="wednesday" name="workhours[wednesday][to]" @if($restaurant->preferences['workdays']['wednesday']['to'] ?? null) value="{{$restaurant->preferences['workdays']['wednesday']['to']}}" @endif>
+							</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-4">
+								<div class="form-group">
+									<input type="checkbox" name="workhours[thursday][enabled]" id="thursday" @if($restaurant->preferences['workdays']['thursday'] ?? null) checked @endif>
+									<label for="thursday">E Enjte:</label>
+									<input type="time" id="thursday" name="workhours[thursday][from]" @if($restaurant->preferences['workdays']['thursday']['from'] ?? null) value="{{$restaurant->preferences['workdays']['thursday']['from']}}" @endif>
+									 deri 
+									<input type="time" id="thursday" name="workhours[thursday][to]" @if($restaurant->preferences['workdays']['thursday']['to'] ?? null) value="{{$restaurant->preferences['workdays']['thursday']['to']}}" @endif>
+							</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="form-group">
+									<input type="checkbox" name="workhours[friday][enabled]" id="friday" @if($restaurant->preferences['workdays']['friday'] ?? null) checked @endif>
+									<label for="friday">E Premte:</label>
+									<input type="time" id="friday" name="workhours[friday][from]" @if($restaurant->preferences['workdays']['friday']['from'] ?? null) value="{{$restaurant->preferences['workdays']['friday']['from']}}" @endif>
+									 deri 
+									<input type="time" id="friday" name="workhours[friday][to]" @if($restaurant->preferences['workdays']['friday']['to'] ?? null) value="{{$restaurant->preferences['workdays']['friday']['to']}}" @endif>
+							</div>
+							</div>
+							<div class="col-sm-4">
+								<div class="form-group">
+									<input type="checkbox" name="workhours[saturday][enabled]" id="saturday" @if($restaurant->preferences['workdays']['saturday'] ?? null) checked @endif>
+									<label for="saturday">E Shtunë:</label>
+									<input type="time" id="saturday" name="workhours[saturday][from]" @if($restaurant->preferences['workdays']['saturday']['from'] ?? null) value="{{$restaurant->preferences['workdays']['saturday']['from']}}" @endif>
+									 deri 
+									<input type="time" id="saturday" name="workhours[saturday][to]" @if($restaurant->preferences['workdays']['saturday']['to'] ?? null) value="{{$restaurant->preferences['workdays']['saturday']['to']}}" @endif>
+							</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-4">
+								<div class="form-group">
+									<input type="checkbox" name="workhours[sunday][enabled]" id="sunday" @if($restaurant->preferences['workdays']['sunday'] ?? null) checked @endif>
+									<label for="sunday">E Diel:</label>
+									<input type="time" id="sunday" name="workhours[sunday][from]" @if($restaurant->preferences['workdays']['sunday']['from'] ?? null) value="{{$restaurant->preferences['workdays']['sunday']['from']}}" @endif>
+									 deri 
+									<input type="time" id="sunday" name="workhours[sunday][to]" @if($restaurant->preferences['workdays']['sunday']['to'] ?? null) value="{{$restaurant->preferences['workdays']['sunday']['to']}}" @endif>
+							</div>
+							</div>
+							</div>
+							<button type="submit" class="btn_1" style="float: right">Ruaj ndryshimet</button>
 						</form>
 					</div><!-- End wrapper_indent -->
 
