@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Food;
+use App\Mail\StatsMail;
 use App\Order;
 use App\Order_Group;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -16,6 +18,16 @@ use Symfony\Component\Console\Input\Input;
 
 class RestaurantController extends Controller
 {
+
+	public function sendStatsMail()
+	{
+		$this->authorize('isRestaurant', User::class);
+
+		Mail::to(auth()->user()->email)->send(new StatsMail(auth()->user()));
+
+		return back();
+	}
+
 
 	public function changePreferences(Request $request)
 	{

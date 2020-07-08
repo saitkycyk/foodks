@@ -42,6 +42,9 @@ Route::middleware('auth:web')->group(function () {
 	Route::patch('/admin/food/update/{food}', 'FoodController@update')->name('updateFood');
 	Route::delete('/admin/food/delete/{food}', 'FoodController@delete')->name('deleteFood');
 
+	//mail
+	Route::post('/admin/mail', 'RestaurantController@sendStatsMail')->name('sendStatsMail');
+
 	//rating
 	Route::post('/restaurant/{id}/profile/rate', 'ReviewController@rateRestaurant')->name('rateRestaurant');
 	Route::delete('/restaurant/{id}/profile/rate', 'ReviewController@deleteRestaurantRating')->name('deleteRestaurantRating');

@@ -200,6 +200,16 @@
 					</div><!-- End wrapper_indent -->
 				</div>
 				<hr class="styled_2">
+				<div class="row">
+					<div class="indent_title_in">
+						<h5><strong>Dërgo në email statistikat rreth restorantit tuaj!</strong></h5></br>
+					<form action="{{route('sendStatsMail')}}" method="POST">
+						@csrf
+						<button type="submit" class="btn_1">Dërgo statistikat</button>
+					</form>
+					</div>		
+				</div>
+
 				</section><!-- End section 1 -->
 
 
