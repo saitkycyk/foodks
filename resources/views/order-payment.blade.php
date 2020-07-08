@@ -183,7 +183,7 @@
                     <h3>Porositë <i class="icon_cart_alt pull-right"></i></h3>
                     <table class="table table_summary">
                         <tbody>
-                            @foreach(auth()->user()->cart as $order)
+                            @foreach(auth()->user()->cart->where('restaurant_id', $restaurant->id) as $order)
                             <tr>
                                 <td>
                                     <strong>{{$order->quantity}}x </strong> {{$order->food->name}}
@@ -201,7 +201,7 @@
                         <tbody>
                             <tr>
                                 <td class="total">
-                                    TOTAL <span class="pull-right">€ {{auth()->user()->cart->sum('price')}}</span>
+                                    TOTAL <span class="pull-right">€ {{auth()->user()->cart->where('restaurant_id', $restaurant->id)->sum('price')}}</span>
                                 </td>
                             </tr>
                         </tbody>

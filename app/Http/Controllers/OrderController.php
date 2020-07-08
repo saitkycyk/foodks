@@ -94,7 +94,7 @@ class OrderController extends Controller
 
 		$this->authorize('isOrderGroupOwner', $orderGroup);
 
-		$orders = Order::whereNull('order_group_id')->get();
+		$orders = Order::whereNull('order_group_id')->where('restaurant_id', $orderGroup->restaurant_id)->get();
 		abort_if($orders->isEmpty(), 404);
 
 		$restaurant = $orderGroup->restaurant;

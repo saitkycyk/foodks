@@ -275,7 +275,7 @@ class RestaurantController extends Controller
 			}
 
 		} else {
-			if(auth()->user()) {
+			if(auth()->user() && auth()->user()->city_id) {
 				$restaurants = $restaurants->where('city_id', auth()->user()->city_id);
 			}
 		}

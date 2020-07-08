@@ -207,7 +207,7 @@
                         <tbody>
                             <tr>
                                 <td class="total">
-                                    TOTAL <span class="pull-right">€ {{auth()->user()->cart->sum('price') ?? 0}}</span>
+                                    TOTAL <span class="pull-right">€ {{auth()->user()->cart->where('restaurant_id', $restaurant->id)->sum('price') ?? 0}}</span>
                                 </td>
                             </tr>
                         </tbody>
