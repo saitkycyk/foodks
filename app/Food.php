@@ -11,10 +11,12 @@ use App\Order;
 class Food extends Model
 {
 	use SoftDeletes;
-	
+
 	protected $guarded = [
 		'id'
 	];
+
+    protected $table = 'foods';
 
     /**
      * The attributes that should be cast to native types.
@@ -24,7 +26,7 @@ class Food extends Model
     protected $casts = [
         'ingredients' => 'json',
     ];
-    
+
 	public function restaurant()
 	{
 		return $this->belongsTo(User::class, 'user_id', 'id');
